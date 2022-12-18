@@ -1,8 +1,10 @@
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -27,6 +29,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    // material
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -39,7 +43,9 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     MatCardModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

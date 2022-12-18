@@ -1,7 +1,7 @@
 import { Guide, Tourist } from "./user"
 
 export interface Tour {
-    id: number
+    id?: number
     author: Guide
     title: string
     city: City
@@ -15,7 +15,7 @@ export interface Tour {
 }
 
 export interface TourStop {
-    id: number
+    id?: number
     latitude: number
     longitude: number
     index: number
@@ -31,7 +31,7 @@ export interface TourStop {
 }
 
 export interface Review {
-    id: number
+    id?: number
     author: Tourist
     tour: Tour
     title: string
@@ -42,30 +42,30 @@ export interface Review {
 }
 
 export interface Report {
-    id: number
+    id?: number
     author: Tourist
     tour: Tour
     reason: string
 }
 
 export interface Suggestion {
-    id: number
+    id?: number
     author: Tourist
     tour: Tour
     description: string
 }
 
 export interface City {
-    id: number
+    id?: number
     name: string
 }
 
 export interface Tag {
-    id: number
+    id?: number
     name: string
 }
 
 export interface Theme {
-    id: number
+    id?: number
     name: string
 }
