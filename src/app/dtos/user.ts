@@ -37,7 +37,7 @@ export interface Guide extends PlatformUser {
 
 export interface GuideDTO extends PlatformUserDTO {
     organizationName: string
-    favouriteCity: City
+    favouriteCityId: number
 }
 
 export interface Tourist extends PlatformUser {
