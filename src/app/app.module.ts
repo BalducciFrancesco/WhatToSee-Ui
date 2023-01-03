@@ -20,13 +20,15 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     NotFoundPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    TourEditorPageComponent
   ],
   imports: [
     BrowserModule,
