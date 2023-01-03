@@ -12,7 +12,6 @@ export interface Message {
 }
 
 export interface MessageDTO {
-    senderId: number
     recieverId: number
     content: string
     timestamp: Date

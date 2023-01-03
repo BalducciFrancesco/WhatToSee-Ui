@@ -18,15 +18,12 @@ export interface Tour {
 }
 
 export interface TourDTO {
-    authorId: number
     title: string
     cityId: number
-    tagsId: number[]
+    tagsIds: number[]
     themeId: number
     approxCost: number
     approxDuration: number
-    creation: Date
-    lastUpdate: Date
     stops: TourStopDTO[]    // unlike tags and themes, stops are created contextually to tour
 }
 
@@ -73,7 +70,6 @@ export interface Review {
 }
 
 export interface ReviewDTO {
-    authorId: number
     tourId: number
     title: string
     stars: number
@@ -90,7 +86,6 @@ export interface Report {
 }
 
 export interface ReportDTO {
-    authorId: number
     tourId: number
     reason: string
 }
@@ -103,7 +98,6 @@ export interface Suggestion {
 }
 
 export interface SuggestionDTO {
-    authorId: number
     tourId: number
     description: string
 }
