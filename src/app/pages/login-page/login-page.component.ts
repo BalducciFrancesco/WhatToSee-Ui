@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class LoginPageComponent {
   
   submitTurist() {
     if(this.turistLogin.valid) {
-      this.userService.login(this.turistLogin.getRawValue()).subscribe(success => {
+      this.userService.loginTourist(this.turistLogin.getRawValue()).subscribe(success => {
         console.log(success);
       })
     }
@@ -37,15 +37,15 @@ export class LoginPageComponent {
 
   submitGuide() {
     if (this.guideLogin.valid) {
-      this.userService.login(this.guideLogin.getRawValue()).subscribe(success => {
+      this.userService.loginGuide(this.guideLogin.getRawValue()).subscribe(success => {
         console.log(success);
       })
     }
   }
 
-  submitAdmin() {
+  submitAdministrator() {
     if (this.adminLogin.valid) {
-      this.userService.login(this.adminLogin.getRawValue()).subscribe(success => {
+      this.userService.loginAdministrator(this.adminLogin.getRawValue()).subscribe(success => {
         console.log(success);
       })
     }
