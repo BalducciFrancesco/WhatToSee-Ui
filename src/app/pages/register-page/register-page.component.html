@@ -1,0 +1,87 @@
+<div class="grid grid-cols-2 gap-4 ">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Registrati come Turista</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="flex flex-col" [formGroup]="turistRegister" (submit)="submitTurist()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" [type]="hidePass[0] ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hidePass[0] = ![0]">
+                        <mat-icon>{{hidePass[0] ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <!-- TODO add repeat password? -->
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="firstName" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput formControlName="lastName" required>
+                </mat-form-field>
+
+                <button type="submit" mat-raised-button color="primary">Registrati</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Registrati come Guida</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="flex flex-col" [formGroup]="guideRegister" (submit)="submitGuide()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" [type]="hidePass[1] ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hidePass[1] = ![1]">
+                        <mat-icon>{{hidePass[1] ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <!-- TODO add repeat password? -->
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="firstName" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput formControlName="lastName" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Nome società</mat-label>
+                    <input matInput formControlName="organizationName" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Città preferita</mat-label>
+                    <mat-select formControlName="favouriteCityId">
+                        <mat-option *ngFor="let city of cityOptions$ | async" [value]="city.id">
+                            {{ city.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button type="submit" mat-raised-button color="primary">Registrati</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
