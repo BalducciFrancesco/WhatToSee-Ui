@@ -11,7 +11,7 @@ export interface Tour {
     tags: Tag[]
     theme: Theme
     approxCost: number
-    approxDuration: number
+    approxDuration: string
     creation: Date
     lastUpdate: Date
     stops: TourStop[]
@@ -20,23 +20,24 @@ export interface Tour {
 export interface TourDTO {
     title: string
     cityId: number
-    tagsIds: number[]
+    tagsIds: TagDTO[]
     themeId: number
     approxCost: number
-    approxDuration: number
+    approxDuration: string
     stops: TourStopDTO[]    // unlike tags and themes, stops are created contextually to tour
 }
 
 export interface TourStop {
     id: number
+    title: string
     latitude: number
     longitude: number
     index: number
     description: string
     cost: number
-    duration: number
+    duration: string
     transferCost: number
-    transferDuration: number
+    transferDuration: string
     transferType: string
     transferDetails: string
     otherOptions: string
@@ -44,14 +45,15 @@ export interface TourStop {
 }
 
 export interface TourStopDTO {
+    title: string
     latitude: number
     longitude: number
     index: number
     description: string
     cost: number
-    duration: number
+    duration: string
     transferCost: number
-    transferDuration: number
+    transferDuration: string
     transferType: string
     transferDetails: string
     otherOptions: string
