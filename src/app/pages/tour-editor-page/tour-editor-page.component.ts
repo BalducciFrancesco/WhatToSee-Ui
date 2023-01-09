@@ -20,7 +20,7 @@ export class TourEditorPageComponent implements OnInit {
   form = new FormGroup({
     title: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     cityId: new FormControl<number>(-1, { nonNullable: true, validators: Validators.required }),
-    tagsIds: new FormControl<TagDTO[]>([], { nonNullable: true, validators: Validators.required }),
+    tagsIds: new FormControl<number[]>([], { nonNullable: true, validators: Validators.required }),
     themeId: new FormControl<number>(-1, { nonNullable: true, validators: Validators.required }),
     approxCost: new FormControl<number>(-1, { nonNullable: true, validators: Validators.required }),
     approxDuration: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),

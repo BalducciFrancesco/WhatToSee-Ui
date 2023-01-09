@@ -6,7 +6,6 @@ import { City } from "./tour"
 export interface User {
     id: number
     username: string
-    password: string
 }
 
 export interface UserDTO {
