@@ -25,6 +25,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { TourCardComponent } from './components/tour-card/tour-card.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
     TourEditorPageComponent,
     TourStopEditorDialogComponent,
     TourStopCardComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    TourCardComponent
   ],
   imports: [
     BrowserModule,
