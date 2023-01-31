@@ -15,12 +15,22 @@ export interface Tour {
     creation: Date
     lastUpdate: Date
     stops: TourStop[]
+    reviews: Review[]
+    reports: Report[]
+    suggestions: Suggestion[]   // empty if is not author
+}
+
+export interface TourSearchDTO {
+    cityId: number
+    approxDuration: string
+    tagsIds: number[]
+    themeId: number
 }
 
 export interface TourDTO {
     title: string
     cityId: number
-    tagsIds: TagDTO[]
+    tagsIds: number[]
     themeId: number
     approxCost: number
     approxDuration: string
@@ -63,7 +73,6 @@ export interface TourStopDTO {
 export interface Review {
     id: number
     author: Tourist
-    tour: Tour
     title: string
     stars: number
     timeStamp: Date
@@ -83,7 +92,6 @@ export interface ReviewDTO {
 export interface Report {
     id: number
     author: Tourist
-    tour: Tour
     reason: string
 }
 
@@ -95,7 +103,6 @@ export interface ReportDTO {
 export interface Suggestion {
     id: number
     author: Tourist
-    tour: Tour
     description: string
 }
 
