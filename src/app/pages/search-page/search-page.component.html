@@ -1,1 +1,44 @@
-<p>search-page works!</p>
+<!-- search bar -->
+<form class="flex flex-col" [formGroup]="searchForm" (submit)="submitSearch()">
+    <mat-form-field appearance="fill">
+        <mat-label>Città</mat-label>
+        <mat-select formControlName="cityId">
+            <mat-option *ngFor="let city of cityOptions$ | async" [value]="city.id">
+                {{ city.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Durata approssimativa</mat-label>
+        <input type="time" matInput formControlName="approxDuration">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Tema</mat-label>
+        <mat-select formControlName="themeId">
+            <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme.id">
+                {{ theme.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Tags</mat-label>
+        <mat-select formControlName="tagsIds" multiple>
+            <mat-option *ngFor="let tag of tagsOptions$ | async" [value]="tag.id">
+                {{ tag.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary">Cerca</button>
+</form>
+
+<!-- results -->
+<div *ngIf="(searchResults$ | async) as tours">
+    <mat-divider class="!my-3"></mat-divider>
+    
+    <h3>Risultati ({{ tours.length }}):</h3>
+    <app-tour-card matRipple *ngFor="let t of tours" [data]="t" style="cursor: pointer;" [routerLink]="['/tour',t.id]"></app-tour-card>
+</div>
