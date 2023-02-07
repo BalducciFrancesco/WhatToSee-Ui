@@ -4,12 +4,79 @@ import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
 
+const fakeTour: Tour = {
+  id: 0,
+  author: {
+    id: 0,
+    username: 'oeoeo',
+    firstName: 'as',
+    lastName: 'ere',
+    organizationName: 'adskkda',
+    favouriteCity: {
+      id: 0,
+      name: 'torino'
+    }
+  },
+  title: 'Pepepe',
+  city: {
+    id: 0,
+    name: 'torino'
+  },
+  tags: [],
+  theme: {
+    id: 0,
+    name: 'eerere'
+  },
+  approxCost: 1,
+  approxDuration: '03:00',
+  creation: new Date(),
+  lastUpdate: new Date(),
+  stops: [{
+    id: 0,
+    cost: 1,
+    description: 'saddsa',
+    duration: '22:11',
+    index: 0,
+    latitude: 111,
+    longitude: 222,
+    otherOptions: 'sdadsa',
+    photos: [],
+    title: 'pwowowow',
+    transferCost: 23,
+    transferDetails: 'dsadsa',
+    transferDuration: '22:11',
+    transferType: 'sososo'
+   }],
+  reviews: [{
+    id: 0,
+    author: {
+      id: 0,
+      firstName: 'sdadsa',
+      lastName: 'jdsadsajm',
+      username: 'jdsajdsa'
+    },
+    content: 'fa cacare',
+    photos: [],
+    stars: 2,
+    timeStamp: new Date(),
+    title: 'dsadsa'
+  }],
+  reports: [],
+  suggestions: []
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class TourService {
 
   constructor(private http: HttpClient) { }
+
+  public get(tourId: string): Observable<Tour> {
+    return of(fakeTour)
+    const params = new HttpParams().append('id', tourId)
+    return this.http.get<Tour>(environment.apiUrl + '/tour', { params })
+  }
 
   public getAllTags(): Observable<Tag[]> {
     return this.http.get<Tag[]>(environment.apiUrl + '/tags')
@@ -20,41 +87,7 @@ export class TourService {
   }
 
   public search(s: TourSearchDTO): Observable<Tour[]> {
-    // return of([
-    //   {
-    //     id: 0,
-    //     author: {
-    //       id: 0,
-    //       username: 'oeoeo',
-    //       password: 'pass-segreta',
-    //       firstName: 'as',
-    //       lastName: 'ere',
-    //       organizationName: 'adskkda',
-    //       favouriteCity: {
-    //         id: 0,
-    //         name: 'torino'
-    //       }
-    //     },
-    //     title: 'Pepepe',
-    //     city: {
-    //       id: 0,
-    //       name: 'torino'
-    //     },
-    //     tags: [],
-    //     theme: {
-    //       id: 0,
-    //       name: 'eerere'
-    //     },
-    //     approxCost: 1,
-    //     approxDuration: '03:00',
-    //     creation: new Date(),
-    //     lastUpdate: new Date(),
-    //     stops: [],
-    //     reviews: [],
-    //     reports: [],
-    //     suggestions: []
-    //   }
-    // ])
+    return of([fakeTour])
     const params = new HttpParams()
       .append('cityId', s.cityId)
       .append('duration', s.approxDuration)

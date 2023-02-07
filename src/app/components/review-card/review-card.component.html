@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <app-star-rating [stars]="data.stars"></app-star-rating>
+            <div>{{ data.title }}</div>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <!-- TODO segnalazione -->
+
+        <p>{{ data.content }}</p>
+
+        <div class="photos-container" *ngIf="data.photos.length > 0">
+            <img *ngFor="let p of data.photos" [src]="getImageSource(p)">
+        </div>
+        
+        <h3>
+            Creata da {{ data.author.firstName }} {{ data.author.lastName }} in data {{ data.timeStamp | date }} 
+            | 
+            <span class="underline cursor-pointer" [routerLink]="['/chat', data.author.id]">Contatta il turista</span>
+        </h3>
+    </mat-card-content>
+</mat-card>

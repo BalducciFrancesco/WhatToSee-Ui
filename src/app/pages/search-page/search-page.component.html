@@ -40,5 +40,5 @@
     <mat-divider class="!my-3"></mat-divider>
     
     <h3>Risultati ({{ tours.length }}):</h3>
-    <app-tour-card matRipple *ngFor="let t of tours" [data]="t" style="cursor: pointer;" [routerLink]="['/tour',t.id]"></app-tour-card>
+    <app-tour-card matRipple *ngFor="let t of tours" [data]="t" class="cursor-pointer" [routerLink]="['/tour',t.id]"></app-tour-card>
 </div>

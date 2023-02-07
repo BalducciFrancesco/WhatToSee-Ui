@@ -1,0 +1,38 @@
+<hgroup>
+    <h1>{{ tour.title }}</h1>
+    <h2>{{ "Creato da " + tour.author.firstName + " " + tour.author.lastName }}</h2>
+</hgroup>
+
+<h3>Tappe ({{ tour.stops.length }}):</h3>
+<app-tour-stop-card *ngFor="let stop of tour.stops" [data]="stop"></app-tour-stop-card>
+
+<!-- TODO mappa qui -->
+
+<h3 class="!my-2">Dettagli complessivi:</h3>
+<ul class="list-disc list-inside ml-2">
+    <li>Durata totale: {{ tour.approxDuration }}</li>
+    <li>Costo totale: {{ tour.approxCost | currency }}</li>
+    <li>Tema: {{ tour.theme.name }}</li>
+    <!-- segnato come percorso da 2 utenti -->
+    <li>
+        <div class="inline-flex items-center">
+            <span>Tags:</span>
+            <mat-chip-listbox class="ml-2">
+                <mat-chip *ngFor="let tag of tour.tags">{{ tag.name }}</mat-chip>
+            </mat-chip-listbox>
+        </div>
+    </li>
+</ul>
+
+<h3 class="!my-2">Recensioni ({{ tour.reviews.length }}):</h3>
+<!-- TODO crea nuova -->
+<div class="grid grid-cols-2">
+    <app-review-card *ngFor="let review of tour.reviews" [data]="review"></app-review-card>
+</div>
+
+<mat-divider class="my-2"></mat-divider>
+
+<button mat-raised-button color="primary">Segna come percorso</button>
+<button mat-raised-button color="primary">Contatta la guida</button>
+<button mat-raised-button color="primary">Proponi un miglioramento</button>
+<button mat-raised-button color="primary">Segnala un problema</button>
