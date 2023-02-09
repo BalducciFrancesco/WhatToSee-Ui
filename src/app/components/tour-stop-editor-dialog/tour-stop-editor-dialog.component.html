@@ -3,7 +3,17 @@
 <div mat-dialog-content>
     <form class="flex flex-col" [formGroup]="form" (submit)="onSubmit()">
     
-        mappa qua!
+        <!-- TODO: replace the two following with map -->
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Latitudine</mat-label>
+            <input type="number" matInput formControlName="latitude" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Longitudine</mat-label>
+            <input type="number" matInput formControlName="longitude" required>
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Titolo</mat-label>
