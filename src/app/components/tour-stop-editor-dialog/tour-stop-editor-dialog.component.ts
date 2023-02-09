@@ -21,7 +21,7 @@ export class TourStopEditorDialogComponent implements OnInit {
     transferType: ['', Validators.required], 
     transferDetails: ['', Validators.required], 
     otherOptions: ['', Validators.required], 
-    photos: [null, Validators.required], 
+    images: [null, Validators.required], 
   });
 
   constructor(
@@ -43,6 +43,6 @@ export class TourStopEditorDialogComponent implements OnInit {
   }
 
   onFilesSelected(e: Event | any) {
-    this.form.controls.photos.setValue(e.target.files)
+    this.form.controls.images.setValue(e.target.files)
   }
 }

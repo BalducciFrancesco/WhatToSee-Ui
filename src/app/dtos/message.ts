@@ -8,11 +8,11 @@ export interface Message {
     sender: PlatformUser
     reciever: PlatformUser
     content: string
-    timestamp: Date
+    creationTimeStamp: Date
 }
 
 export interface MessageDTO {
     recieverId: number
     content: string
-    timestamp: Date
+    creationTimeStamp: Date
 }
