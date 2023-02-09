@@ -17,20 +17,33 @@
 
                 <mat-form-field appearance="fill">
                     <mat-label>Tags</mat-label>
-                    <mat-select formControlName="tagsIds" multiple>
-                        <mat-option *ngFor="let tag of tagsOptions$ | async" [value]="tag.id">
+                    <mat-chip-grid #tagChips formArrayName="tags">
+                        <mat-chip-row *ngFor="let selectedTag of form.controls.tags.value" (removed)="removeTag(selectedTag.name!)">
+                            {{ selectedTag.name }}
+                            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                        </mat-chip-row>
+                    </mat-chip-grid>
+                    <input 
+                        [matChipInputFor]="tagChips"
+                        [matAutocomplete]="tagsAutocomplete"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addTag($event)" 
+                    />
+                    <mat-autocomplete #tagsAutocomplete="matAutocomplete" (optionSelected)="selectedTag($event)">
+                        <mat-option *ngFor="let tag of tagsOptions$ | async" [value]="tag.name">
                             {{ tag.name }}
                         </mat-option>
-                    </mat-select>
+                    </mat-autocomplete>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Tema</mat-label>
-                    <mat-select formControlName="themeId">
-                        <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme.id">
+                    <input type="text" matInput formGroupName="theme" [matAutocomplete]="tagsAuto">
+                    <mat-autocomplete #tagsAuto="matAutocomplete">
+                        <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme.name">
                             {{ theme.name }}
                         </mat-option>
-                    </mat-select>
+                    </mat-autocomplete>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
