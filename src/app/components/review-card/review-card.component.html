@@ -10,8 +10,8 @@
 
         <p>{{ data.content }}</p>
 
-        <div class="photos-container" *ngIf="data.photos.length > 0">
-            <img *ngFor="let p of data.photos" [src]="getImageSource(p)">
+        <div class="images-container" *ngIf="data.images.length > 0">
+            <img *ngFor="let p of data.images" [src]="getImageSource(p)">
         </div>
         
         <h3>

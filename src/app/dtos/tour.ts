@@ -30,8 +30,8 @@ export interface TourSearchDTO {
 export interface TourDTO {
     title: string
     cityId: number
-    tagsIds: number[]
-    themeId: number
+    tags: TagDTO[]
+    theme: ThemeDTO
     approxCost: number
     approxDuration: string
     stops: TourStopDTO[]    // unlike tags and themes, stops are created contextually to tour
@@ -46,28 +46,27 @@ export interface TourStop {
     description: string
     cost: number
     duration: string
-    transferCost: number
-    transferDuration: string
-    transferType: string
-    transferDetails: string
-    otherOptions: string
-    photos: Blob[]
+    transportDTO: TourStopTransportDTO
+    images: Blob[]
 }
 
 export interface TourStopDTO {
     title: string
     latitude: number
     longitude: number
-    index: number
     description: string
     cost: number
     duration: string
+    transportDTO: TourStopTransportDTO
+    images: Blob[]
+}
+
+export interface TourStopTransportDTO {
     transferCost: number
     transferDuration: string
     transferType: string
     transferDetails: string
-    otherOptions: string
-    photos: Blob[]
+    transferOtherOptions: string
 }
 
 export interface Review {
@@ -77,7 +76,7 @@ export interface Review {
     stars: number
     timeStamp: Date
     content: string
-    photos: Blob[]
+    images: Blob[]
 }
 
 export interface ReviewDTO {
@@ -86,7 +85,7 @@ export interface ReviewDTO {
     stars: number
     timeStamp: Date
     content: string
-    photos: Blob[]
+    images: Blob[]
 }
 
 export interface Report {

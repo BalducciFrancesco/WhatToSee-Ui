@@ -39,13 +39,15 @@ const fakeTour: Tour = {
     index: 0,
     latitude: 111,
     longitude: 222,
-    otherOptions: 'sdadsa',
-    photos: [],
+    transportDTO: {
+      transferCost: 23,
+      transferDetails: 'dsadsa',
+      transferDuration: '22:11',
+      transferType: 'sososo',
+      transferOtherOptions: 'sdadsa',
+    },
+    images: [],
     title: 'pwowowow',
-    transferCost: 23,
-    transferDetails: 'dsadsa',
-    transferDuration: '22:11',
-    transferType: 'sososo'
    }],
   reviews: [{
     id: 0,
@@ -56,7 +58,7 @@ const fakeTour: Tour = {
       username: 'jdsajdsa'
     },
     content: 'fa cacare',
-    photos: [],
+    images: [],
     stars: 2,
     timeStamp: new Date(),
     title: 'dsadsa'
@@ -73,12 +75,13 @@ export class TourService {
   constructor(private http: HttpClient) { }
 
   public get(tourId: string): Observable<Tour> {
-    return of(fakeTour)
+    // return of(fakeTour)
     const params = new HttpParams().append('id', tourId)
     return this.http.get<Tour>(environment.apiUrl + '/tour', { params })
   }
 
   public getAllTags(): Observable<Tag[]> {
+    return of([{ id: 1, name: 'asd' }, { id: 2, name: 'eeee' }])
     return this.http.get<Tag[]>(environment.apiUrl + '/tags')
   }
 
@@ -87,7 +90,7 @@ export class TourService {
   }
 
   public search(s: TourSearchDTO): Observable<Tour[]> {
-    return of([fakeTour])
+    // return of([fakeTour])
     const params = new HttpParams()
       .append('cityId', s.cityId)
       .append('duration', s.approxDuration)
