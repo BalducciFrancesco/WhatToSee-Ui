@@ -1,0 +1,5 @@
+
+<h3>Chat con le guide ()</h3>
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let m of (messages$ | async)">{{ m.content }}</mat-list-item>
+</mat-list>

@@ -32,6 +32,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
+import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ReportDialogComponent } from './components/report-dialog/report-dialog.
     SuggestionDialogComponent,
     ReviewCardComponent,
     StarRatingComponent,
-    ReportDialogComponent
+    ReportDialogComponent,
+    MessagesCenterPageComponent
   ],
   imports: [
     BrowserModule,
