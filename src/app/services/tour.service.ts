@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
+import { City, Report, ReportDTO, Suggestion, SuggestionDTO, Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
 
 const fakeTour: Tour = {
   id: 0,
@@ -81,12 +81,16 @@ export class TourService {
   }
 
   public getAllTags(): Observable<Tag[]> {
-    return of([{ id: 1, name: 'asd' }, { id: 2, name: 'eeee' }])
+    // return of([{ id: 1, name: 'asd' }, { id: 2, name: 'eeee' }])
     return this.http.get<Tag[]>(environment.apiUrl + '/tags')
   }
 
   public getAllThemes(): Observable<Theme[]> {
     return this.http.get<Theme[]>(environment.apiUrl + '/themes')
+  }
+
+  public getAllCities(): Observable<City[]> {
+    return this.http.get<City[]>(environment.apiUrl + '/city')
   }
 
   public search(s: TourSearchDTO): Observable<Tour[]> {
@@ -99,8 +103,18 @@ export class TourService {
     return this.http.get<Tour[]>(environment.apiUrl + '/themes', { params })
   }
 
+  // -----
+
   public createTour(t: TourDTO): Observable<Tour> {
     return this.http.post<Tour>(environment.apiUrl + '/tour/create', t)
+  }
+
+  public createSuggestion(s: SuggestionDTO): Observable<Suggestion> {
+    return this.http.post<Suggestion>(environment.apiUrl + '/tour/suggestion/create', s)
+  }
+  
+  public createReport(r: ReportDTO): Observable<Report> {
+    return this.http.post<Report>(environment.apiUrl + '/tour/report/create', r)
   }
 
 }

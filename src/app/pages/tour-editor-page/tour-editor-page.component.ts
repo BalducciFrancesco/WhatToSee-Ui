@@ -1,14 +1,13 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { TourStopEditorDialogComponent } from 'src/app/components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
-import { City, Tag, TagDTO, Theme, Tour, TourStopDTO } from 'src/app/dtos/tour';
-import { CityService } from 'src/app/services/city.service';
+import { City, Tag, Theme, Tour, TourStopDTO } from 'src/app/dtos/tour';
 import { TourService } from 'src/app/services/tour.service';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 
 // TODO reuse for editing / creation
@@ -43,13 +42,12 @@ export class TourEditorPageComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
-    private cityService: CityService, 
     private tourService: TourService,
     private dialogService: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.cityOptions$ = this.cityService.getAll()
+    this.cityOptions$ = this.tourService.getAllCities()
     this.tagsOptions$ = this.tourService.getAllTags()
     this.themeOptions$ = this.tourService.getAllThemes()
   }
