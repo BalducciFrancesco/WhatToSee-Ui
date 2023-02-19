@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { debounceTime, mergeMap, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { City } from 'src/app/dtos/tour';
-import { CityService } from 'src/app/services/city.service';
+import { TourService } from 'src/app/services/tour.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -32,10 +32,10 @@ export class RegisterPageComponent implements OnInit {
 
   cityOptions$!: Observable<City[]>
 
-  constructor(private fb: FormBuilder, private userService: UserService, private cityService: CityService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private tourService: TourService) { }
 
   ngOnInit(): void {
-    this.cityOptions$ = this.cityService.getAll()
+    this.cityOptions$ = this.tourService.getAllCities()
   }
 
   submitTurist() {

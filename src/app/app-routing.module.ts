@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
@@ -15,6 +16,11 @@ const routes: Routes = [
     { path: 'create', component: TourEditorPageComponent, data: { title: 'Crea Tour' }},
     { path: ':id', component: TourPageComponent, data: { title: 'Visualizza tour' }},
   ]},
+  { path: 'messages', children: [
+      { path: 'list', component: MessagesCenterPageComponent, data: { title: 'Centro messaggi' } },
+      { path: ':id', component: TourPageComponent, data: { title: 'Visualizza tour' } },
+    ]
+  },
 
   { path: '', pathMatch: 'full', redirectTo: 'search' },  // default
   { path: '**', component: NotFoundPageComponent },      // 404

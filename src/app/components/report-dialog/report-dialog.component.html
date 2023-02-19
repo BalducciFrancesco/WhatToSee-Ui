@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>Crea suggerimento</h1>
+<h1 mat-dialog-title>Crea segnalazione</h1>
 
 <div mat-dialog-content>
     <form class="flex flex-col" [formGroup]="form" (submit)="onSubmit()">
         <mat-form-field appearance="fill">
-            <mat-label>Suggerimento</mat-label>
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" required formControlName="description" (keypress)="keypress($event)"></textarea>
+            <mat-label>Motivazione</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" required formControlName="reason" (keypress)="keypress($event)"></textarea>
         </mat-form-field>
     </form>
 </div>

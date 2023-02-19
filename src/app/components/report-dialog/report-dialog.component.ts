@@ -5,14 +5,14 @@ import { Tour } from 'src/app/dtos/tour';
 import { TourStopEditorDialogComponent } from '../tour-stop-editor-dialog/tour-stop-editor-dialog.component';
 
 @Component({
-  templateUrl: './suggestion-dialog.component.html',
-  styleUrls: ['./suggestion-dialog.component.scss']
+  templateUrl: './report-dialog.component.html',
+  styleUrls: ['./report-dialog.component.scss']
 })
-export class SuggestionDialogComponent implements OnInit {
+export class ReportDialogComponent implements OnInit {
 
   form = this.fb.nonNullable.group({
     tourId: [-1, Validators.required],
-    description: ['', Validators.required],
+    reason: ['', Validators.required],
   });
 
   constructor(

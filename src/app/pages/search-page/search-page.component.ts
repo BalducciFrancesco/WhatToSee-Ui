@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { City, TagDTO, Tour } from 'src/app/dtos/tour';
-import { CityService } from 'src/app/services/city.service';
+import { City, Tour } from 'src/app/dtos/tour';
 import { TourService } from 'src/app/services/tour.service';
 
 @Component({
@@ -27,13 +26,12 @@ export class SearchPageComponent implements OnInit {
   searchResults$?: Observable<Tour[]>
 
   constructor(
-    private cityService: CityService, 
     private tourService: TourService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.cityOptions$ = this.cityService.getAll()
+    this.cityOptions$ = this.tourService.getAllCities()
     this.themeOptions$ = this.tourService.getAllThemes()
     this.tagsOptions$ = this.tourService.getAllTags()
   }
