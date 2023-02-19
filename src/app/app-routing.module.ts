@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
+import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
@@ -18,7 +19,7 @@ const routes: Routes = [
   ]},
   { path: 'messages', children: [
       { path: 'list', component: MessagesCenterPageComponent, data: { title: 'Centro messaggi' } },
-      { path: ':id', component: TourPageComponent, data: { title: 'Visualizza tour' } },
+      { path: ':id', component: MessagesPageComponent, data: { title: 'Messaggi' } },
     ]
   },
 

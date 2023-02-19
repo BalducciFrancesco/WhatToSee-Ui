@@ -1,7 +1,7 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -33,6 +33,7 @@ import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-pa
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
+import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MessagesCenterPageComponent } from './pages/messages-center-page/messag
     ReviewCardComponent,
     StarRatingComponent,
     ReportDialogComponent,
-    MessagesCenterPageComponent
+    MessagesCenterPageComponent,
+    MessagesPageComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { MessagesCenterPageComponent } from './pages/messages-center-page/messag
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     // material
     LayoutModule,
     MatToolbarModule,

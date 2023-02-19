@@ -19,3 +19,8 @@
 #outlet {
   padding: 8px;
 }
+
+main {
+  min-height: calc(100vh - 64px);
+  height: 0;
+}

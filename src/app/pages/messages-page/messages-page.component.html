@@ -1,0 +1,17 @@
+<div class="h-full flex flex-col justify-between">
+    <div class="grow overflow-auto">
+        <!-- TODO modifica aspetto messaggio mandato da me -->
+        <mat-card *ngFor="let m of messages" class="mb-2">
+            <mat-card-content>
+                <p>{{ m.sender.firstName }} in data {{ m.creationTimeStamp | date: 'full' }}</p>
+                <p class="mt-2">{{ m.content }}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="flex items-baseline">
+        <mat-form-field class="grow" appearance="fill">
+            <input matInput [(ngModel)]="newMessage" placeholder="Invia un messaggio..." (keydown.enter)="sendMessage()">
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="ml-4" style="height: 70%;" type="submit" (click)="sendMessage()">Invia</button>
+    </div>
+</div>
