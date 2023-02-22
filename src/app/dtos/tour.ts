@@ -40,25 +40,28 @@ export interface TourDTO {
 export interface TourStop {
     id: number
     title: string
-    latitude: number
-    longitude: number
-    index: number
+    coordinates: {
+        latitude: number
+        longitude: number
+    }
     description: string
     cost: number
     duration: string
     transportDTO: TourStopTransportDTO
-    images: Blob[]
+    images: File[]
 }
 
 export interface TourStopDTO {
     title: string
-    latitude: number
-    longitude: number
+    coordinates: {
+        latitude: number
+        longitude: number
+    }
     description: string
     cost: number
     duration: string
     transportDTO: TourStopTransportDTO
-    images: Blob[]
+    images: File[]
 }
 
 export interface TourStopTransportDTO {
@@ -76,7 +79,7 @@ export interface Review {
     stars: number
     creationTimeStamp: Date
     content: string
-    images: Blob[]
+    images: File[]
 }
 
 export interface ReviewDTO {
@@ -85,7 +88,7 @@ export interface ReviewDTO {
     stars: number
     creationTimeStamp: Date
     content: string
-    images: Blob[]
+    images: File[]
 }
 
 export interface Report {

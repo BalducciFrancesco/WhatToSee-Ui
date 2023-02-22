@@ -5,6 +5,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { Utils } from 'src/app/classes/utils';
 import { TourStopEditorDialogComponent } from 'src/app/components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
 import { City, Tag, TagDTO, Theme, Tour, TourStopDTO } from 'src/app/dtos/tour';
 import { TourService } from 'src/app/services/tour.service';
@@ -22,7 +23,7 @@ export class TourEditorPageComponent implements OnInit {
   form = new FormGroup({
     title: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     cityId: new FormControl<number>(-1, { nonNullable: true, validators: Validators.required }),
-    tags: new UntypedFormArray([], { validators: Validators.required }),
+    tags: new UntypedFormArray([]),
     theme: new FormGroup({
       name: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     }),
@@ -49,7 +50,7 @@ export class TourEditorPageComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialogService.open(TourStopEditorDialogComponent, { data: this.form.controls.stops.value.length });
+    const dialogRef = this.dialogService.open(TourStopEditorDialogComponent);
     dialogRef.afterClosed().subscribe(createdStop => {
       if(createdStop)
         this.form.patchValue({ stops: [...this.form.controls.stops.value, createdStop] })
@@ -65,6 +66,8 @@ export class TourEditorPageComponent implements OnInit {
           console.log('salvato');
         }, error: (e: Error) => console.log(e)
       })
+    } else {
+      console.error('invalid fields: ', Utils.findInvalidControls(this.form));
     }
   }
 

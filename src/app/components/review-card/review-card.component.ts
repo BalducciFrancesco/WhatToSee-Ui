@@ -13,7 +13,7 @@ export class ReviewCardComponent {
 
   constructor(private sanitizer: DomSanitizer) { }
 
-  getImageSource(f: Blob): SafeUrl {
+  getImageSource(f: File): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(f))
   }
 

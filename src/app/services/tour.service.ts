@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Utils } from '../classes/utils';
 import { City, Report, ReportDTO, Suggestion, SuggestionDTO, Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
 
 const fakeTour: Tour = {
@@ -36,9 +37,10 @@ const fakeTour: Tour = {
     cost: 1,
     description: 'saddsa',
     duration: '22:11',
-    index: 0,
-    latitude: 111,
-    longitude: 222,
+    coordinates: {
+      latitude: 111,
+      longitude: 222,
+    },
     transportDTO: {
       transferCost: 23,
       transferDetails: 'dsadsa',
@@ -82,15 +84,15 @@ export class TourService {
 
   public getAllTags(): Observable<Tag[]> {
     // return of([{ id: 1, name: 'asd' }, { id: 2, name: 'eeee' }])
-    return this.http.get<Tag[]>(environment.apiUrl + '/tags')
+    return this.http.get<Tag[]>(environment.apiUrl + '/tag/')
   }
 
   public getAllThemes(): Observable<Theme[]> {
-    return this.http.get<Theme[]>(environment.apiUrl + '/themes')
+    return this.http.get<Theme[]>(environment.apiUrl + '/theme/')
   }
 
   public getAllCities(): Observable<City[]> {
-    return this.http.get<City[]>(environment.apiUrl + '/city')
+    return this.http.get<City[]>(environment.apiUrl + '/city/')
   }
 
   public search(s: TourSearchDTO): Observable<Tour[]> {
@@ -100,13 +102,25 @@ export class TourService {
       .append('duration', s.approxDuration)
       .append('themeId', s.themeId)
       .appendAll({'tagsIds': s.tagsIds})
-    return this.http.get<Tour[]>(environment.apiUrl + '/themes', { params })
+    return this.http.get<Tour[]>(environment.apiUrl + '/tour/search', { params })
   }
 
   // -----
 
   public createTour(t: TourDTO): Observable<Tour> {
-    return this.http.post<Tour>(environment.apiUrl + '/tour/create', t)
+    return from(this.mapTourPhotos(t)).pipe(
+      switchMap(tour => this.http.post<Tour>(environment.apiUrl + '/tour/create', tour))
+    )
+  }
+
+  /** for each photo in each stop, maps it to Base64 string */
+  private async mapTourPhotos(t: TourDTO | any) {
+    for(let i = 0; i < t.stops.length; i++) {
+      for(let j = 0; j < t.stops[i].images.length; j++) {
+        t.stops[i].images[j] = await Utils.fileToBase64(t.stops[i].images[j])
+      }
+    }
+    return t
   }
 
   public createSuggestion(s: SuggestionDTO): Observable<Suggestion> {
