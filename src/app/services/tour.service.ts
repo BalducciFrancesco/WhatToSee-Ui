@@ -84,15 +84,15 @@ export class TourService {
 
   public getAllTags(): Observable<Tag[]> {
     // return of([{ id: 1, name: 'asd' }, { id: 2, name: 'eeee' }])
-    return this.http.get<Tag[]>(environment.apiUrl + '/tag/')
+    return this.http.get<Tag[]>(environment.apiUrl + '/tag')
   }
 
   public getAllThemes(): Observable<Theme[]> {
-    return this.http.get<Theme[]>(environment.apiUrl + '/theme/')
+    return this.http.get<Theme[]>(environment.apiUrl + '/theme')
   }
 
   public getAllCities(): Observable<City[]> {
-    return this.http.get<City[]>(environment.apiUrl + '/city/')
+    return this.http.get<City[]>(environment.apiUrl + '/city')
   }
 
   public search(s: TourSearchDTO): Observable<Tour[]> {
@@ -113,14 +113,15 @@ export class TourService {
     )
   }
 
-  /** for each photo in each stop, maps it to Base64 string */
-  private async mapTourPhotos(t: TourDTO | any) {
+  /** for each photo in each stop, maps it to Base64 string and returns a new object */
+  private async mapTourPhotos(t: TourDTO | any): Promise<TourDTO | any> {
+    let t1 = JSON.parse(JSON.stringify(t))
     for(let i = 0; i < t.stops.length; i++) {
       for(let j = 0; j < t.stops[i].images.length; j++) {
-        t.stops[i].images[j] = await Utils.fileToBase64(t.stops[i].images[j])
+        t1.stops[i].images[j] = await Utils.fileToBase64(t.stops[i].images[j])
       }
     }
-    return t
+    return t1
   }
 
   public createSuggestion(s: SuggestionDTO): Observable<Suggestion> {
