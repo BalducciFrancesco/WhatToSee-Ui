@@ -30,7 +30,7 @@
                         (matChipInputTokenEnd)="addTag($event)" 
                     />
                     <mat-autocomplete #tagsAutocomplete="matAutocomplete" (optionSelected)="selectedTag($event)">
-                        <mat-option *ngFor="let tag of tagsOptions" [value]="tag.name">
+                        <mat-option *ngFor="let tag of tagsOptions" [value]="tag">
                             {{ tag.name }}
                         </mat-option>
                     </mat-autocomplete>
@@ -38,9 +38,9 @@
 
                 <mat-form-field appearance="fill" formGroupName="theme">
                     <mat-label>Tema</mat-label>
-                    <input type="text" matInput formControlName="name" [matAutocomplete]="tagsAuto">
-                    <mat-autocomplete #tagsAuto="matAutocomplete">
-                        <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme.name">
+                    <input type="text" matInput formControlName="name" (input)="onThemeInput($event)" [matAutocomplete]="tagsAuto">
+                    <mat-autocomplete #tagsAuto="matAutocomplete" [displayWith]="themeDisplayFn" (optionSelected)="selectedTheme($event)">
+                        <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme">
                             {{ theme.name }}
                         </mat-option>
                     </mat-autocomplete>

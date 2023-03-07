@@ -1,17 +1,27 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, UntypedFormArray, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Utils } from 'src/app/classes/utils';
 import { TourStopEditorDialogComponent } from 'src/app/components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
-import { City, Tag, TagDTO, Theme, Tour, TourStopDTO } from 'src/app/dtos/tour';
+import { City, Tag, Theme, Tour, TourStopDTO } from 'src/app/dtos/tour';
 import { TourService } from 'src/app/services/tour.service';
 
 
 // TODO reuse for editing / creation
+
+type TagFormGroup = FormGroup<{
+  id: FormControl<number>,
+  name: FormControl<string> 
+}>
+
+interface ThemeControl {
+  id: FormControl<number>,
+  name: FormControl<string>
+}
 
 @Component({
   selector: 'app-tour-editor-page',
@@ -23,8 +33,9 @@ export class TourEditorPageComponent implements OnInit {
   form = new FormGroup({
     title: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     cityId: new FormControl<number>(-1, { nonNullable: true, validators: Validators.required }),
-    tags: new UntypedFormArray([]),
-    theme: new FormGroup({
+    tags: new FormArray<TagFormGroup>([]),
+    theme: new FormGroup<ThemeControl>({
+      id: new FormControl<number>({ value: -1, disabled: true }, { nonNullable: true }),
       name: new FormControl<string>('', { nonNullable: true, validators: Validators.required }),
     }),
     approxCost: new FormControl<number>(-1, { nonNullable: true, validators: Validators.required }),
@@ -59,9 +70,7 @@ export class TourEditorPageComponent implements OnInit {
 
   submit(): void {
     if(this.form.valid) {
-      let t: any = this.form.getRawValue()
-      t.tags = 
-      this.tourService.createTour(this.form.getRawValue()).subscribe({
+      this.tourService.createTour(this.form.value as any).subscribe({
         next: (t: Tour) => {
           console.log('salvato');
         }, error: (e: Error) => console.log(e)
@@ -76,6 +85,7 @@ export class TourEditorPageComponent implements OnInit {
     const existingTag = this.tagsOptions!.find(t => t.name === e.value)
     if (existingTag) {
       // add also the tag ID from BE
+
       this.form.controls.tags.push(new FormGroup({ 
         id: new FormControl<number>(existingTag.id, { nonNullable: true }),
         name: new FormControl<string>(e.value, { nonNullable: true }),
@@ -83,6 +93,7 @@ export class TourEditorPageComponent implements OnInit {
     } else {
       // don't add tag ID so it'll be created from BE
       this.form.controls.tags.push(new FormGroup({
+        id: new FormControl<number>({ value: -1, disabled: true }, { nonNullable: true }),
         name: new FormControl<string>(e.value, { nonNullable: true }),
       }))
     }
@@ -90,14 +101,29 @@ export class TourEditorPageComponent implements OnInit {
   }
 
   removeTag(name: string): void {
-    const i = this.form.controls.tags.value.findIndex((t: TagDTO) => t.name === name)
+    const i = this.form.controls.tags.value.findIndex(t => t.name === name)
     if(i !== -1)
       this.form.controls.tags.removeAt(i)
   }
 
   selectedTag(e: MatAutocompleteSelectedEvent): void {
-    this.form.controls.tags.push(new FormGroup({ name: new FormControl<string>(e.option.viewValue, { nonNullable: true }) }))
+    this.form.controls.tags.push(new FormGroup({
+      id: new FormControl<number>(e.option.value.id, { nonNullable: true }),
+      name: new FormControl<string>(e.option.value.name, { nonNullable: true }),
+    }))
   }
 
+  selectedTheme(e: MatAutocompleteSelectedEvent): void {
+    this.form.controls.theme.controls.id.enable()
+    this.form.controls.theme.patchValue(e.option.value)
+  }
+
+  onThemeInput(e: Event) {
+    this.form.controls.theme.controls.id.disable()
+  }
+
+  themeDisplayFn(t: Theme): string {
+    return t.name;
+  }
 
 }
