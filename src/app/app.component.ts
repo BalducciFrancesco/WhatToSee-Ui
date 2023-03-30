@@ -12,7 +12,7 @@ import { filter, map, mergeMap, shareReplay, tap } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
 
-  routeTitle: string = "WelcomeApp"
+  routeTitle: string = "WhatToSeeApp"
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       filter((route: ActivatedRoute) => route.outlet === 'primary'),
       mergeMap((route: ActivatedRoute) => route.data)
     ).subscribe((routeData: any) => {
-      this.routeTitle = routeData.title ?? "WelcomeApp"
+      this.routeTitle = routeData.title ?? "WhatToSeeApp"
     });
   }
 

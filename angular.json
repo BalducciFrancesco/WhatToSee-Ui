@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Welcome-Ui": {
+    "WhatToSee-Ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/welcome-ui",
+            "outputPath": "dist/whattosee-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Welcome-Ui:build:production"
+              "browserTarget": "WhatToSee-Ui:build:production"
             },
             "development": {
-              "browserTarget": "Welcome-Ui:build:development"
+              "browserTarget": "WhatToSee-Ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Welcome-Ui:build"
+            "browserTarget": "WhatToSee-Ui:build"
           }
         },
         "test": {
