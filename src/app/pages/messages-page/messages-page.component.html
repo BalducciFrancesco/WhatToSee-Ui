@@ -1,9 +1,9 @@
 <div class="h-full flex flex-col justify-between">
     <div class="grow overflow-auto">
         <!-- TODO modifica aspetto messaggio mandato da me -->
-        <mat-card *ngFor="let m of messages" class="mb-2">
+        <mat-card *ngFor="let m of conversation.messages" class="mb-2">
             <mat-card-content>
-                <p>{{ m.sender.firstName }} in data {{ m.creationTimeStamp | date: 'full' }}</p>
+                <p>{{ m.direction ? conversation.guide.firstName : conversation.tourist.firstName }} in data {{ m.timestamp | date: 'full' }}</p>
                 <p class="mt-2">{{ m.content }}</p>
             </mat-card-content>
         </mat-card>

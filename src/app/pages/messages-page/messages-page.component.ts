@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, mergeMap, tap } from 'rxjs';
-import { Message } from 'src/app/dtos/message';
-import { PlatformUser } from 'src/app/dtos/user';
+import { Message, Conversation } from 'src/app/dtos/message';
 import { MessageService } from 'src/app/services/message.service';
 
 @Component({
@@ -11,8 +10,8 @@ import { MessageService } from 'src/app/services/message.service';
 })
 export class MessagesPageComponent implements OnInit {
 
-  messages!: Message[]
-  interlocutorId!: number
+  conversation!: Conversation
+  conversationId!: number
 
   newMessage?: string
 
@@ -21,17 +20,17 @@ export class MessagesPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map((param: ParamMap) => param.get('id')!),
-      map(interlocutorId => Number.parseInt(interlocutorId)),
-      tap(interlocutorId => this.interlocutorId = interlocutorId),
-      mergeMap(interlocutorId => this.messagesService.getAllByInterlocutor(interlocutorId))
-    ).subscribe(messages => this.messages = messages)
+      map(conversationId => Number.parseInt(conversationId)),
+      tap(conversationId => this.conversationId = conversationId),
+      mergeMap(conversationId => this.messagesService.getConversationById(conversationId))
+    ).subscribe(conversation => this.conversation = conversation)
   }
 
   sendMessage() {
     if(this.newMessage && this.newMessage.trim()) {
-      this.messagesService.sendMessage({ recieverId: this.interlocutorId, content: this.newMessage, creationTimeStamp: new Date() }).subscribe(
-        m => this.messages.push(m)
-      )
+      // this.messagesService.sendMessage({ recieverId: this.interlocutorId, content: this.newMessage, creationTimeStamp: new Date() }).subscribe(
+      //   m => this.messages.push(m)
+      // )
     }
   }
 

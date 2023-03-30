@@ -10,7 +10,7 @@ export class LoginPageComponent {
 
   hidePass = [true, true, true];
 
-  turistLogin = this.fb.nonNullable.group({
+  touristLogin = this.fb.nonNullable.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
@@ -27,9 +27,9 @@ export class LoginPageComponent {
 
   constructor(private fb: FormBuilder, private userService: UserService) { }
   
-  submitTurist() {
-    if(this.turistLogin.valid) {
-      this.userService.loginTourist(this.turistLogin.getRawValue()).subscribe(success => {
+  submitTourist() {
+    if(this.touristLogin.valid) {
+      this.userService.loginTourist(this.touristLogin.getRawValue()).subscribe(success => {
         console.log(success);
       })
     }

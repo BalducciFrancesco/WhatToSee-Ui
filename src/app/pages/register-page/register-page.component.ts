@@ -14,7 +14,7 @@ export class RegisterPageComponent implements OnInit {
 
   hidePass = [true, true];
 
-  turistRegister = this.fb.nonNullable.group({
+  touristRegister = this.fb.nonNullable.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
     firstName: ['', Validators.required],
@@ -38,9 +38,9 @@ export class RegisterPageComponent implements OnInit {
     this.cityOptions$ = this.tourService.getAllCities()
   }
 
-  submitTurist() {
-    if (this.turistRegister.valid) {
-      this.userService.registerTourist(this.turistRegister.getRawValue()).subscribe(success => {
+  submitTourist() {
+    if (this.touristRegister.valid) {
+      this.userService.registerTourist(this.touristRegister.getRawValue()).subscribe(success => {
         console.log(success);
       })
     }

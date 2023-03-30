@@ -1,18 +1,8 @@
 
 <ng-container *ngIf="conversations$ | async as convs">
-    <h3>Chat con le guide ({{convs.guides.length}}):</h3>
-    <div class="p-2 select-none" *ngFor="let c of convs.guides; let i = index" [ngStyle]="i % 2 === 0 ? { 'background': 'gainsboro' } : null">
-        <span>{{ c.firstName + ' ' + c.lastName }} | </span>
-        <a class="underline" [routerLink]="['/messages', c.id]">Apri</a>
-        <span> | </span>
-        <a class="underline cursor-pointer" (click)="delete(c.id)">Elimina</a>
-    </div>
-
-    <mat-divider class="!my-3"></mat-divider>
-
-    <h3>Chat con i i turisti ({{convs.tourists.length}}):</h3>
-    <div class="p-2 select-none" *ngFor="let c of convs.tourists; let i = index" [ngStyle]="i % 2 === 0 ? { 'background': 'gainsboro' } : null">
-        <span>{{ c.firstName + ' ' + c.lastName }} | </span>
+    <h3>Chat con le guide ({{convs.length}}):</h3>
+    <div class="p-2 select-none" *ngFor="let c of convs; let i = index" [ngStyle]="i % 2 === 0 ? { 'background': 'gainsboro' } : null">
+        <span>{{ c.guide.firstName + ' ' + c.guide.lastName }} | </span>
         <a class="underline" [routerLink]="['/messages', c.id]">Apri</a>
         <span> | </span>
         <a class="underline cursor-pointer" (click)="delete(c.id)">Elimina</a>

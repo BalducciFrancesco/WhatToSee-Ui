@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Conversations, Message } from 'src/app/dtos/message';
+import { Conversation } from 'src/app/dtos/message';
 import { MessageService } from 'src/app/services/message.service';
 
 @Component({
@@ -9,12 +9,12 @@ import { MessageService } from 'src/app/services/message.service';
 })
 export class MessagesCenterPageComponent implements OnInit {
   
-  conversations$!: Observable<Conversations>
+  conversations$!: Observable<Conversation[]>
   
   constructor(private messageService: MessageService) {}
   
   ngOnInit(): void {
-    this.conversations$ = this.messageService.getAllConversations()
+    this.conversations$ = this.messageService.getAllConversation()
   }
   
   // TODO refresh

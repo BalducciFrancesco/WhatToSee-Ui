@@ -15,7 +15,7 @@ export class SearchPageComponent implements OnInit {
   searchForm = new FormGroup({
     cityId: new FormControl<number>(-1, { nonNullable: true }),
     approxDuration: new FormControl<string>('', { nonNullable: true }),
-    tagsIds: new FormControl<number[]>([], { nonNullable: true }),
+    tags: new FormControl<string[]>([], { nonNullable: true }),
     themeId: new FormControl<number>(-1, { nonNullable: true }),
   })
 

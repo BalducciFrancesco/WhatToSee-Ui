@@ -12,83 +12,65 @@ export interface Tour {
     theme: Theme
     approxCost: number
     approxDuration: string
-    creation: Date
-    lastUpdate: Date
+    creationDate: Date
     stops: TourStop[]
     reviews: Review[]
     reports: Report[]
-    suggestions: Suggestion[]   // empty if is not author
 }
 
 export interface TourSearchDTO {
     cityId: number
     approxDuration: string
-    tagsIds: number[]
+    tags: string[]
     themeId: number
 }
 
 export interface TourDTO {
     title: string
     cityId: number
-    tags: TagDTO[]
-    theme: ThemeDTO
+    tags: string[]
+    themeId: number
     approxCost: number
     approxDuration: string
-    stops: TourStopDTO[]    // unlike tags and themes, stops are created contextually to tour
+    stops: TourStopDTO[]
 }
 
 export interface TourStop {
     id: number
     title: string
-    coordinates: {
-        latitude: number
-        longitude: number
-    }
     description: string
     cost: number
     duration: string
-    transportDTO: TourStopTransportDTO
-    images: File[]
-}
-
-export interface TourStopDTO {
-    title: string
-    coordinates: {
-        latitude: number
-        longitude: number
-    }
-    description: string
-    cost: number
-    duration: string
-    transportDTO: TourStopTransportDTO
-    images: File[]
-}
-
-export interface TourStopTransportDTO {
     transferCost: number
     transferDuration: string
     transferType: string
     transferDetails: string
-    transferOtherOptions: string
+    transferOtherOptions: string | null
+}
+
+export interface TourStopDTO {
+    title: string
+    description: string
+    cost: number
+    duration: string
+    transferCost: number
+    transferDuration: string
+    transferType: string
+    transferDetails: string
+    transferOtherOptions: string | null
 }
 
 export interface Review {
     id: number
     author: Tourist
-    title: string
+    timestamp: Date
     stars: number
-    creationTimeStamp: Date
-    content: string
-    images: File[]
+    description: string
 }
 
 export interface ReviewDTO {
-    tourId: number
-    title: string
     stars: number
-    creationTimeStamp: Date
-    content: string
-    images: File[]
+    description: string
 }
 
 export interface Report {
@@ -102,23 +84,8 @@ export interface ReportDTO {
     reason: string
 }
 
-export interface Suggestion {
-    id: number
-    author: Tourist
-    description: string
-}
-
-export interface SuggestionDTO {
-    tourId: number
-    description: string
-}
-
 export interface City {
     id: number
-    name: string
-}
-
-export interface CityDTO {
     name: string
 }
 
@@ -133,9 +100,5 @@ export interface TagDTO {
 
 export interface Theme {
     id: number
-    name: string
-}
-
-export interface ThemeDTO {
     name: string
 }
