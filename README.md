@@ -1,4 +1,4 @@
-# WelcomeUi
+# WhatToSee-Ui
 Prova finale di Ingegneria del Software presso Politecnico di Milano
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
