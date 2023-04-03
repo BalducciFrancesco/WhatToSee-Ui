@@ -13,7 +13,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
                     <input matInput formControlName="password" [type]="hidePass[0] ? 'password' : 'text'" required>
-                    <button mat-icon-button matSuffix (click)="hidePass[0] = ![0]">
+                    <button type="button" mat-icon-button matSuffix (click)="hidePass[0] = !hidePass[0]">
                         <mat-icon>{{hidePass[0] ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
@@ -36,7 +36,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
                     <input matInput formControlName="password" [type]="hidePass[1] ? 'password' : 'text'" required>
-                    <button mat-icon-button matSuffix (click)="hidePass[1] = ![1]">
+                    <button type="button" mat-icon-button matSuffix (click)="hidePass[1] = !hidePass[1]">
                         <mat-icon>{{hidePass[1] ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
@@ -59,7 +59,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
                     <input matInput formControlName="password" [type]="hidePass[3] ? 'password' : 'text'" required>
-                    <button mat-icon-button matSuffix (click)="hidePass[3] = ![3]">
+                    <button type="button" mat-icon-button matSuffix (click)="hidePass[3] = !hidePass[3]">
                         <mat-icon>{{hidePass[3] ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
@@ -67,4 +67,8 @@
             </form>
         </mat-card-content>
     </mat-card>
+</div>
+
+<div class="mt-2 text-center">
+    <a routerLink="/register">Non hai un account?</a>
 </div>

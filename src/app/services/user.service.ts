@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   public loginTourist(u: UserDTO): Observable<User> {
-    return this.http.post<User>(environment.apiUrl + '/loginTourist', u)
+    return this.http.post<User>(environment.apiUrl + '/tourist/login', u)
   }
 
   public loginGuide(u: UserDTO): Observable<Guide> {
@@ -26,10 +26,30 @@ export class UserService {
   // -----
 
   public registerTourist(u: TouristDTO): Observable<Tourist> {
-    return this.http.post<Tourist>(environment.apiUrl + '/registerTourist', u)
+    return this.http.post<Tourist>(environment.apiUrl + '/tourist/register', u)
   }
 
   public registerGuide(u: GuideDTO): Observable<Guide> {
-    return this.http.post<Guide>(environment.apiUrl + '/registerGuide', u)
+    return this.http.post<Guide>(environment.apiUrl + '/guide/register', u)
   }
+
+  // -----
+
+  public logout() {
+    sessionStorage.removeItem('logged-user');
+  }
+
+  public saveSession(u: User) {
+    // TODO enable Base64 encoding
+    // sessionStorage.setItem('logged-user', btoa(JSON.stringify(u)));
+    sessionStorage.setItem('logged-user', JSON.stringify(u));
+  }
+
+  public getSession(): User | null {
+    let u = sessionStorage.getItem('logged-user');
+    // TODO enable Base64 encoding
+    // return u ? JSON.parse(atob(u)) : null;
+    return u ? JSON.parse(u) : null;
+  }
+  
 }

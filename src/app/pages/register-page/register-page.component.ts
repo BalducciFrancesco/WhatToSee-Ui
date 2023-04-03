@@ -1,16 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { City } from 'src/app/dtos/tour';
 import { TourService } from 'src/app/services/tour.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss']
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent {
 
   hidePass = [true, true];
 
@@ -26,17 +23,9 @@ export class RegisterPageComponent implements OnInit {
     password: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    organizationName: ['', Validators.required],
-    favouriteCityId: [-1, Validators.required],
   });
 
-  cityOptions$!: Observable<City[]>
-
   constructor(private fb: FormBuilder, private userService: UserService, private tourService: TourService) { }
-
-  ngOnInit(): void {
-    this.cityOptions$ = this.tourService.getAllCities()
-  }
 
   submitTourist() {
     if (this.touristRegister.valid) {

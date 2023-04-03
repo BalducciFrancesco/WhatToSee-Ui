@@ -8,16 +8,18 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: 'search', component: SearchPageComponent, data: { title: 'Cerca' }},
   { path: 'login', component: LoginPageComponent, data: { title: 'Login' }},
   { path: 'register', component: RegisterPageComponent, data: { title: 'Registrati' }},
-  { path: 'tour', children: [
+  
+  { path: 'search', component: SearchPageComponent, canActivate: [AuthGuard], data: { title: 'Cerca' }},
+  { path: 'tour', canActivate: [AuthGuard], children: [
     { path: 'create', component: TourEditorPageComponent, data: { title: 'Crea Tour' }},
     { path: ':id', component: TourPageComponent, data: { title: 'Visualizza tour' }},
   ]},
-  { path: 'messages', children: [
+  { path: 'messages', canActivate: [AuthGuard], children: [
       { path: 'list', component: MessagesCenterPageComponent, data: { title: 'Centro messaggi' } },
       { path: ':id', component: MessagesPageComponent, data: { title: 'Messaggi' } },
     ]
