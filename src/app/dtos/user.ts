@@ -6,9 +6,13 @@ import { City } from "./tour"
 export interface User {
     id: number
     username: string
-    password: string
     firstName: string
     lastName: string
+    role: UserRole
+}
+
+export enum UserRole {
+    TOURIST, GUIDE, ADMINISTRATOR
 }
 
 export interface UserDTO {
@@ -29,9 +33,7 @@ export interface GuideDTO extends UserDTO {
 }
 
 export interface Tourist extends User {
-    // completedTours: Tour[] -- li recuperiamo a parte? altrimenti ogni volta che prendo un tursita mi tiro giù tutto
 }
 
 export interface TouristDTO extends UserDTO {
-    // completedTours: Tour[] -- non esistono al momento della creazione
 }

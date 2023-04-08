@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -34,28 +34,24 @@ export class LoginPageComponent {
   
   submitTourist() {
     if(this.touristLogin.valid) {
-      this.userService.loginTourist(this.touristLogin.getRawValue()).subscribe({
-        next: success => {
-          this.userService.saveSession(success);
-          this.router.navigate(['/']);
-        },
-        error: err => console.log(err)
+      this.userService.loginTourist(this.touristLogin.getRawValue()).subscribe(loggedTourist => {
+        this.router.navigate(['/']);
       })
     }
   }
 
   submitGuide() {
-    if (this.guideLogin.valid) {
-      this.userService.loginGuide(this.guideLogin.getRawValue()).subscribe(success => {
-        console.log(success);
+    if(this.guideLogin.valid) {
+      this.userService.loginGuide(this.guideLogin.getRawValue()).subscribe(loggedGuide => {
+        this.router.navigate(['/']);
       })
     }
   }
 
   submitAdministrator() {
-    if (this.adminLogin.valid) {
-      this.userService.loginAdministrator(this.adminLogin.getRawValue()).subscribe(success => {
-        console.log(success);
+    if(this.adminLogin.valid) {
+      this.userService.loginAdministrator(this.adminLogin.getRawValue()).subscribe(loggedAdmin => {
+        this.router.navigate(['/']);
       })
     }
   }

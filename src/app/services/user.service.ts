@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Administrator, Guide, GuideDTO, Tourist, TouristDTO, User, UserDTO } from '../dtos/user';
 
@@ -12,25 +12,25 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   public loginTourist(u: UserDTO): Observable<User> {
-    return this.http.post<User>(environment.apiUrl + '/tourist/login', u)
+    return this.http.post<User>(environment.apiUrl + '/tourist/login', u).pipe(tap(u => this.saveSession(u)))
   }
 
   public loginGuide(u: UserDTO): Observable<Guide> {
-    return this.http.post<Guide>(environment.apiUrl + '/loginGuide', u)
+    return this.http.post<Guide>(environment.apiUrl + '/guide/login', u).pipe(tap(u => this.saveSession(u)))
   }
   
   public loginAdministrator(u: UserDTO): Observable<Administrator> {
-    return this.http.post<Administrator>(environment.apiUrl + '/loginAdministrator', u)
+    return this.http.post<Administrator>(environment.apiUrl + '/administrator/login', u).pipe(tap(u => this.saveSession(u)))
   }
 
   // -----
 
   public registerTourist(u: TouristDTO): Observable<Tourist> {
-    return this.http.post<Tourist>(environment.apiUrl + '/tourist/register', u)
+    return this.http.post<Tourist>(environment.apiUrl + '/tourist/register', u).pipe(tap(u => this.saveSession(u)))
   }
 
   public registerGuide(u: GuideDTO): Observable<Guide> {
-    return this.http.post<Guide>(environment.apiUrl + '/guide/register', u)
+    return this.http.post<Guide>(environment.apiUrl + '/guide/register', u).pipe(tap(u => this.saveSession(u)))
   }
 
   // -----
@@ -51,5 +51,5 @@ export class UserService {
     // return u ? JSON.parse(atob(u)) : null;
     return u ? JSON.parse(u) : null;
   }
-  
+
 }
