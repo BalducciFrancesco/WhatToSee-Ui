@@ -1,5 +1,10 @@
 import { FormGroup } from "@angular/forms";
 
+export type NonEmptyFields<T> = {
+    [P in keyof T]: NonNullable<T[P]>;
+};
+
+
 export abstract class Utils  {
     public static findInvalidControls(form: FormGroup): string[] {
         const invalid = [];
@@ -12,13 +17,16 @@ export abstract class Utils  {
         return invalid;
     }
 
-    public static async fileToBase64(f: File): Promise<string> {
-        return new Promise(resolve => {
-            const reader = new FileReader();
-            reader.readAsDataURL(f);
-            reader.onload = () => {
-                resolve(reader.result as string);
-            };
+    /** 
+     * Object casting for excluding null and undefined properties from object.
+     */
+    public static nonEmptyFieldsOf<T extends Object>(obj: T): NonEmptyFields<Required<T>> {
+        const castedValue = {} as { [key: string]: any }
+        Object.entries(obj).forEach(([key, value]) => {
+            if (value !== null && value !== undefined) {
+                castedValue[key] = value
+            }
         })
+        return castedValue as NonEmptyFields<Required<T>>
     }
 }
