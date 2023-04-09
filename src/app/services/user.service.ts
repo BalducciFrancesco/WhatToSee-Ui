@@ -52,4 +52,10 @@ export class UserService {
     return u ? JSON.parse(u) : null;
   }
 
+  // -----
+
+  public getAllTourists(): Observable<Tourist[]> {
+    return this.http.get<Tourist[]>(environment.apiUrl + '/tourist')
+  }
+
 }

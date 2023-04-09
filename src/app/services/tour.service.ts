@@ -41,20 +41,17 @@ export class TourService {
   // -----
 
   public createTour(t: TourDTO): Observable<Tour> {
-    return from(this.mapTourPhotos(t)).pipe(
-      switchMap(tour => this.http.post<Tour>(environment.apiUrl + '/tour/create', tour))
-    )
-  }
-
-  /** for each photo in each stop, maps it to Base64 string and returns a new object */
-  private async mapTourPhotos(t: TourDTO | any): Promise<TourDTO | any> {
-    let t1 = JSON.parse(JSON.stringify(t))
-    for(let i = 0; i < t.stops.length; i++) {
-      for(let j = 0; j < t.stops[i].images.length; j++) {
-        t1.stops[i].images[j] = await Utils.fileToBase64(t.stops[i].images[j])
-      }
+    let mapped: any = {
+      ...t,
+      cityId: t.city.id,
+      themeId: t.theme.id,
+      sharedTouristIds: t.sharedTourists?.map(t => t.id)
     }
-    return t1
+    delete mapped.city
+    delete mapped.theme
+    delete mapped.sharedTourist
+    console.log(mapped);
+    return this.http.post<Tour>(environment.apiUrl + '/tour', mapped)
   }
 
   public createReport(r: ReportDTO): Observable<Report> {

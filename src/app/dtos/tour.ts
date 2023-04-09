@@ -1,12 +1,14 @@
 import { Guide, Tourist } from "./user"
 
-// DTO = as sent to BE, removed sub-entities and id, lazy, POST request
-// NON-DTO = as recieved form BE, entity, eager, GET response
+// DTO = as sent to BE service, removed sub-entities and id (or extractede from service), lazy, POST request
+// NON-DTO = as received form BE, entity, eager, GET response
 
 export interface Tour {
     id: number
     author: Guide
     title: string
+    description: string
+    isPublic: boolean
     city: City
     tags: Tag[]
     theme: Theme
@@ -15,7 +17,6 @@ export interface Tour {
     creationDate: Date
     stops: TourStop[]
     reviews: Review[]
-    reports: Report[]
 }
 
 export interface TourSearchDTO {
@@ -27,11 +28,14 @@ export interface TourSearchDTO {
 
 export interface TourDTO {
     title: string
-    cityId: number
-    tags: string[]
-    themeId: number
+    description: string
+    isPublic: boolean
+    city: City
+    tags: string[]               // can be empty
+    theme: Theme
     approxCost: number
     approxDuration: string
+    sharedTourists?: Tourist[]   // can be empty
     stops: TourStopDTO[]
 }
 

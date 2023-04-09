@@ -6,7 +6,10 @@
     <mat-card-content>
         <p class="!my-3">{{ data.description }}</p>
 
-        <h3 class="!mb-2">Spostamento dalla tappa precedente:</h3>
+        <div class="!mb-2">
+            <h3 class="inline">Come raggiungerla:</h3>
+            <p class="pl-1 inline">{{ data.transferDetails }}</p>
+        </div>
         <ul class="list-disc list-inside ml-2">
             <li>{{ "Tipologia: " + data.transferType }}</li>
             <li>{{ "Costo: " + (data.transferCost | currency) }}</li>
