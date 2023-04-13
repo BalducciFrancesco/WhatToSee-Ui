@@ -36,6 +36,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
 import { ErrorInterceptor } from './services/error.interceptor';
+import { HeadersInterceptor } from './services/headers.interceptor';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { ErrorInterceptor } from './services/error.interceptor';
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { width: '80vw' } },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+    { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
