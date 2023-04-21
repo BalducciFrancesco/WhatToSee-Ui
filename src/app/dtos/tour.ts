@@ -1,6 +1,6 @@
 import { Guide, Tourist } from "./user"
 
-// DTO = as sent to BE service, removed sub-entities and id (or extractede from service), lazy, POST request
+// DTO = as sent to BE service, removed sub-entities and id (or extracted from service), lazy, POST request
 // NON-DTO = as received form BE, entity, eager, GET response
 
 export interface Tour {
@@ -20,10 +20,10 @@ export interface Tour {
 }
 
 export interface TourSearchDTO {
-    cityId: number
-    approxDuration: string
-    tags: string[]
-    themeId: number
+    city?: City
+    approxDuration?: string  // will return tours with <= this value
+    tags?: Tag[]
+    theme?: Theme
 }
 
 export interface TourDTO {
@@ -31,7 +31,7 @@ export interface TourDTO {
     description: string
     isPublic: boolean
     city: City
-    tags: string[]               // can be empty
+    tagNames: string[]               // can be empty
     theme: Theme
     approxCost: number
     approxDuration: string

@@ -25,7 +25,7 @@ export class TourPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map((param: ParamMap) => param.get('id')!),
-      mergeMap(tourId => this.tourService.get(tourId))
+      mergeMap(tourId => this.tourService.getById(tourId))
     ).subscribe(tour => this.tour = tour)
   }
 

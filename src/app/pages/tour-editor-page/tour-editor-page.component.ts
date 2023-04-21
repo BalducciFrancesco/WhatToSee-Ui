@@ -27,7 +27,7 @@ export class TourEditorPageComponent implements OnInit {
     title: new FormControl<string | null>(null, { validators: Validators.required }),
     description: new FormControl<string | null>(null, { validators: Validators.required }),
     city: new FormControl<City | null>(null, { validators: Validators.required }),
-    tags: new FormControl<string[]>([]),
+    tagNames: new FormControl<string[]>([]),
     theme: new FormControl<Theme | null>(null, { validators: Validators.required }),
     approxCost: new FormControl<number | null>(null, { validators: Validators.required }),
     approxDuration: new FormControl<string | null>(null, { validators: Validators.required }),
@@ -114,35 +114,35 @@ export class TourEditorPageComponent implements OnInit {
     }
   }
   
-  addTag(e: MatChipInputEvent): void {
+  addTagName(e: MatChipInputEvent): void {
     const newTag = e.value.trim().toLocaleLowerCase()
     if (!newTag) return;
 
-    const tags = this.form.controls.tags.value!
+    const tags = this.form.controls.tagNames.value!
     if (!tags.find(t => t.toLowerCase() == newTag.toLowerCase())) {
       // not already added - if is not between options will be added to DB
       tags.push(newTag)
-      this.form.controls.tags.setValue(tags)
+      this.form.controls.tagNames.setValue(tags)
     }
 
     e.chipInput.clear()
     this.tagInputControl.setValue(null)
   }
 
-  removeTag(tag: string): void {
-    const tags = this.form.controls.tags.value!
+  removeTagName(tag: string): void {
+    const tags = this.form.controls.tagNames.value!
     tags.splice(tags.indexOf(tag), 1)
-    this.form.controls.tags.setValue(tags)
+    this.form.controls.tagNames.setValue(tags)
   }
 
   selectedTag(e: MatAutocompleteSelectedEvent): void {
     const newTag: Tag = e.option.value
     if (!newTag) return;
 
-    const tags = this.form.controls.tags.value!
+    const tags = this.form.controls.tagNames.value!
     if (!tags.find(t => t === newTag.name)) {
       tags.push(newTag.name)
-      this.form.controls.tags.setValue(tags)
+      this.form.controls.tagNames.setValue(tags)
     }
     
     this.tagInput.nativeElement.value = ''

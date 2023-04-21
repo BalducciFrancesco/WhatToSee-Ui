@@ -12,9 +12,8 @@ export class TourService {
 
   constructor(private http: HttpClient) { }
 
-  public get(tourId: string): Observable<Tour> {
-    const params = new HttpParams().append('id', tourId)
-    return this.http.get<Tour>(environment.apiUrl + '/tour', { params })
+  public getById(tourId: string): Observable<Tour> {
+    return this.http.get<Tour>(environment.apiUrl + '/tour/' + tourId)
   }
 
   public getAllTags(): Observable<Tag[]> {
@@ -30,11 +29,11 @@ export class TourService {
   }
 
   public search(s: TourSearchDTO): Observable<Tour[]> {
-    const params = new HttpParams()
-      .append('cityId', s.cityId)
-      .append('duration', s.approxDuration)
-      .append('themeId', s.themeId)
-      .appendAll({'tags': s.tags})
+    let params = new HttpParams()
+    s.city ? params = params.append('cityId', s.city.id) : null
+    s.approxDuration ? params = params.append('approxDuration', s.approxDuration) : null
+    s.theme ? params = params.append('themeId', s.theme.id) : null
+    s.tags ? params = params.appendAll({'tagIds': s.tags.map(t => t.id)}) : null
     return this.http.get<Tour[]>(environment.apiUrl + '/tour/search', { params })
   }
 
@@ -49,8 +48,7 @@ export class TourService {
     }
     delete mapped.city
     delete mapped.theme
-    delete mapped.sharedTourist
-    console.log(mapped);
+    delete mapped.sharedTourists
     return this.http.post<Tour>(environment.apiUrl + '/tour', mapped)
   }
 
