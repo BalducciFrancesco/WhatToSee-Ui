@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { City } from 'src/app/dtos/tour';
-import { TourService } from 'src/app/services/tour.service';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss']
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent {
 
   hidePass = [true, true];
 
-  turistRegister = this.fb.nonNullable.group({
+  touristRegister = this.fb.nonNullable.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
     firstName: ['', Validators.required],
@@ -26,30 +23,26 @@ export class RegisterPageComponent implements OnInit {
     password: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    organizationName: ['', Validators.required],
-    favouriteCityId: [-1, Validators.required],
   });
 
-  cityOptions$!: Observable<City[]>
+  constructor(
+    private fb: FormBuilder, 
+    private userService: UserService, 
+    private router: Router
+  ) { }
 
-  constructor(private fb: FormBuilder, private userService: UserService, private tourService: TourService) { }
-
-  ngOnInit(): void {
-    this.cityOptions$ = this.tourService.getAllCities()
-  }
-
-  submitTurist() {
-    if (this.turistRegister.valid) {
-      this.userService.registerTourist(this.turistRegister.getRawValue()).subscribe(success => {
-        console.log(success);
+  submitTourist() {
+    if (this.touristRegister.valid) {
+      this.userService.registerTourist(this.touristRegister.getRawValue()).subscribe(registeredTourist => {
+        this.router.navigate(['/']);
       })
     }
   }
 
   submitGuide() {
     if (this.guideRegister.valid) {
-      this.userService.registerGuide(this.guideRegister.getRawValue()).subscribe(success => {
-        console.log(success);
+      this.userService.registerGuide(this.guideRegister.getRawValue()).subscribe(registeredGuide => {
+        this.router.navigate(['/']);
       })
     }
   }

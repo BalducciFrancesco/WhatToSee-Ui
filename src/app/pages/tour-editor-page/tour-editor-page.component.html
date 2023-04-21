@@ -1,71 +1,112 @@
-    <mat-card>
-        <mat-card-content>
-            <form class="flex flex-col" [formGroup]="form" (submit)="submit()">
-                <mat-form-field appearance="fill">
-                    <mat-label>Titolo</mat-label>
-                    <input matInput formControlName="title" required>
-                </mat-form-field>
-    
-                <mat-form-field appearance="fill">
-                    <mat-label>Città</mat-label>
-                    <mat-select formControlName="cityId">
-                        <mat-option *ngFor="let city of cityOptions$ | async" [value]="city.id">
-                            {{ city.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+<mat-card>
+    <mat-card-content>
+        <form class="flex flex-col" [formGroup]="form">
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Tags</mat-label>
-                    <mat-chip-grid #tagChips formArrayName="tags">
-                        <mat-chip-row *ngFor="let selectedTag of form.controls.tags.value" (removed)="removeTag(selectedTag.name!)">
-                            {{ selectedTag.name }}
-                            <button matChipRemove><mat-icon>cancel</mat-icon></button>
-                        </mat-chip-row>
-                    </mat-chip-grid>
-                    <input 
-                        [matChipInputFor]="tagChips"
-                        [matAutocomplete]="tagsAutocomplete"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        (matChipInputTokenEnd)="addTag($event)" 
-                    />
-                    <mat-autocomplete #tagsAutocomplete="matAutocomplete" (optionSelected)="selectedTag($event)">
-                        <mat-option *ngFor="let tag of tagsOptions" [value]="tag">
-                            {{ tag.name }}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Titolo</mat-label>
+                <input matInput formControlName="title" required>
+            </mat-form-field>
 
-                <mat-form-field appearance="fill" formGroupName="theme">
-                    <mat-label>Tema</mat-label>
-                    <input type="text" matInput formControlName="name" (input)="onThemeInput($event)" [matAutocomplete]="tagsAuto">
-                    <mat-autocomplete #tagsAuto="matAutocomplete" [displayWith]="themeDisplayFn" (optionSelected)="selectedTheme($event)">
-                        <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme">
-                            {{ theme.name }}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Descrizione</mat-label>
+                <input matInput formControlName="description" required>
+            </mat-form-field>
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Costo approssimativo</mat-label>
-                    <input type="number" min="0.00" step="0.01" matInput formControlName="approxCost" required>
-                </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Città</mat-label>
+                <mat-select formControlName="city">
+                    <mat-option *ngFor="let city of cityOptions$ | async" [value]="city">
+                        {{ city.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Durata approssimativa</mat-label>
-                    <input type="time" matInput formControlName="approxDuration" required>
-                </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Tags</mat-label>
+                <mat-chip-grid #tagChips formArrayName="tagNames">
+                    <mat-chip-row *ngFor="let selectedTagName of form.controls.tagNames.value" (removed)="removeTagName(selectedTagName)">
+                        {{ selectedTagName }}
+                        <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <input 
+                    #tagInput
+                    [formControl]="tagInputControl"
+                    [matChipInputFor]="tagChips"
+                    [matAutocomplete]="tagNamesAutocomplete"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="addTagName($event)" 
+                />
+                <mat-autocomplete #tagNamesAutocomplete="matAutocomplete" (optionSelected)="selectedTag($event)">
+                    <mat-option *ngFor="let tag of tagOptionsFilter$ | async" [value]="tag">
+                        {{ tag.name }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-                <mat-divider class="py-2"></mat-divider>
+            <mat-form-field appearance="fill">
+                <mat-label>Tema</mat-label>
+                <mat-select formControlName="theme">
+                    <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme">
+                        {{ theme.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-                <button type="button" mat-raised-button (click)="openDialog()">Aggiungi fermata</button>
+            <mat-form-field appearance="fill">
+                <mat-label>Costo approssimativo</mat-label>
+                <input type="number" min="0.00" step="0.01" matInput formControlName="approxCost" required>
+            </mat-form-field>
 
+            <mat-form-field appearance="fill">
+                <mat-label>Durata approssimativa</mat-label>
+                <input type="time" matInput formControlName="approxDuration" required>
+            </mat-form-field>
+
+            <div class="mb-4">
+                <mat-label>Visibilità: </mat-label>
+                <mat-radio-group formControlName="isPublic">
+                    <mat-radio-button [value]="true">Pubblico</mat-radio-button>
+                    <mat-radio-button [value]="false">Privato</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <mat-form-field appearance="fill" *ngIf="!form.controls.isPublic.value">
+                <mat-label>Condividi con</mat-label>
+                <mat-chip-grid #sharedTouristChips formArrayName="sharedTourists">
+                    <mat-chip-row *ngFor="let selectedTourist of form.controls.sharedTourists.value" (removed)="removeSharedTourist(selectedTourist)">
+                        {{ selectedTourist.username }}
+                        <button matChipRemove><mat-icon>cancel</mat-icon></button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <input 
+                    #touristInput
+                    [formControl]="touristInputControl"
+                    [matChipInputFor]="sharedTouristChips"
+                    [matAutocomplete]="sharedTouristAutocomplete"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="addSharedTourist($event)" 
+                />
+                <mat-autocomplete #sharedTouristAutocomplete="matAutocomplete" (optionSelected)="selectedSharedTourist($event)">
+                    <mat-option *ngFor="let sharedTourist of touristOptionsFilter$ | async" [value]="sharedTourist">
+                        {{ sharedTourist.username }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-divider class="pb-2"></mat-divider>
+
+            <button mat-button type="button" (click)="openDialog()">Aggiungi fermata</button>
+
+            <div class="flex flex-col gap-y-2 my-2">
+                <h3 *ngIf="form.controls.stops.value!.length > 0" class="!mb-0">Fermate create:</h3>
                 <app-tour-stop-card 
                     *ngFor="let stop of form.controls.stops.value"
                     [data]="stop"
                 ></app-tour-stop-card>
+            </div>
 
-                <button type="submit" mat-raised-button color="primary">Crea</button>
-            </form>
-        </mat-card-content>
-    </mat-card>
+            <button mat-raised-button type="submit" [disabled]="form.invalid" (click)="submit()" mat-raised-button color="primary">Crea tour</button>
+        </form>
+    </mat-card-content>
+</mat-card>

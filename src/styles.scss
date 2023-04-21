@@ -24,3 +24,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         height: 32px;
     }
 }
+
+a {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,18 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Conversations, Message, MessageDTO } from '../dtos/message';
+import { Conversation, Message, MessageDTO } from '../dtos/message';
 
-const fakeMessages: Message[] = [
-  { id: 0, sender: { id: 0, firstName: 'john', lastName: 'watson', username: 'test123' }, reciever: { id: 1, firstName: 'tom', lastName: 'riggs', username: 'azaza12' }, content: 'wee', creationTimeStamp: new Date() },
-  { id: 1, sender: { id: 1, firstName: 'tom', lastName: 'riggs', username: 'azaza12' }, reciever: { id: 0, firstName: 'john', lastName: 'watson', username: 'test123' }, content: 'che vuoi?', creationTimeStamp: new Date() },
-]
-
-const fakeConversations: Conversations = {
-  guides: [{ id: 0, firstName: 'john', lastName: 'watson', username: 'test123', organizationName: 'oeoeoe', favouriteCity: { id: 0, name: 'asd' } }],
-  tourists: [{ id: 1, firstName: 'hant', lastName: 'carlson', username: 'woa2003' }],
-}
 
 @Injectable({
   providedIn: 'root'
@@ -21,27 +12,23 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllConversations(): Observable<Conversations> {
-    // return of(fakeConversations)
-    return this.http.get<Conversations>(environment.apiUrl + '/messages')
+  public getAllConversation(): Observable<Conversation[]> {
+    return this.http.get<Conversation[]>(environment.apiUrl + '/messages')
   }
   
   // guide or tourist
-  public getAllByInterlocutor(interlocutorId: number): Observable<Message[]> {
-    // return of(fakeMessages)
-    const params = new HttpParams().append('interlocutor', interlocutorId)
-    return this.http.get<Message[]>(environment.apiUrl + '/messages', { params })
+  public getConversationById(conversationId: number): Observable<Conversation> {
+    return this.http.get<Conversation>(environment.apiUrl + '/messages/' + conversationId)
   }
 
   // ---------
 
   public deleteConversation(conversationId: number): void {
-    const params = new HttpParams().append('conversation', conversationId)
-    this.http.delete(environment.apiUrl + '/messages', { params }).subscribe()
+    this.http.delete<Conversation>(environment.apiUrl + '/messages/' + conversationId).subscribe()
   }
 
   public sendMessage(message: MessageDTO): Observable<Message> {
-    return this.http.post<Message>(environment.apiUrl + '/messages/send', message)
+    return this.http.post<Message>(environment.apiUrl + '/messages', message)
   }
 
 }

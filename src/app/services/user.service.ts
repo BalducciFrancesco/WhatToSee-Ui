@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Administrator, Guide, GuideDTO, Tourist, TouristDTO, User, UserDTO } from '../dtos/user';
 
@@ -12,24 +12,50 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   public loginTourist(u: UserDTO): Observable<User> {
-    return this.http.post<User>(environment.apiUrl + '/loginTourist', u)
+    return this.http.post<User>(environment.apiUrl + '/tourist/login', u).pipe(tap(u => this.saveSession(u)))
   }
 
   public loginGuide(u: UserDTO): Observable<Guide> {
-    return this.http.post<Guide>(environment.apiUrl + '/loginGuide', u)
+    return this.http.post<Guide>(environment.apiUrl + '/guide/login', u).pipe(tap(u => this.saveSession(u)))
   }
   
   public loginAdministrator(u: UserDTO): Observable<Administrator> {
-    return this.http.post<Administrator>(environment.apiUrl + '/loginAdministrator', u)
+    return this.http.post<Administrator>(environment.apiUrl + '/administrator/login', u).pipe(tap(u => this.saveSession(u)))
   }
 
   // -----
 
   public registerTourist(u: TouristDTO): Observable<Tourist> {
-    return this.http.post<Tourist>(environment.apiUrl + '/registerTourist', u)
+    return this.http.post<Tourist>(environment.apiUrl + '/tourist/register', u).pipe(tap(u => this.saveSession(u)))
   }
 
   public registerGuide(u: GuideDTO): Observable<Guide> {
-    return this.http.post<Guide>(environment.apiUrl + '/registerGuide', u)
+    return this.http.post<Guide>(environment.apiUrl + '/guide/register', u).pipe(tap(u => this.saveSession(u)))
   }
+
+  // -----
+
+  public logout() {
+    sessionStorage.removeItem('logged-user');
+  }
+
+  public saveSession(u: User) {
+    // TODO enable Base64 encoding
+    // sessionStorage.setItem('logged-user', btoa(JSON.stringify(u)));
+    sessionStorage.setItem('logged-user', JSON.stringify(u));
+  }
+
+  public getSession(): User | null {
+    let u = sessionStorage.getItem('logged-user');
+    // TODO enable Base64 encoding
+    // return u ? JSON.parse(atob(u)) : null;
+    return u ? JSON.parse(u) : null;
+  }
+
+  // -----
+
+  public getAllTourists(): Observable<Tourist[]> {
+    return this.http.get<Tourist[]>(environment.apiUrl + '/tourist')
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class LoginPageComponent {
 
   hidePass = [true, true, true];
 
-  turistLogin = this.fb.nonNullable.group({
+  touristLogin = this.fb.nonNullable.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
@@ -25,28 +26,32 @@ export class LoginPageComponent {
     password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private userService: UserService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private userService: UserService,
+    private router: Router
+  ) { }
   
-  submitTurist() {
-    if(this.turistLogin.valid) {
-      this.userService.loginTourist(this.turistLogin.getRawValue()).subscribe(success => {
-        console.log(success);
+  submitTourist() {
+    if(this.touristLogin.valid) {
+      this.userService.loginTourist(this.touristLogin.getRawValue()).subscribe(loggedTourist => {
+        this.router.navigate(['/']);
       })
     }
   }
 
   submitGuide() {
-    if (this.guideLogin.valid) {
-      this.userService.loginGuide(this.guideLogin.getRawValue()).subscribe(success => {
-        console.log(success);
+    if(this.guideLogin.valid) {
+      this.userService.loginGuide(this.guideLogin.getRawValue()).subscribe(loggedGuide => {
+        this.router.navigate(['/']);
       })
     }
   }
 
   submitAdministrator() {
-    if (this.adminLogin.valid) {
-      this.userService.loginAdministrator(this.adminLogin.getRawValue()).subscribe(success => {
-        console.log(success);
+    if(this.adminLogin.valid) {
+      this.userService.loginAdministrator(this.adminLogin.getRawValue()).subscribe(loggedAdmin => {
+        this.router.navigate(['/']);
       })
     }
   }
