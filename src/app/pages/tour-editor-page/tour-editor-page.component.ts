@@ -8,8 +8,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
 import { Utils } from 'src/app/classes/utils';
-import { TourStopEditorDialogComponent } from 'src/app/components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
-import { City, Tag, Theme, Tour, TourStopDTO } from 'src/app/dtos/tour';
+import { StopEditorDialogComponent } from 'src/app/components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
+import { City, Tag, Theme, Tour, StopDTO } from 'src/app/dtos/tour';
 import { Tourist } from 'src/app/dtos/user';
 import { TourService } from 'src/app/services/tour.service';
 import { UserService } from 'src/app/services/user.service';
@@ -33,7 +33,7 @@ export class TourEditorPageComponent implements OnInit {
     approxDuration: new FormControl<string | null>(null, { validators: Validators.required }),
     sharedTourists: new FormControl<Tourist[]>([]),  // disabled if not public (usernames only)
     isPublic: new FormControl<boolean>(true, { nonNullable: true, validators: Validators.required }),
-    stops: new FormControl<TourStopDTO[]>([], { validators: Validators.required }),
+    stops: new FormControl<StopDTO[]>([], { validators: Validators.required }),
   });
 
   cityOptions$!: Observable<City[]>
@@ -79,8 +79,8 @@ export class TourEditorPageComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialogService.open(TourStopEditorDialogComponent);
-    dialogRef.afterClosed().subscribe((createdStop?: TourStopDTO) => {
+    const dialogRef = this.dialogService.open(StopEditorDialogComponent);
+    dialogRef.afterClosed().subscribe((createdStop?: StopDTO) => {
       if(createdStop) {
         const stops = this.form.controls.stops.value!
         stops.push(createdStop)

@@ -6,6 +6,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,10 +23,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
+import { ReviewDialogComponent } from './components/review-dialog/review-dialog.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
-import { TourStopCardComponent } from './components/tour-stop-card/tour-stop-card.component';
-import { TourStopEditorDialogComponent } from './components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
+import { StopCardComponent } from './components/tour-stop-card/tour-stop-card.component';
+import { StopEditorDialogComponent } from './components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
@@ -47,14 +49,15 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     NotAuthorizedPageComponent,
     RegisterPageComponent,
     TourEditorPageComponent,
-    TourStopEditorDialogComponent,
-    TourStopCardComponent,
+    StopEditorDialogComponent,
+    StopCardComponent,
     SearchPageComponent,
     TourCardComponent,
     TourPageComponent,
     ReviewCardComponent,
     StarRatingComponent,
     ReportDialogComponent,
+    ReviewDialogComponent,
     MessagesCenterPageComponent,
     MessagesPageComponent
   ],
@@ -78,8 +81,9 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     MatRadioModule,
     MatDialogModule,
     MatCardModule,
-    MatAutocompleteModule,  // must precede chips, for some reason
+    MatAutocompleteModule,  // must precede chips, for some description
     MatChipsModule,
+    MatRippleModule,
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },

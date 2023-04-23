@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TourStopEditorDialogComponent } from './tour-stop-editor-dialog.component';
+import { StopEditorDialogComponent } from './tour-stop-editor-dialog.component';
 
-describe('TourStopEditorDialogComponent', () => {
-  let component: TourStopEditorDialogComponent;
-  let fixture: ComponentFixture<TourStopEditorDialogComponent>;
+describe('StopEditorDialogComponent', () => {
+  let component: StopEditorDialogComponent;
+  let fixture: ComponentFixture<StopEditorDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TourStopEditorDialogComponent ]
+      declarations: [ StopEditorDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TourStopEditorDialogComponent);
+    fixture = TestBed.createComponent(StopEditorDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

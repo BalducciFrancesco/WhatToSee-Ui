@@ -7,7 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   templateUrl: './tour-stop-editor-dialog.component.html',
   styleUrls: ['./tour-stop-editor-dialog.component.scss']
 })
-export class TourStopEditorDialogComponent {
+export class StopEditorDialogComponent {
   
   form = this.fb.nonNullable.group({
     title: new FormControl<string | null>(null, { validators: Validators.required}),
@@ -22,7 +22,7 @@ export class TourStopEditorDialogComponent {
   });
 
   constructor(
-    private dialogRef: MatDialogRef<TourStopEditorDialogComponent>,
+    private dialogRef: MatDialogRef<StopEditorDialogComponent>,
     private fb: FormBuilder,
   ) { }
 
