@@ -1,10 +1,12 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs';
 import { ReportDialogComponent } from 'src/app/components/report-dialog/report-dialog.component';
 import { Tour } from 'src/app/dtos/tour';
 import { TourService } from 'src/app/services/tour.service';
+import { ReviewDialogComponent } from 'src/app/components/review-dialog/review-dialog.component';
 
 @Component({
   selector: 'app-tour-page',
@@ -13,13 +15,14 @@ import { TourService } from 'src/app/services/tour.service';
 })
 export class TourPageComponent implements OnInit {
 
-  public tour!: Tour
-
+  tour?: Tour
   
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private tourService: TourService,
-    private dialogService: MatDialog
+    private dialogService: MatDialog,
+    private notify: MatSnackBar
   ) {}
   
   ngOnInit(): void {
@@ -31,9 +34,30 @@ export class TourPageComponent implements OnInit {
 
   openReportModal(): void {
     const dialogRef = this.dialogService.open(ReportDialogComponent, { data: this.tour });
-    dialogRef.afterClosed().subscribe(newReport => {
-      this.tourService.createReport(newReport).subscribe()
+    dialogRef.afterClosed().subscribe(description => {
+      if(description)
+        this.tourService.createReport({tourId: this.tour!.id, description}).subscribe(() => this.notify.open('Segnalazione inviata!'))
     });
+  }
+
+  openReviewModal(): void {
+    const dialogRef = this.dialogService.open(ReviewDialogComponent, { data: this.tour });
+    dialogRef.afterClosed().subscribe(review => {
+      if(review) {
+        this.tourService.createReview({ tourId: this.tour!.id, ...review }).subscribe((createdReview) => {
+          this.tour!.reviews.push(createdReview);
+          this.notify.open('Recensione inviata!')
+        })
+      }
+    });
+  }
+
+  goChat(): void {
+    this.router.navigate(['/messages', this.tour!.author.id])
+  }
+
+  markCompleted(): void {
+    // this.tourService.markAsCompleted(this.tour!.id);
   }
 
 }

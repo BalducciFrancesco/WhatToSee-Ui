@@ -1,15 +1,13 @@
-<h1 mat-dialog-title>Crea segnalazione</h1>
+<h1 mat-dialog-title>Nuova segnalazione tour</h1>
 
-<div mat-dialog-content>
-    <form class="flex flex-col" [formGroup]="form" (submit)="onSubmit()">
-        <mat-form-field appearance="fill">
-            <mat-label>Motivazione</mat-label>
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" required formControlName="reason" (keypress)="keypress($event)"></textarea>
-        </mat-form-field>
-    </form>
+<div class="!flex flex-col" mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Motivazione</mat-label>
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" required [(ngModel)]="description" (keypress)="keypress($event)"></textarea>
+    </mat-form-field>
 </div>
 
 <div mat-dialog-actions align="end">
     <button mat-button (click)="onCancel()">Annulla</button>
-    <button mat-button [disabled]="form.invalid" (click)="onSubmit()" color="primary" cdkFocusInitial>Invia</button>
+    <button mat-button [disabled]="!description || !description.trim()" (click)="onSubmit()" color="primary" cdkFocusInitial>Invia</button>
 </div>

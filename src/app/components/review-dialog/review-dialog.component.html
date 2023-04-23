@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Nuova recensione tour</h1>
+
+<div mat-dialog-content>
+    <form class="flex flex-col" [formGroup]="form" (submit)="onSubmit()">
+        <div class="flex">
+            <mat-label class="mr-2">Valutazione:</mat-label>
+            <app-star-rating [editable]="true" (starsChange)="onStarChange($event)"></app-star-rating>
+        </div>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Descrizione</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" required formControlName="description" (keypress)="keypress($event)"></textarea>
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Annulla</button>
+    <button mat-button [disabled]="!form.valid" (click)="onSubmit()" color="primary" cdkFocusInitial>Invia</button>
+</div>

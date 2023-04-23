@@ -15,7 +15,7 @@ export interface Tour {
     approxCost: number
     approxDuration: string
     creationDate: Date
-    stops: TourStop[]
+    stops: Stop[]
     reviews: Review[]
 }
 
@@ -36,10 +36,10 @@ export interface TourDTO {
     approxCost: number
     approxDuration: string
     sharedTourists?: Tourist[]   // can be empty
-    stops: TourStopDTO[]
+    stops: StopDTO[]
 }
 
-export interface TourStop {
+export interface Stop {
     id: number
     title: string
     description: string
@@ -52,7 +52,7 @@ export interface TourStop {
     transferOtherOptions: string | null
 }
 
-export interface TourStopDTO {
+export interface StopDTO {
     title: string
     description: string
     cost: number
@@ -68,11 +68,12 @@ export interface Review {
     id: number
     author: Tourist
     timestamp: Date
-    stars: number
+    stars: number   // 1-5
     description: string
 }
 
 export interface ReviewDTO {
+    tourId: number
     stars: number
     description: string
 }
@@ -80,12 +81,12 @@ export interface ReviewDTO {
 export interface Report {
     id: number
     author: Tourist
-    reason: string
+    description: string
 }
 
 export interface ReportDTO {
     tourId: number
-    reason: string
+    description: string
 }
 
 export interface City {

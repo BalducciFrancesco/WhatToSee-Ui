@@ -11,10 +11,4 @@ export class ReviewCardComponent {
 
   @Input() data!: Review 
 
-  constructor(private sanitizer: DomSanitizer) { }
-
-  getImageSource(f: File): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(f))
-  }
-
 }

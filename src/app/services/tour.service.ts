@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Utils } from '../classes/utils';
-import { City, Report, ReportDTO, Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
+import { City, Report, ReportDTO, Review, ReviewDTO, Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +52,12 @@ export class TourService {
     return this.http.post<Tour>(environment.apiUrl + '/tour', mapped)
   }
 
+  public createReview(r: ReviewDTO): Observable<Review> {
+    return this.http.post<Review>(environment.apiUrl + '/tour/review', r)
+  }
+
   public createReport(r: ReportDTO): Observable<Report> {
-    return this.http.post<Report>(environment.apiUrl + '/tour/report/create', r)
+    return this.http.post<Report>(environment.apiUrl + '/tour/report', r)
   }
 
 }

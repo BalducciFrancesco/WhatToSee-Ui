@@ -2,36 +2,25 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Tour } from 'src/app/dtos/tour';
-import { TourStopEditorDialogComponent } from '../tour-stop-editor-dialog/tour-stop-editor-dialog.component';
+import { StopEditorDialogComponent } from '../tour-stop-editor-dialog/tour-stop-editor-dialog.component';
 
 @Component({
   templateUrl: './report-dialog.component.html',
   styleUrls: ['./report-dialog.component.scss']
 })
-export class ReportDialogComponent implements OnInit {
+export class ReportDialogComponent {
 
-  form = this.fb.nonNullable.group({
-    tourId: [-1, Validators.required],
-    reason: ['', Validators.required],
-  });
+  description: string | null = null;
 
-  constructor(
-    private dialogRef: MatDialogRef<TourStopEditorDialogComponent>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private tour: Tour,
-  ) { }
-
-  ngOnInit(): void {
-    this.form.patchValue({ tourId: this.tour.id })
-  }
+  constructor(private dialogRef: MatDialogRef<StopEditorDialogComponent>,) { }
 
   onCancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   onSubmit(): void {
-    if(this.form.valid)
-      this.dialogRef.close(this.form.getRawValue());
+    if(this.description !== null && this.description.trim())
+      this.dialogRef.close(this.description);
   }
 
   keypress(key: KeyboardEvent) {

@@ -1,37 +1,56 @@
-<hgroup>
-    <h1 class="!mb-0">{{ tour.title }}</h1>
-    <h3>{{ "A cura di " + tour.author.firstName + " " + tour.author.lastName }}</h3>
-</hgroup>
+<ng-container *ngIf="tour">
+    <!-- floating bottom right FABs -->
+    <!-- TODO limit to tourists only -->
+    <div class="fixed bottom-4 right-6 z-10 flex flex-col gap-y-2">
+        <!-- report -->
+        <button mat-fab color="warn" (click)="openReportModal()">
+            <mat-icon>flag</mat-icon>
+        </button>
+        <!-- chat with guide -->
+        <button mat-fab color="accent" (click)="goChat()">
+            <mat-icon>chat</mat-icon>
+        </button>
+        <!-- mark as completed -->
+        <!-- TODO don't allow multiple completetions -->
+        <button mat-fab color="primary" (click)="markCompleted()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
 
-<h3>Tappe ({{ tour.stops.length }}):</h3>
-<app-tour-stop-card *ngFor="let stop of tour.stops" [data]="stop"></app-tour-stop-card>
-
-<!-- TODO mappa qui -->
-
-<h3 class="!my-2">Dettagli complessivi:</h3>
-<ul class="list-disc list-inside ml-2">
-    <li>Durata totale: {{ tour.approxDuration }}</li>
-    <li>Costo totale: {{ tour.approxCost | currency }}</li>
-    <li>Tema: {{ tour.theme.name }}</li>
-    <!-- segnato come percorso da 2 utenti -->
-    <li>
-        <div class="inline-flex items-center">
-            <span>Tags:</span>
-            <mat-chip-listbox class="ml-2">
-                <mat-chip *ngFor="let tag of tour.tags">{{ tag.name }}</mat-chip>
-            </mat-chip-listbox>
-        </div>
-    </li>
-</ul>
-
-<h3 class="!my-2">Recensioni ({{ tour.reviews.length }}):</h3>
-<!-- TODO crea nuova -->
-<div class="grid grid-cols-2">
-    <app-review-card *ngFor="let review of tour.reviews" [data]="review"></app-review-card>
-</div>
-
-<mat-divider class="my-2"></mat-divider>
-
-<button mat-raised-button color="primary">Segna come percorso</button>
-<button mat-raised-button color="primary">Contatta la guida</button>
-<button mat-raised-button color="secondary" (click)="openReportModal()">Segnala un problema</button>
+    <hgroup>
+        <h1 class="!mb-0">{{ tour.title }}</h1>
+        <h3 class="!mb-0">{{ "A cura di " + tour.author.firstName + " " + tour.author.lastName }}</h3>
+    </hgroup>
+    
+    <h3 class="!my-2">Tappe ({{ tour.stops.length }}):</h3>
+    <div class="flex flex-col gap-y-2">
+        <app-tour-stop-card *ngFor="let stop of tour.stops" [data]="stop"></app-tour-stop-card>
+    </div>
+    
+    <h3 class="!my-2">Dettagli complessivi:</h3>
+    <ul class="list-disc list-inside ml-2">
+        <li>Durata approssimativa: {{ tour.approxDuration }}</li>
+        <li>Costo approssimativo: {{ tour.approxCost | currency }}</li>
+        <li>Tema: {{ tour.theme.name }}</li>
+        <!-- segnato come percorso da 2 utenti -->
+        <li>
+            <div class="inline-flex items-center">
+                <span>Tags:</span>
+                <mat-chip-listbox class="ml-2">
+                    <mat-chip *ngFor="let tag of tour.tags">{{ tag.name }}</mat-chip>
+                </mat-chip-listbox>
+            </div>
+        </li>
+    </ul>
+    
+    <h3 class="!my-2">Recensioni ({{ tour.reviews.length }}):</h3>
+    <div class="flex flex-col gap-2">
+        <app-review-card *ngFor="let review of tour.reviews" [data]="review"></app-review-card>
+        <!-- new review -->
+        <!-- TODO don't allow more than one -->
+        <mat-card matRipple class="new-review-card" (click)="openReviewModal()">
+            <mat-icon>add</mat-icon>
+        </mat-card>
+    </div>
+    
+</ng-container>
