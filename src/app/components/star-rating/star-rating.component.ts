@@ -21,7 +21,7 @@ export class StarRatingComponent {
   public onClick(i: number): void {
     if (this.editable) {
       this.stars = i + 1
-      this.starsChange.emit(this.stars + 1)
+      this.starsChange.emit(this.stars)
     }
   }
 

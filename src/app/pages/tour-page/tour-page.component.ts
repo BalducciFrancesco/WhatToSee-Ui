@@ -9,7 +9,6 @@ import { TourService } from 'src/app/services/tour.service';
 import { ReviewDialogComponent } from 'src/app/components/review-dialog/review-dialog.component';
 
 @Component({
-  selector: 'app-tour-page',
   templateUrl: './tour-page.component.html',
   styleUrls: ['./tour-page.component.scss']
 })
@@ -36,7 +35,7 @@ export class TourPageComponent implements OnInit {
     const dialogRef = this.dialogService.open(ReportDialogComponent, { data: this.tour });
     dialogRef.afterClosed().subscribe(description => {
       if(description)
-        this.tourService.createReport({tourId: this.tour!.id, description}).subscribe(() => this.notify.open('Segnalazione inviata!'))
+        this.tourService.createReport(this.tour!.id, { description }).subscribe(() => this.notify.open('Segnalazione inviata!'))
     });
   }
 
@@ -44,7 +43,7 @@ export class TourPageComponent implements OnInit {
     const dialogRef = this.dialogService.open(ReviewDialogComponent, { data: this.tour });
     dialogRef.afterClosed().subscribe(review => {
       if(review) {
-        this.tourService.createReview({ tourId: this.tour!.id, ...review }).subscribe((createdReview) => {
+        this.tourService.createReview(this.tour!.id, review).subscribe((createdReview) => {
           this.tour!.reviews.push(createdReview);
           this.notify.open('Recensione inviata!')
         })
@@ -57,7 +56,7 @@ export class TourPageComponent implements OnInit {
   }
 
   markCompleted(): void {
-    // this.tourService.markAsCompleted(this.tour!.id);
+    this.tourService.markAsCompleted(this.tour!.id).subscribe(() => this.notify.open('Segnato come completato!'));
   }
 
 }

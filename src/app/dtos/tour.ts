@@ -73,7 +73,6 @@ export interface Review {
 }
 
 export interface ReviewDTO {
-    tourId: number
     stars: number
     description: string
 }
@@ -85,7 +84,6 @@ export interface Report {
 }
 
 export interface ReportDTO {
-    tourId: number
     description: string
 }
 

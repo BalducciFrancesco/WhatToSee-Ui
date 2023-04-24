@@ -52,12 +52,16 @@ export class TourService {
     return this.http.post<Tour>(environment.apiUrl + '/tour', mapped)
   }
 
-  public createReview(r: ReviewDTO): Observable<Review> {
-    return this.http.post<Review>(environment.apiUrl + '/tour/review', r)
+  public createReview(id: number, r: ReviewDTO): Observable<Review> {
+    return this.http.post<Review>(environment.apiUrl + '/tour/' + id + '/review', r)
   }
 
-  public createReport(r: ReportDTO): Observable<Report> {
-    return this.http.post<Report>(environment.apiUrl + '/tour/report', r)
+  public createReport(id: number, r: ReportDTO): Observable<Report> {
+    return this.http.post<Report>(environment.apiUrl + '/tour/' + id + '/report', r)
+  }
+
+  public markAsCompleted(id: number): Observable<void> {
+    return this.http.post<void>(environment.apiUrl + '/tour/' + id + '/completed', null)
   }
 
 }
