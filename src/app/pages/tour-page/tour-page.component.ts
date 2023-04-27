@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +8,7 @@ import { ReportDialogComponent } from 'src/app/components/report-dialog/report-d
 import { Tour } from 'src/app/dtos/tour';
 import { TourService } from 'src/app/services/tour.service';
 import { ReviewDialogComponent } from 'src/app/components/review-dialog/review-dialog.component';
+import { UserRole } from 'src/app/dtos/user';
 
 @Component({
   templateUrl: './tour-page.component.html',
@@ -15,21 +17,48 @@ import { ReviewDialogComponent } from 'src/app/components/review-dialog/review-d
 export class TourPageComponent implements OnInit {
 
   tour?: Tour
+  role!: UserRole
+  UserRole = UserRole
+  isOwner: boolean = false
   
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private tourService: TourService,
     private dialogService: MatDialog,
-    private notify: MatSnackBar
+    private notify: MatSnackBar,
+    private userService: UserService,
   ) {}
   
   ngOnInit(): void {
+    this.role = this.userService.getSession()!.role
     this.route.paramMap.pipe(
       map((param: ParamMap) => param.get('id')!),
       mergeMap(tourId => this.tourService.getById(tourId))
-    ).subscribe(tour => this.tour = tour)
+    ).subscribe(tour => {
+      this.tour = tour
+      this.isOwner = tour.author.id === this.userService.getSession()!.id
+    })
   }
+
+  // -----------------
+  // guide methods
+  // -----------------
+  
+  delete(): void {
+    this.tourService.delete(this.tour!.id).subscribe(() => {
+      this.notify.open('Tour eliminato!');
+      this.router.navigate(['/guide', 'you'])
+    })
+  }
+
+  goEdit(): void {
+    this.router.navigate(['edit'])
+  }
+  
+  // -----------------
+  // tourist methods
+  // -----------------
 
   openReportModal(): void {
     const dialogRef = this.dialogService.open(ReportDialogComponent, { data: this.tour });
@@ -50,7 +79,7 @@ export class TourPageComponent implements OnInit {
       }
     });
   }
-
+  
   goChat(): void {
     this.router.navigate(['/messages', this.tour!.author.id])
   }

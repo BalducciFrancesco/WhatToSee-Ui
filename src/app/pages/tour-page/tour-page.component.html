@@ -1,20 +1,36 @@
 <ng-container *ngIf="tour">
     <!-- floating bottom right FABs -->
-    <!-- TODO limit to tourists only and if not already done -->
-    <div class="fixed bottom-4 right-6 z-10 flex flex-col gap-y-2">
-        <!-- report -->
-        <button mat-fab color="warn" (click)="openReportModal()">
-            <mat-icon>flag</mat-icon>
-        </button>
-        <!-- chat with guide -->
-        <button mat-fab color="accent" (click)="goChat()">
-            <mat-icon>chat</mat-icon>
-        </button>
-        <!-- mark as completed -->
-        <!-- TODO don't allow multiple completetions -->
-        <button mat-fab color="primary" (click)="markCompleted()">
-            <mat-icon>done</mat-icon>
-        </button>
+    <div class="fixed bottom-4 right-6 z-10 flex flex-col gap-y-2" [ngSwitch]="role">
+        <!-- tourist actions -->
+        <ng-container *ngSwitchCase="UserRole.TOURIST">
+            <!-- report -->
+            <!-- TODO don't allow multiple -->
+            <button mat-fab color="warn" (click)="openReportModal()">
+                <mat-icon>flag</mat-icon>
+            </button>
+            <!-- chat with guide -->
+            <button mat-fab color="accent" (click)="goChat()">
+                <mat-icon>chat</mat-icon>
+            </button>
+            <!-- mark as completed -->
+            <!-- TODO don't allow multiple -->
+            <button mat-fab color="primary" (click)="markCompleted()">
+                <mat-icon>done</mat-icon>
+            </button>
+        </ng-container>
+        <!-- guide actions -->
+        <ng-container *ngSwitchCase="UserRole.GUIDE">
+            <ng-container *ngIf="isOwner">
+                <!-- delete -->
+                <button mat-fab color="warn" (click)="delete()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <!-- edit -->
+                <button mat-fab color="primary" routerLink="edit">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </ng-container>
+        </ng-container>
     </div>
 
     <hgroup>

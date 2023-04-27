@@ -72,8 +72,14 @@ export class TourService {
     return this.http.post<Report>(environment.apiUrl + '/tour/' + id + '/report', r)
   }
 
+  // -----
+
   public markAsCompleted(id: number): Observable<void> {
     return this.http.post<void>(environment.apiUrl + '/tour/' + id + '/completed', null)
+  }
+
+  public delete(id: number): Observable<void> {
+    return this.http.delete<void>(environment.apiUrl + '/tour/' + id)
   }
 
 }
