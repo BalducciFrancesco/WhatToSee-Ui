@@ -17,6 +17,7 @@ export interface Tour {
     creationDate: Date
     stops: Stop[]
     reviews: Review[]
+    markedAsCompletedCount: number
 }
 
 export interface TourSearchDTO {

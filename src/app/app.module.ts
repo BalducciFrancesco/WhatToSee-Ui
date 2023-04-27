@@ -37,6 +37,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
+import { TouristPageComponent } from './pages/tourist-page/tourist-page.component';
 import { ErrorInterceptor } from './services/error.interceptor';
 import { HeadersInterceptor } from './services/headers.interceptor';
 
@@ -59,7 +60,8 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     ReportDialogComponent,
     ReviewDialogComponent,
     MessagesCenterPageComponent,
-    MessagesPageComponent
+    MessagesPageComponent,
+    TouristPageComponent
   ],
   imports: [
     BrowserModule,

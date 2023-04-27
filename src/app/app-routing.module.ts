@@ -10,11 +10,13 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
+import { TouristPageComponent } from './pages/tourist-page/tourist-page.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent, data: { title: 'Login' }},
   { path: 'register', component: RegisterPageComponent, data: { title: 'Registrati' }},
+  { path: 'you', component: TouristPageComponent, canActivate: [AuthGuard], data: { title: 'La tua pagina', role: [UserRole.TOURIST] }},
   
   { path: 'search', component: SearchPageComponent, canActivate: [AuthGuard], data: { title: 'Cerca' }},
   { path: 'tour', children: [
