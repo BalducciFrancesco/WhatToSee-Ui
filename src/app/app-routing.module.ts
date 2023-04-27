@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserRole } from './dtos/user';
+import { GuidePageComponent } from './pages/guide-page/guide-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
@@ -16,7 +17,8 @@ import { AuthGuard } from './services/auth.guard';
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent, data: { title: 'Login' }},
   { path: 'register', component: RegisterPageComponent, data: { title: 'Registrati' }},
-  { path: 'you', component: TouristPageComponent, canActivate: [AuthGuard], data: { title: 'La tua pagina', role: [UserRole.TOURIST] }},
+  { path: 'tourist/you', component: TouristPageComponent, canActivate: [AuthGuard], data: { title: 'La tua pagina turista', role: [UserRole.TOURIST] }},
+  { path: 'guide/you', component: GuidePageComponent, canActivate: [AuthGuard], data: { title: 'La tua pagina guida', role: [UserRole.GUIDE] }},
   
   { path: 'search', component: SearchPageComponent, canActivate: [AuthGuard], data: { title: 'Cerca' }},
   { path: 'tour', children: [

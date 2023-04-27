@@ -1,0 +1,9 @@
+<ng-container *ngIf="(createdTours$ | async) as createdTours">
+    <h3>Tour creati da te ({{ createdTours.length }}):</h3>
+    <div class="flex flex-col gap-y-2 my-2">
+        <app-tour-card matRipple *ngFor="let t of createdTours" [data]="t" class="cursor-pointer" [routerLink]="['/tour',t.id]"></app-tour-card>
+        <mat-card matRipple class="new-tour-card" [routerLink]="['/tour', 'create']">
+            <mat-icon>add</mat-icon>
+        </mat-card>
+    </div>
+</ng-container>

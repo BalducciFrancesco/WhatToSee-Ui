@@ -24,6 +24,10 @@ export class TourService {
     return this.http.get<Tour[]>(environment.apiUrl + '/tour/shared')
   }
 
+  public getCreatedTours(): Observable<Tour[]> {
+    return this.http.get<Tour[]>(environment.apiUrl + '/tour/created')
+  }
+
   public getAllTags(): Observable<Tag[]> {
     return this.http.get<Tag[]>(environment.apiUrl + '/tag')
   }

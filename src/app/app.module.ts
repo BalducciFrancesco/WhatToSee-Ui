@@ -28,6 +28,7 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { StopCardComponent } from './components/tour-stop-card/tour-stop-card.component';
 import { StopEditorDialogComponent } from './components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
+import { GuidePageComponent } from './pages/guide-page/guide-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
@@ -61,7 +62,8 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     ReviewDialogComponent,
     MessagesCenterPageComponent,
     MessagesPageComponent,
-    TouristPageComponent
+    TouristPageComponent,
+    GuidePageComponent
   ],
   imports: [
     BrowserModule,
