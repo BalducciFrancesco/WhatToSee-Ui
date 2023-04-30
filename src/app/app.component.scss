@@ -16,6 +16,9 @@
   z-index: 2;
 }
 
-#outlet {
-  padding: 8px;
+@media only screen and (min-width: 960px) {
+  main {
+    max-width: 1300px;
+    margin: auto;
+  }
 }
