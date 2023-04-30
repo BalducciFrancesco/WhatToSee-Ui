@@ -28,9 +28,10 @@ const routes: Routes = [
     { path: ':id/edit', component: TourEditorPageComponent, canActivate: [AuthGuard], data: { title: 'Modifica tour', role: [UserRole.GUIDE] } },
     { path: ':id', component: TourPageComponent, canActivate: [AuthGuard], data: { title: 'Visualizza tour' }},
   ]},
-  { path: 'messages', children: [
+  { path: 'conversation', children: [
       { path: 'list', component: MessagesCenterPageComponent, canActivate: [AuthGuard], data: { title: 'Centro messaggi', role: [UserRole.TOURIST, UserRole.GUIDE] } },
-      { path: ':id', component: MessagesPageComponent, canActivate: [AuthGuard], data: { title: 'Messaggi', role: [UserRole.TOURIST, UserRole.GUIDE] } },
+      { path: 'new', component: MessagesPageComponent, canActivate: [AuthGuard], data: { title: 'Conversazione', role: [UserRole.TOURIST, UserRole.GUIDE] } },
+      { path: ':id', component: MessagesPageComponent, canActivate: [AuthGuard], data: { title: 'Conversazione', role: [UserRole.TOURIST, UserRole.GUIDE] } },
     ]
   },
 

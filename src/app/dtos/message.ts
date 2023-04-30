@@ -7,7 +7,12 @@ export interface Conversation {
     id: number
     guide: Guide
     tourist: Tourist
-    messages: Message[]
+    messages: Message[] | null  // null in messages center response
+}
+
+export interface ConversationDTO {  // only tourists can create a conversation
+    guideId: number
+    message: string
 }
 
 export interface Message {
@@ -15,14 +20,4 @@ export interface Message {
     content: string
     direction: boolean
     timestamp: Date
-}
-
-export interface ConversationDTO {
-    guideId: number
-    messages: MessageDTO[]
-}
-
-export interface MessageDTO {
-    conversationId: number
-    content: string
 }

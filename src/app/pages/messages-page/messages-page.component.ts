@@ -18,12 +18,12 @@ export class MessagesPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private messagesService: MessageService) {}
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
-      map((param: ParamMap) => param.get('id')!),
-      map(conversationId => Number.parseInt(conversationId)),
-      tap(conversationId => this.conversationId = conversationId),
-      mergeMap(conversationId => this.messagesService.getConversationById(conversationId))
-    ).subscribe(conversation => this.conversation = conversation)
+    // this.route.paramMap.pipe(
+    //   map((param: ParamMap) => param.get('id')!),
+    //   map(conversationId => Number.parseInt(conversationId)),
+    //   tap(conversationId => this.conversationId = conversationId),
+    //   mergeMap(conversationId => this.messagesService.getConversationById(conversationId))
+    // ).subscribe(conversation => this.conversation = conversation)
   }
 
   sendMessage() {

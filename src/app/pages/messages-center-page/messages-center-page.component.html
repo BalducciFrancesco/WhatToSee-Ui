@@ -1,10 +1,14 @@
-
 <ng-container *ngIf="conversations$ | async as convs">
-    <h3>Chat con le guide ({{convs.length}}):</h3>
-    <div class="p-2 select-none" *ngFor="let c of convs; let i = index" [ngStyle]="i % 2 === 0 ? { 'background': 'gainsboro' } : null">
-        <span>{{ c.guide.firstName + ' ' + c.guide.lastName }} | </span>
-        <a class="underline" [routerLink]="['/messages', c.id]">Apri</a>
-        <span> | </span>
-        <a class="underline cursor-pointer" (click)="delete(c.id)">Elimina</a>
+    <h3>Chat con {{ role == UserRole.TOURIST ? 'le guide' : 'i turisti' }} ({{convs.length}}):</h3>
+
+    <div [ngStyle]="i % 2 === 0 ? { 'background': 'gainsboro' } : null"
+        *ngFor="let conv of convs; let i = index"
+        [routerLink]="['/conversation', conv.id]"
+        class="cursor-pointer p-2"
+        matRipple
+    >
+        {{ role == UserRole.TOURIST ? 
+            conv.guide.firstName + ' ' + conv.guide.lastName : 
+            conv.tourist.firstName + ' ' + conv.tourist.lastName }}
     </div>
 </ng-container>
