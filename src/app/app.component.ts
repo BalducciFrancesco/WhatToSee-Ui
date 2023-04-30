@@ -17,9 +17,8 @@ export class AppComponent implements OnInit {
   isLogged: boolean = false;
   
   name: string | null = null;
-  showTouristMenu: boolean = false;
-  showGuideMenu: boolean = false;
-  showAdministratorMenu: boolean = false;
+  role: UserRole | null = null;
+  UserRole = UserRole;
 
   routeTitle: string = "WhatToSeeApp";
 
@@ -49,9 +48,7 @@ export class AppComponent implements OnInit {
       this.routeTitle = routeData.title ?? "WhatToSeeApp"
       this.isLogged = this.userService.getSession() !== null;
       this.name = this.userService.getSession()?.firstName ?? null;
-      this.showTouristMenu = this.isLogged && this.userService.getSession()?.role === UserRole.TOURIST;
-      this.showGuideMenu = this.isLogged && this.userService.getSession()?.role === UserRole.GUIDE;
-      this.showAdministratorMenu = this.isLogged && this.userService.getSession()?.role === UserRole.ADMINISTRATOR;
+      this.role = this.userService.getSession()?.role ?? null;
     });
   }
 

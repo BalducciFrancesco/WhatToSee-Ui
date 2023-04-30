@@ -15,7 +15,7 @@ export class ReviewDialogComponent {
   });
 
   constructor(
-    private dialogRef: MatDialogRef<StopEditorDialogComponent>,
+    private dialogRef: MatDialogRef<ReviewDialogComponent>,
     private fb: FormBuilder,
   ) { }
 

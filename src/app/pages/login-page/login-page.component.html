@@ -58,9 +58,9 @@
     
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password" [type]="hidePass[3] ? 'password' : 'text'" required>
-                    <button type="button" mat-icon-button matSuffix (click)="hidePass[3] = !hidePass[3]">
-                        <mat-icon>{{hidePass[3] ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <input matInput formControlName="password" [type]="hidePass[2] ? 'password' : 'text'" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hidePass[2] = !hidePass[2]">
+                        <mat-icon>{{hidePass[2] ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
                 <button type="submit" mat-raised-button color="primary">Accedi</button>

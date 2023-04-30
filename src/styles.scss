@@ -30,3 +30,7 @@ a {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.error-snackbar > div {
+    background-color: #9d1107 !important;
+}

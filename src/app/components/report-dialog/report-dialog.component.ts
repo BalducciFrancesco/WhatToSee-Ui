@@ -12,7 +12,7 @@ export class ReportDialogComponent {
 
   description: string | null = null;
 
-  constructor(private dialogRef: MatDialogRef<StopEditorDialogComponent>,) { }
+  constructor(private dialogRef: MatDialogRef<ReportDialogComponent>) { }
 
   onCancel(): void {
     this.dialogRef.close(null);

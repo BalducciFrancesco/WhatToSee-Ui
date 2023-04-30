@@ -1,44 +1,40 @@
 <!-- search bar -->
-<mat-card>
-    <mat-card-content>
-        <form class="flex flex-col" [formGroup]="searchForm" (submit)="submitSearch()">
-            <mat-form-field appearance="fill">
-                <mat-label>Città</mat-label>
-                <mat-select formControlName="city">
-                    <mat-option *ngFor="let city of cityOptions$ | async" [value]="city">
-                        {{ city.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-            <mat-form-field appearance="fill">
-                <mat-label>Durata approssimativa massima</mat-label>
-                <input type="time" matInput formControlName="approxDuration">
-            </mat-form-field>
-        
-            <mat-form-field appearance="fill">
-                <mat-label>Tema</mat-label>
-                <mat-select formControlName="theme">
-                    <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme">
-                        {{ theme.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-            <mat-form-field appearance="fill">
-                <mat-label>Tags</mat-label>
-                <mat-select formControlName="tags" multiple>
-                    <mat-option *ngFor="let tag of tagsOptions$ | async" [value]="tag">
-                        {{ tag.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-            <button class="mb-2" type="submit" mat-raised-button color="primary">Cerca</button>
-            <button type="reset" mat-button>Rimuovi tutti i filtri</button>
-        </form>
-    </mat-card-content>
-</mat-card>
+<form class="flex flex-col" [formGroup]="searchForm" (submit)="submitSearch()">
+    <mat-form-field appearance="fill">
+        <mat-label>Città</mat-label>
+        <mat-select formControlName="city">
+            <mat-option *ngFor="let city of cityOptions$ | async" [value]="city">
+                {{ city.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Durata approssimativa massima</mat-label>
+        <input type="time" matInput formControlName="approxDuration">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Tema</mat-label>
+        <mat-select formControlName="theme">
+            <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme">
+                {{ theme.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Tags</mat-label>
+        <mat-select formControlName="tags" multiple>
+            <mat-option *ngFor="let tag of tagsOptions$ | async" [value]="tag">
+                {{ tag.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button class="mb-2" type="submit" mat-raised-button color="primary">Cerca</button>
+    <button type="reset" mat-button>Rimuovi tutti i filtri</button>
+</form>
 
 <!-- results -->
 <ng-container *ngIf="(searchResults$ | async) as tours">
