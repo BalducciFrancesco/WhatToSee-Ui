@@ -22,7 +22,8 @@ const routes: Routes = [
   
   { path: 'search', component: SearchPageComponent, canActivate: [AuthGuard], data: { title: 'Cerca' }},
   { path: 'tour', children: [
-    { path: 'create', component: TourEditorPageComponent, canActivate: [AuthGuard], data: { title: 'Crea Tour', role: [UserRole.GUIDE] }},
+    { path: 'create', component: TourEditorPageComponent, canActivate: [AuthGuard], data: { title: 'Crea tour', role: [UserRole.GUIDE] }},
+    { path: ':id/edit', component: TourEditorPageComponent, canActivate: [AuthGuard], data: { title: 'Modifica tour', role: [UserRole.GUIDE] } },
     { path: ':id', component: TourPageComponent, canActivate: [AuthGuard], data: { title: 'Visualizza tour' }},
   ]},
   { path: 'messages', children: [

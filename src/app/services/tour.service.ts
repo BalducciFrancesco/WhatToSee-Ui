@@ -4,6 +4,7 @@ import { from, Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Utils } from '../classes/utils';
 import { City, Report, ReportDTO, Review, ReviewDTO, Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
+import { Tourist } from '../dtos/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class TourService {
   
   public getSharedTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(environment.apiUrl + '/tour/shared')
+  }
+
+  public getSharedTourists(id: number): Observable<Tourist[]> {
+    return this.http.get<Tourist[]>(environment.apiUrl + '/tour/' + id + '/shared')
   }
 
   public getCreatedTours(): Observable<Tour[]> {
@@ -73,6 +78,19 @@ export class TourService {
   }
 
   // -----
+
+  public editTour(id: number, t: TourDTO): Observable<Tour> {
+    let mapped: any = {
+      ...t,
+      cityId: t.city.id,
+      themeId: t.theme.id,
+      sharedTouristIds: t.sharedTourists?.map(t => t.id)
+    }
+    delete mapped.city
+    delete mapped.theme
+    delete mapped.sharedTourists
+    return this.http.patch<Tour>(environment.apiUrl + '/tour/' + id, mapped)
+  }
 
   public markAsCompleted(id: number): Observable<void> {
     return this.http.post<void>(environment.apiUrl + '/tour/' + id + '/completed', null)

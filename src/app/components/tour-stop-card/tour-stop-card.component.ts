@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Stop, StopDTO } from 'src/app/dtos/tour';
 
@@ -11,10 +11,10 @@ export class StopCardComponent {
 
   @Input() data!: Stop | StopDTO
 
-  constructor(private sanitizer: DomSanitizer) {}
+  @Input() editable: boolean = false
+  @Input() deletable: boolean = false
 
-  getImageSource(f: File): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(f))
-  }
+  @Output() editClick: EventEmitter<void> = new EventEmitter<void>()
+  @Output() deleteClick: EventEmitter<void> = new EventEmitter<void>()
 
 }

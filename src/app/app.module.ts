@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -88,6 +89,7 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     MatAutocompleteModule,  // must precede chips, for some description
     MatChipsModule,
     MatRippleModule,
+    DragDropModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },

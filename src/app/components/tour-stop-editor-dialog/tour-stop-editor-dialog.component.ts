@@ -1,13 +1,14 @@
+import { Stop } from 'src/app/dtos/tour';
 import { Utils } from 'src/app/classes/utils';
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './tour-stop-editor-dialog.component.html',
   styleUrls: ['./tour-stop-editor-dialog.component.scss']
 })
-export class StopEditorDialogComponent {
+export class StopEditorDialogComponent implements OnInit {
   
   form = this.fb.nonNullable.group({
     title: new FormControl<string | null>(null, { validators: Validators.required}),
@@ -24,7 +25,13 @@ export class StopEditorDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<StopEditorDialogComponent>,
     private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public savedStop?: Stop,
   ) { }
+
+  ngOnInit(): void {
+    if(this.savedStop)
+      this.form.patchValue(this.savedStop);
+  }
 
   onCancel(): void {
     this.dialogRef.close();
