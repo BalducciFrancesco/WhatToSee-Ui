@@ -22,6 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProblemsDialogComponent } from './components/problems-dialog/problems-dialog.component';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
 import { ReviewDialogComponent } from './components/review-dialog/review-dialog.component';
@@ -29,6 +30,7 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { StopCardComponent } from './components/tour-stop-card/tour-stop-card.component';
 import { StopEditorDialogComponent } from './components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
+import { AdministratorPageComponent } from './pages/administrator-page/administrator-page.component';
 import { GuidePageComponent } from './pages/guide-page/guide-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
@@ -60,11 +62,13 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     ReviewCardComponent,
     StarRatingComponent,
     ReportDialogComponent,
+    ProblemsDialogComponent,
     ReviewDialogComponent,
     MessagesCenterPageComponent,
     MessagesPageComponent,
     TouristPageComponent,
-    GuidePageComponent
+    GuidePageComponent,
+    AdministratorPageComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,7 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     MatRadioModule,
     MatDialogModule,
     MatCardModule,
-    MatAutocompleteModule,  // must precede chips, for some description
+    MatAutocompleteModule,  // must precede chips, for some reason
     MatChipsModule,
     MatRippleModule,
     DragDropModule
@@ -94,7 +98,7 @@ import { HeadersInterceptor } from './services/headers.interceptor';
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { width: '80vw' } },
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
     { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserRole } from './dtos/user';
+import { AdministratorPageComponent } from './pages/administrator-page/administrator-page.component';
 import { GuidePageComponent } from './pages/guide-page/guide-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent, data: { title: 'Registrati' }},
   { path: 'tourist/you', component: TouristPageComponent, canActivate: [AuthGuard], data: { title: 'La tua pagina turista', role: [UserRole.TOURIST] }},
   { path: 'guide/you', component: GuidePageComponent, canActivate: [AuthGuard], data: { title: 'La tua pagina guida', role: [UserRole.GUIDE] }},
+  { path: 'administrator/you', component: AdministratorPageComponent, canActivate: [AuthGuard], data: { title: 'La tua pagina amministratore', role: [UserRole.ADMINISTRATOR] }},
   
   { path: 'search', component: SearchPageComponent, canActivate: [AuthGuard], data: { title: 'Cerca' }},
   { path: 'tour', children: [

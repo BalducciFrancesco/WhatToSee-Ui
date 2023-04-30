@@ -1,3 +1,4 @@
+import { ProblemsDialogComponent } from './../../components/problems-dialog/problems-dialog.component';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
@@ -61,7 +62,7 @@ export class TourPageComponent implements OnInit {
   // -----------------
 
   openReportModal(): void {
-    const dialogRef = this.dialogService.open(ReportDialogComponent, { data: this.tour });
+    const dialogRef = this.dialogService.open(ReportDialogComponent);
     dialogRef.afterClosed().subscribe(description => {
       if(description)
         this.tourService.createReport(this.tour!.id, { description }).subscribe(() => this.notify.open('Segnalazione inviata!'))
@@ -69,7 +70,7 @@ export class TourPageComponent implements OnInit {
   }
 
   openReviewModal(): void {
-    const dialogRef = this.dialogService.open(ReviewDialogComponent, { data: this.tour });
+    const dialogRef = this.dialogService.open(ReviewDialogComponent);
     dialogRef.afterClosed().subscribe(review => {
       if(review) {
         this.tourService.createReview(this.tour!.id, review).subscribe((createdReview) => {
@@ -86,6 +87,25 @@ export class TourPageComponent implements OnInit {
 
   markCompleted(): void {
     this.tourService.markAsCompleted(this.tour!.id).subscribe(() => this.notify.open('Segnato come completato!'));
+  }
+
+  // -----------------
+  // administrator methods
+  // -----------------
+
+  openProblemsModal(): void {
+    const dialogRef = this.dialogService.open(ProblemsDialogComponent, { data: this.tour });
+    dialogRef.afterClosed().subscribe(isDelete => {
+      if(isDelete)
+        this.administratorDelete()
+    });
+  }
+
+  private administratorDelete(): void {
+    this.tourService.delete(this.tour!.id).subscribe(() => {
+      this.notify.open('Tour eliminato!');
+      this.router.navigate(['/administrator', 'you'])
+    })
   }
 
 }

@@ -31,6 +31,13 @@
                 </button>
             </ng-container>
         </ng-container>
+        <!-- guide actions -->
+        <ng-container *ngSwitchCase="UserRole.ADMINISTRATOR">
+            <!-- problems check -->
+            <button mat-fab color="warn" (click)="openProblemsModal()">
+                <mat-icon>feedback</mat-icon>
+            </button>
+        </ng-container>
     </div>
 
     <hgroup>

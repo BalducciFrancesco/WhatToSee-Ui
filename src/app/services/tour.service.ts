@@ -33,6 +33,25 @@ export class TourService {
     return this.http.get<Tour[]>(environment.apiUrl + '/tour/created')
   }
 
+  public getReportedTours(): Observable<Tour[]> {
+    return this.http.get<Tour[]>(environment.apiUrl + '/tour/reported')
+  }
+
+  public getReports(id: number): Observable<Report[]> {
+    return this.http.get<Report[]>(environment.apiUrl + '/tour/' + id + '/report')
+  }
+
+  public search(s: TourSearchDTO): Observable<Tour[]> {
+    let params = new HttpParams()
+    s.city ? params = params.append('cityId', s.city.id) : null
+    s.approxDuration ? params = params.append('approxDuration', s.approxDuration) : null
+    s.theme ? params = params.append('themeId', s.theme.id) : null
+    s.tags ? params = params.appendAll({'tagIds': s.tags.map(t => t.id)}) : null
+    return this.http.get<Tour[]>(environment.apiUrl + '/tour/search', { params })
+  }
+
+  // -----
+
   public getAllTags(): Observable<Tag[]> {
     return this.http.get<Tag[]>(environment.apiUrl + '/tag')
   }
@@ -43,15 +62,6 @@ export class TourService {
 
   public getAllCities(): Observable<City[]> {
     return this.http.get<City[]>(environment.apiUrl + '/city')
-  }
-
-  public search(s: TourSearchDTO): Observable<Tour[]> {
-    let params = new HttpParams()
-    s.city ? params = params.append('cityId', s.city.id) : null
-    s.approxDuration ? params = params.append('approxDuration', s.approxDuration) : null
-    s.theme ? params = params.append('themeId', s.theme.id) : null
-    s.tags ? params = params.appendAll({'tagIds': s.tags.map(t => t.id)}) : null
-    return this.http.get<Tour[]>(environment.apiUrl + '/tour/search', { params })
   }
 
   // -----

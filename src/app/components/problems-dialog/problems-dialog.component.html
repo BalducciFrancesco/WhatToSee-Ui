@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Resoconto segnalazioni tour</h1>
+
+<div class="!flex flex-col gap-y-1" mat-dialog-content>
+    <ng-container *ngIf="(reports$ | async) as reports; else loading">
+        <ng-container *ngIf="reports.length > 0; else noReports">
+            <mat-card *ngFor="let r of reports; let i = index" class="!mb-2 !text-black">
+                <mat-card-header>
+                    <mat-card-title>Segnalazione {{ i+1 }}</mat-card-title>
+                    <mat-card-subtitle>di {{ r.author.firstName + " " + r.author.lastName }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>{{ r.description }}</mat-card-content>
+            </mat-card>
+        </ng-container>
+    </ng-container>
+    
+    <ng-template #noReports>Evviva, non ci sono segnalazioni!</ng-template>
+    <ng-template #loading>Caricamento in corso...</ng-template>
+</div>
+
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Annulla</button>
+    <button mat-button (click)="onSubmit()" color="warn" cdkFocusInitial>Elimina</button>
+</div>
