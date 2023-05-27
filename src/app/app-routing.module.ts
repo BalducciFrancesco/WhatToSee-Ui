@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserRole } from './dtos/user';
 import { AdministratorPageComponent } from './pages/administrator-page/administrator-page.component';
+import { ConversationPageComponent } from './pages/conversation-page/conversation-page.component';
 import { GuidePageComponent } from './pages/guide-page/guide-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MessagesCenterPageComponent } from './pages/messages-center-page/messages-center-page.component';
-import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
 import { NotAuthorizedPageComponent } from './pages/not-authorized/not-authorized-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
@@ -30,8 +30,8 @@ const routes: Routes = [
   ]},
   { path: 'conversation', children: [
       { path: 'list', component: MessagesCenterPageComponent, canActivate: [AuthGuard], data: { title: 'Centro messaggi', role: [UserRole.TOURIST, UserRole.GUIDE] } },
-      { path: 'new', component: MessagesPageComponent, canActivate: [AuthGuard], data: { title: 'Conversazione', role: [UserRole.TOURIST, UserRole.GUIDE] } },
-      { path: ':id', component: MessagesPageComponent, canActivate: [AuthGuard], data: { title: 'Conversazione', role: [UserRole.TOURIST, UserRole.GUIDE] } },
+      { path: 'new', component: ConversationPageComponent, canActivate: [AuthGuard], data: { title: 'Conversazione', role: [UserRole.TOURIST, UserRole.GUIDE] } },
+      { path: ':id', component: ConversationPageComponent, canActivate: [AuthGuard], data: { title: 'Conversazione', role: [UserRole.TOURIST, UserRole.GUIDE] } },
     ]
   },
 

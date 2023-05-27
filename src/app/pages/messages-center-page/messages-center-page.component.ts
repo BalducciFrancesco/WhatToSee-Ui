@@ -1,8 +1,8 @@
 import { UserRole } from 'src/app/dtos/user';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Conversation } from 'src/app/dtos/message';
-import { MessageService } from 'src/app/services/message.service';
+import { Conversation } from 'src/app/dtos/conversation';
+import { ConversationService } from 'src/app/services/conversation.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,11 +15,11 @@ export class MessagesCenterPageComponent implements OnInit {
   role?: UserRole
   UserRole = UserRole
   
-  constructor(private userService: UserService, private messageService: MessageService) {}
+  constructor(private userService: UserService, private messageService: ConversationService) {}
   
   ngOnInit(): void {
     this.role = this.userService.getSession()!.role
-    this.conversations$ = this.messageService.getAllConversation()
+    this.conversations$ = this.messageService.getAll()
   }
   
 }

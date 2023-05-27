@@ -18,6 +18,6 @@ export interface ConversationDTO {  // only tourists can create a conversation
 export interface Message {
     id: number
     content: string
-    direction: boolean
+    direction: boolean  // true if guide -> tourist, false if tourist -> guide
     timestamp: Date
 }

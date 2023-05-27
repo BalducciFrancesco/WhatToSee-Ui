@@ -1,0 +1,18 @@
+<!-- works for tourist-guide and vice versa -->
+<ng-container *ngIf="conversation">
+    <mat-card *ngFor="let m of conversation.messages" [ngClass]="{'own-message': m.direction ? role === UserRole.GUIDE : role === UserRole.TOURIST }" class="mb-2">
+        <mat-card-content>
+            <p>{{ m.direction ? conversation.guide.firstName : conversation.tourist.firstName }} in data {{ m.timestamp | date: 'full' }}</p>
+            <p class="mt-2">{{ m.content }}</p>
+        </mat-card-content>
+    </mat-card>
+        
+    <div class="fixed bottom-0 left-0 w-full px-2 flex" [style]="!(isHandset$ | async) ? 'padding-left: calc(200px + 0.5rem)' : null" >
+        <mat-form-field class="grow" appearance="fill">
+            <input matInput [(ngModel)]="newMessage" placeholder="Invia un messaggio..." (keydown.enter)="sendMessage()">
+        </mat-form-field>
+        <button mat-icon-button color="primary" class="ml-3" type="submit" (click)="sendMessage()">
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+</ng-container>
