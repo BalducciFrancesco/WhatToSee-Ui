@@ -1,3 +1,5 @@
+import { Conversation } from 'src/app/dtos/conversation';
+import { ConversationService } from 'src/app/services/conversation.service';
 import { ProblemsDialogComponent } from './../../components/problems-dialog/problems-dialog.component';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,6 +28,7 @@ export class TourPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private tourService: TourService,
+    private conversationService: ConversationService,
     private dialogService: MatDialog,
     private notify: MatSnackBar,
     private userService: UserService,
@@ -81,8 +84,16 @@ export class TourPageComponent implements OnInit {
     });
   }
   
-  goChat(): void {
-    this.router.navigate(['/messages', this.tour!.author.id])
+  goConversation(): void {
+    this.conversationService.getByGuide(this.tour!.author.id).subscribe((c: Conversation | null) => {
+      if(c) { // conversation already exists
+        // navigate to that, passing the already loaded data
+        this.router.navigate(['/conversation', c.id], { state: c})
+      } else {
+        // navigate to a pre-conversation page, passing the requested guide
+        this.router.navigate(['/conversation', 'new'], { state: { 'guideId': this.tour!.author.id }})
+      }
+    })
   }
 
   markCompleted(): void {
