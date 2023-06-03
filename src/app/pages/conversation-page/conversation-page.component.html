@@ -1,13 +1,13 @@
 <!-- works for tourist-guide and vice versa -->
 <ng-container *ngIf="conversation || creationGuideId">
-    <ng-container *ngIf="conversation; else newConversation">
+    <div class="flex flex-col items-start" *ngIf="conversation; else newConversation">
         <mat-card *ngFor="let m of conversation.messages" [ngClass]="{'own-message': m.direction ? role === UserRole.GUIDE : role === UserRole.TOURIST }" class="mb-2">
             <mat-card-content>
-                <p>{{ m.direction ? conversation.guide.firstName : conversation.tourist.firstName }} in data {{ m.timestamp | date: 'full' }}</p>
+                <p>{{ m.direction ? conversation.guide.firstName : conversation.tourist.firstName }} in data {{ m.timestamp | date: 'medium' }}</p>
                 <p class="mt-2">{{ m.content }}</p>
             </mat-card-content>
         </mat-card>
-    </ng-container>
+    </div>
     <ng-template #newConversation>
         <div class="text-center">Qui non c'è nulla... Inizia la conversazione!</div>
     </ng-template>

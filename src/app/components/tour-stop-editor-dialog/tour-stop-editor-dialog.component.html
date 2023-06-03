@@ -2,54 +2,57 @@
 
 <div mat-dialog-content>
     <form class="flex flex-col" [formGroup]="form" (submit)="onSubmit()">
+        <div class="flex flex-col gap-x-5 lg:grid lg:grid-cols-2">
+            <mat-form-field appearance="fill">
+                <mat-label>Titolo</mat-label>
+                <input matInput formControlName="title" required>
+            </mat-form-field>
     
-        <mat-form-field appearance="fill">
-            <mat-label>Titolo</mat-label>
-            <input matInput formControlName="title" required>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Descrizione</mat-label>
-            <input matInput formControlName="description" required>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Costo</mat-label>
-            <input type="number" min="0.00" step="0.01" matInput formControlName="cost" required>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Durata</mat-label>
-            <input type="time" matInput formControlName="duration" required>
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Descrizione</mat-label>
+                <input matInput formControlName="description" required>
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Costo</mat-label>
+                <input type="number" min="0.00" step="0.01" matInput formControlName="cost" required>
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Durata</mat-label>
+                <input type="time" matInput formControlName="duration" required>
+            </mat-form-field>
+        </div>
     
         <mat-divider></mat-divider>
 
         <h3 class="pt-3">Dettagli sullo spostamento per raggiungerla</h3>
-        <mat-form-field appearance="fill">
-            <mat-label>Costo</mat-label>
-            <input type="number" min="0.00" step="0.01" matInput formControlName="transferCost" required>
-        </mat-form-field>
+        <div class="flex flex-col gap-x-5 lg:grid lg:grid-cols-2">
+            <mat-form-field appearance="fill">
+                <mat-label>Costo</mat-label>
+                <input type="number" min="0.00" step="0.01" matInput formControlName="transferCost" required>
+            </mat-form-field>
+            
+            <mat-form-field appearance="fill">
+                <mat-label>Durata</mat-label>
+                <input type="time" matInput formControlName="transferDuration" required>
+            </mat-form-field>
         
-        <mat-form-field appearance="fill">
-            <mat-label>Durata</mat-label>
-            <input type="time" matInput formControlName="transferDuration" required>
-        </mat-form-field>
-    
-        <mat-form-field appearance="fill">
-            <mat-label>Tipologia</mat-label>
-            <input matInput formControlName="transferType" required>
-        </mat-form-field>
-    
-        <mat-form-field appearance="fill">
-            <mat-label>Dettagli</mat-label>
-            <input matInput formControlName="transferDetails" required>
-        </mat-form-field>
-    
-        <mat-form-field appearance="fill">
-            <mat-label>Altre opzioni</mat-label>
-            <input matInput formControlName="transferOtherOptions">
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Tipologia</mat-label>
+                <input matInput formControlName="transferType" required>
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill">
+                <mat-label>Dettagli</mat-label>
+                <input matInput formControlName="transferDetails" required>
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill">
+                <mat-label>Altre opzioni</mat-label>
+                <input matInput formControlName="transferOtherOptions">
+            </mat-form-field>
+        </div>
     </form>
 </div>
 

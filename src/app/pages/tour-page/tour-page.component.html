@@ -67,11 +67,11 @@
     </ul>
     
     <h3 class="!my-2">Recensioni ({{ tour.reviews.length }}):</h3>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 lg:grid lg:grid-cols-2">
         <app-review-card *ngFor="let review of tour.reviews" [data]="review"></app-review-card>
         <!-- new review -->
         <!-- TODO don't allow more than one -->
-        <mat-card matRipple class="new-review-card" (click)="openReviewModal()">
+        <mat-card *ngIf="role === UserRole.TOURIST" matRipple class="new-review-card" (click)="openReviewModal()">
             <mat-icon>add</mat-icon>
         </mat-card>
     </div>

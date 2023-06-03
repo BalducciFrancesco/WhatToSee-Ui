@@ -1,7 +1,9 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LayoutModule } from '@angular/cdk/layout';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import localeIt from '@angular/common/locales/it';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,6 +47,7 @@ import { TouristPageComponent } from './pages/tourist-page/tourist-page.componen
 import { ErrorInterceptor } from './services/error.interceptor';
 import { HeadersInterceptor } from './services/headers.interceptor';
 
+registerLocaleData(localeIt);
 
 @NgModule({
   declarations: [
@@ -96,6 +99,8 @@ import { HeadersInterceptor } from './services/headers.interceptor';
     DragDropModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'it' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { width: '80vw' } },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },

@@ -1,13 +1,13 @@
 <ng-container *ngIf="(sharedTours$ | async) as sharedTours">
     <h3>Tour condivisi con te ({{ sharedTours.length }}):</h3>
-    <div class="flex flex-col gap-y-2 my-2">
+    <div class="flex flex-col gap-3 lg:grid lg:grid-cols-2 my-2">
         <app-tour-card matRipple *ngFor="let t of sharedTours" [data]="t" class="cursor-pointer" [routerLink]="['/tour',t.id]"></app-tour-card>
     </div>
 </ng-container>
 
 <ng-container *ngIf="(completedTours$ | async) as completedTours">
     <h3>Tour completati da te ({{ completedTours.length }}):</h3>
-    <div class="flex flex-col gap-y-2 my-2">
+    <div class="flex flex-col gap-3 lg:grid lg:grid-cols-2 my-2">
         <app-tour-card matRipple *ngFor="let t of completedTours" [data]="t" class="cursor-pointer" [routerLink]="['/tour',t.id]"></app-tour-card>
     </div>
 </ng-container>

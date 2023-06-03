@@ -1,8 +1,10 @@
 <mat-card>
     <mat-card-header>
         <div class="w-full flex justify-between items-center">
-            <app-star-rating [stars]="data.stars"></app-star-rating>
-            <h4 class="!text-sm !mb-0">{{ data.author.firstName }} {{ data.author.lastName }} in data {{ data.timestamp | date }}</h4>
+            <div class="rating-container">
+                <app-star-rating [stars]="data.stars"></app-star-rating>
+            </div>
+            <h4 class="!text-sm author-label">{{ data.author.firstName }} {{ data.author.lastName }} in data {{ data.timestamp | date:'medium' }}</h4>
         </div>
     </mat-card-header>
     <mat-card-content>

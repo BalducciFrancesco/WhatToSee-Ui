@@ -1,0 +1,11 @@
+.author-label {
+    margin-bottom: 0;
+    direction: rtl;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rating-container {
+    flex-shrink: 0; // prevent shrink
+}

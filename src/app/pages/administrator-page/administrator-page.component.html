@@ -1,6 +1,6 @@
 <ng-container *ngIf="(reportedTours$ | async) as reportedTours">
     <h3>Tour segnalati dagli utenti ({{ reportedTours.length }}):</h3>
-    <div class="flex flex-col gap-y-2 my-2">
+    <div class="flex flex-col gap-3 lg:grid lg:grid-cols-2 my-2">
         <app-tour-card *ngFor="let t of reportedTours" 
             matRipple [data]="t" class="cursor-pointer" 
             [routerLink]="['/tour',t.id]"
