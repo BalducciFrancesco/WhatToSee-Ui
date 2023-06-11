@@ -1,3 +1,4 @@
+import { ConversationDTO, MessageDTO } from './../dtos/conversation';
 import { Message } from 'src/app/dtos/conversation';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,7 @@ export class ConversationService {
   constructor(private http: HttpClient) { }
 
   public getAll(): Observable<Conversation[]> {
-    return this.http.get<Conversation[]>(environment.apiUrl + '/conversation')
+    return this.http.get<Conversation[]>(environment.apiUrl + '/conversation/all')
   }
 
   public getById(conversationId: number): Observable<Conversation> {
@@ -30,14 +31,13 @@ export class ConversationService {
   
   // ---------
 
-  public sendMessage(conversationId: number, m: string): Observable<Message> {
-    return this.http.post<Message>(environment.apiUrl + '/conversation/' + conversationId + '/message', m)
+  public sendMessage(m: MessageDTO): Observable<Message> {
+    return this.http.post<Message>(environment.apiUrl + '/conversation/message', m)
   }
 
   // creates a new conversation with a message and returns the created one
-  public createConversation(guideId: number, m: string): Observable<Conversation> {
-    const params = new HttpParams().append('guideId', guideId)
-    return this.http.post<Conversation>(environment.apiUrl + '/conversation', m, { params })
+  public createConversation(c: ConversationDTO): Observable<Conversation> {
+    return this.http.post<Conversation>(environment.apiUrl + '/conversation', c)
   }
 
 }

@@ -58,13 +58,13 @@ export class ConversationPageComponent implements OnInit {
   sendMessage() {
     if(this.newMessage && this.newMessage.trim()) {
       if(this.conversation !== undefined) { // sending in an already existing conversation
-        this.messagesService.sendMessage(this.conversation!.id, this.newMessage).subscribe(m => {
+        this.messagesService.sendMessage({ content: this.newMessage, conversationId: this.conversation.id }).subscribe(m => {
           // reload conversation
           this.conversation!.messages!.push(m)
           this.newMessage = ''
         })
       } else if(this.creationGuideId !== undefined) { // sending in a new conversation
-        this.messagesService.createConversation(this.creationGuideId, this.newMessage).subscribe(c => {
+        this.messagesService.createConversation({ message: this.newMessage, guideId: this.creationGuideId }).subscribe(c => {
           this.conversation = c
           this.newMessage = ''
           // TODO navigate to current page with conversation id

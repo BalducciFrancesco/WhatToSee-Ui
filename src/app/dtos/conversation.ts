@@ -21,3 +21,8 @@ export interface Message {
     direction: boolean  // true if guide -> tourist, false if tourist -> guide
     timestamp: Date
 }
+
+export interface MessageDTO {
+    content: string
+    conversationId: number
+}
