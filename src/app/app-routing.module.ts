@@ -13,7 +13,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
 import { TouristPageComponent } from './pages/tourist-page/tourist-page.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent, data: { title: 'Login' }},
@@ -36,8 +36,8 @@ const routes: Routes = [
   },
 
   { path: '', pathMatch: 'full', redirectTo: 'search' },  // default
-  { path: 'not-authorized', component: NotAuthorizedPageComponent, data: { title: 'Non autorizzato' } }, // 403 // TODO also intercept 403 from backend
-  { path: '**', component: NotFoundPageComponent },      // 404
+  { path: 'not-authorized', component: NotAuthorizedPageComponent, data: { title: 'Non autorizzato' } }, // when any 401 response
+  { path: '**', component: NotFoundPageComponent }, // route not found 
 ];
 
 

@@ -33,6 +33,8 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { StopCardComponent } from './components/tour-stop-card/tour-stop-card.component';
 import { StopEditorDialogComponent } from './components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { HeadersInterceptor } from './interceptors/headers.interceptor';
 import { AdministratorPageComponent } from './pages/administrator-page/administrator-page.component';
 import { ConversationPageComponent } from './pages/conversation-page/conversation-page.component';
 import { GuidePageComponent } from './pages/guide-page/guide-page.component';
@@ -45,8 +47,6 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
 import { TouristPageComponent } from './pages/tourist-page/tourist-page.component';
-import { ErrorInterceptor } from './services/error.interceptor';
-import { HeadersInterceptor } from './services/headers.interceptor';
 
 registerLocaleData(localeIt);
 

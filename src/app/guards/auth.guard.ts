@@ -1,4 +1,4 @@
-import { UserRole } from './../dtos/user';
+import { UserRole } from '../dtos/user';
 import { UserService } from 'src/app/services/user.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
