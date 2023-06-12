@@ -45,16 +45,12 @@ export class UserService {
   }
 
   public saveSession(u: User) {
-    // TODO enable Base64 encoding
-    // sessionStorage.setItem('logged-user', btoa(JSON.stringify(u)));
-    sessionStorage.setItem('logged-user', JSON.stringify(u));
+    sessionStorage.setItem('logged-user', window.btoa(JSON.stringify(u)));
   }
 
   public getSession(): User | null {
     let u = sessionStorage.getItem('logged-user');
-    // TODO enable Base64 encoding
-    // return u ? JSON.parse(atob(u)) : null;
-    return u ? JSON.parse(u) : null;
+    return u ? JSON.parse(window.atob(u)) : null;
   }
 
   // -----
