@@ -12,13 +12,13 @@ import { UserService } from 'src/app/services/user.service';
 export class MessagesCenterPageComponent implements OnInit {
   
   conversations$!: Observable<Conversation[]>
-  role?: UserRole
+  role: UserRole | null = null
   UserRole = UserRole
   
   constructor(private userService: UserService, private messageService: ConversationService) {}
   
   ngOnInit(): void {
-    this.role = this.userService.getSession()!.role
+    this.role = this.userService.getSessionRole()
     this.conversations$ = this.messageService.getAll()
   }
   

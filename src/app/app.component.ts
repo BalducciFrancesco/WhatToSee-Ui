@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
       this.routeTitle = routeData.title ?? "WhatToSeeApp"
       this.isLogged = this.userService.getSession() !== null;
       this.name = this.userService.getSession()?.firstName ?? null;
-      this.role = this.userService.getSession()?.role ?? null;
+      this.role = this.userService.getSessionRole()
     });
   }
 

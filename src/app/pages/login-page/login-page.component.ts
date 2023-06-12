@@ -14,14 +14,13 @@ export class LoginPageComponent {
   hidePass = true;
 
   selectedRole: UserRole = UserRole.TOURIST
+  UserRole = UserRole
 
   nonWhitespaceRegex = /[\S]/
   form = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
     password: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
   });
-
-  UserRole = UserRole
 
   constructor(
     private fb: FormBuilder, 

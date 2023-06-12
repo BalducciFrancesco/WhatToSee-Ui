@@ -15,7 +15,7 @@ export class ConversationPageComponent implements OnInit {
 
   conversation?: Conversation
   creationGuideId?: number | undefined // defined only if is tourist starting a conversation
-  role!: UserRole
+  role: UserRole | null = null
   UserRole = UserRole
 
   newMessage: string = ''
@@ -44,7 +44,7 @@ export class ConversationPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.role = this.userService.getSession()!.role
+    this.role = this.userService.getSessionRole()
     if(this.conversation === undefined && this.creationGuideId === undefined) { // not already loaded data from constructor
       this.route.paramMap.pipe(
         map((param: ParamMap) => param.get('id')),

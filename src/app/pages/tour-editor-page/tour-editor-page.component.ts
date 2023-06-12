@@ -16,8 +16,6 @@ import { UserService } from 'src/app/services/user.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 
-// TODO reuse for editing / creation
-
 @Component({
   templateUrl: './tour-editor-page.component.html',
   styleUrls: ['./tour-editor-page.component.scss']

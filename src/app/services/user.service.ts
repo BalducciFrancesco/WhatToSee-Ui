@@ -1,3 +1,4 @@
+import { UserRole } from './../dtos/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
@@ -51,6 +52,12 @@ export class UserService {
   public getSession(): User | null {
     let u = sessionStorage.getItem('logged-user');
     return u ? JSON.parse(window.atob(u)) : null;
+  }
+
+  public getSessionRole(): UserRole | null {
+    let u = sessionStorage.getItem('logged-user');
+    let u1 = u ? JSON.parse(window.atob(u)) as User : null;
+    return u1 !== null ? u1.role : null
   }
 
   // -----

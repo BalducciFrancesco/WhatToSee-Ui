@@ -13,6 +13,7 @@ export class RegisterPageComponent {
   hidePass = true;
 
   selectedRole: UserRole = UserRole.TOURIST
+  UserRole = UserRole
   
   nonWhitespaceRegex = /[\S]/
   form = this.fb.nonNullable.group({
@@ -21,8 +22,6 @@ export class RegisterPageComponent {
     firstName: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
     lastName: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
   });
-  
-  UserRole = UserRole
 
   constructor(
     private fb: FormBuilder, 
