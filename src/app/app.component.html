@@ -1,12 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false"
-      *ngIf="isLogged">
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+    *ngIf="isLogged"
+  >
     <mat-toolbar>Ciao, {{ name }}!</mat-toolbar>
 
-    <mat-nav-list>
+    <mat-nav-list (click)="onRouteClick()">
       <a mat-list-item routerLink="/search">Cerca tour</a>
       <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>
@@ -15,7 +16,7 @@
         <!-- tourist menu -->
         <ng-container *ngSwitchCase="UserRole.TOURIST">
           <h4 class="text-slate-500 pl-4 !mb-0">Menu turista</h4>
-          <mat-nav-list>
+          <mat-nav-list (click)="onRouteClick()">
             <a mat-list-item routerLink="/tourist/you">La tua pagina</a>
             <a mat-list-item routerLink="/conversation/list">Centro messaggi</a>
           </mat-nav-list>
@@ -24,7 +25,7 @@
         <!-- guide menu -->
         <ng-container *ngSwitchCase="UserRole.GUIDE">
           <h4 class="text-slate-500 pl-4 !mb-0">Menu guida</h4>
-          <mat-nav-list>
+          <mat-nav-list (click)="onRouteClick()">
             <a mat-list-item routerLink="/guide/you">La tua pagina</a>
             <a mat-list-item routerLink="/tour/create">Crea tour</a>
             <a mat-list-item routerLink="/conversation/list">Centro messaggi</a>
@@ -34,7 +35,7 @@
         <!-- administrator menu -->
         <ng-container *ngSwitchCase="UserRole.ADMINISTRATOR">
           <h4 class="text-slate-500 pl-4 !mb-0">Menu amministratore</h4>
-          <mat-nav-list>
+          <mat-nav-list (click)="onRouteClick()"> 
             <a mat-list-item routerLink="/administrator/you">La tua pagina</a>
           </mat-nav-list>
         </ng-container>

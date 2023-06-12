@@ -1,3 +1,4 @@
+import { UserRole } from './../../dtos/user';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,21 +10,19 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterPageComponent {
 
-  hidePass = [true, true];
+  hidePass = true;
 
-  touristRegister = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required]
+  selectedRole: UserRole = UserRole.TOURIST
+  
+  nonWhitespaceRegex = /[\S]/
+  form = this.fb.nonNullable.group({
+    username: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
+    password: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
+    firstName: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
+    lastName: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
   });
-
-  guideRegister = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-  });
+  
+  UserRole = UserRole
 
   constructor(
     private fb: FormBuilder, 
@@ -31,20 +30,22 @@ export class RegisterPageComponent {
     private router: Router
   ) { }
 
-  submitTourist() {
-    if (this.touristRegister.valid) {
-      this.userService.registerTourist(this.touristRegister.getRawValue()).subscribe(registeredTourist => {
-        this.router.navigate(['/']);
-      })
-    }
-  }
+  submit() {
+    if(!this.form.valid) return;
 
-  submitGuide() {
-    if (this.guideRegister.valid) {
-      this.userService.registerGuide(this.guideRegister.getRawValue()).subscribe(registeredGuide => {
-        this.router.navigate(['/']);
-      })
+    let req;
+    switch(this.selectedRole) {
+      case UserRole.TOURIST: 
+        req = this.userService.registerTourist(this.form.getRawValue())
+        break
+      case UserRole.GUIDE:
+        req = this.userService.registerGuide(this.form.getRawValue())
+        break
     }
+
+    req?.subscribe(registered => {
+      this.router.navigate(['/']);
+    })
   }
 
 }

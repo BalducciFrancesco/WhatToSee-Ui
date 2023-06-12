@@ -11,6 +11,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  // username is back-end trimmed and case-insensitive    
+
   public loginTourist(u: UserDTO): Observable<User> {
     return this.http.post<User>(environment.apiUrl + '/tourist/login', u).pipe(tap(u => this.saveSession(u)))
   }
@@ -24,6 +26,9 @@ export class UserService {
   }
 
   // -----
+
+  // username is back-end trimmed and case-insensitive
+  // first name and last name are back-end trimmed
 
   public registerTourist(u: TouristDTO): Observable<Tourist> {
     return this.http.post<Tourist>(environment.apiUrl + '/tourist/register', u).pipe(tap(u => this.saveSession(u)))

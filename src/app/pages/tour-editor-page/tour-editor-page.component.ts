@@ -138,6 +138,7 @@ export class TourEditorPageComponent implements OnInit {
     }
   }
 
+  // FIXME causes exceptions
   objCompareFn(o1: City | Theme | Tag, o2: City | Theme | Tag): boolean {
     return o1.id === o2.id
   }

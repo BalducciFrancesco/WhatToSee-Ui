@@ -59,6 +59,12 @@ export class AppComponent implements OnInit {
     return route;
   }
 
+  // clear focus and close drawer
+  onRouteClick() {
+    this.drawer.close();
+    (document.activeElement! as HTMLElement).blur();
+  }
+
   logout() {
     this.userService.logout();
     this.router.navigate(['login']);

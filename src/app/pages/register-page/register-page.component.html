@@ -1,24 +1,28 @@
 <div class="flex flex-col gap-4 lg:grid lg:grid-cols-2">
     <mat-card>
-        <mat-card-header>
-            <mat-card-title>Registrati come Turista</mat-card-title>
-        </mat-card-header>
         <mat-card-content>
-            <form class="flex flex-col" [formGroup]="touristRegister" (submit)="submitTourist()">
+            <form class="flex flex-col" [formGroup]="form" (submit)="submit()">
+                <div class="flex items-center mb-3">
+                    <span class="mr-3">Ruolo:</span>
+                    <mat-button-toggle-group [(ngModel)]="selectedRole" [ngModelOptions]="{standalone: true}" class="self-start">
+                        <mat-button-toggle [value]="UserRole.TOURIST">Turista</mat-button-toggle>
+                        <mat-button-toggle [value]="UserRole.GUIDE">Guida</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+
                 <mat-form-field appearance="fill">
                     <mat-label>Username</mat-label>
                     <input matInput formControlName="username" required>
                 </mat-form-field>
 
+                <!-- TODO add repeat password -->
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password" [type]="hidePass[0] ? 'password' : 'text'" required>
-                    <button type="button" mat-icon-button matSuffix (click)="hidePass[0] = !hidePass[0]">
-                        <mat-icon>{{hidePass[0] ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <input matInput formControlName="password" [type]="hidePass ? 'password' : 'text'" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hidePass = !hidePass">
+                        <mat-icon>{{ hidePass ? 'visibility_off' : 'visibility' }}</mat-icon>
                     </button>
                 </mat-form-field>
-
-                <!-- TODO add repeat password? -->
 
                 <mat-form-field appearance="fill">
                     <mat-label>Nome</mat-label>
@@ -30,43 +34,7 @@
                     <input matInput formControlName="lastName" required>
                 </mat-form-field>
 
-                <button type="submit" mat-raised-button color="primary">Registrati</button>
-            </form>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Registrati come Guida</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form class="flex flex-col" [formGroup]="guideRegister" (submit)="submitGuide()">
-                <mat-form-field appearance="fill">
-                    <mat-label>Username</mat-label>
-                    <input matInput formControlName="username" required>
-                </mat-form-field>
-
-                <mat-form-field appearance="fill">
-                    <mat-label>Password</mat-label>
-                    <input matInput formControlName="password" [type]="hidePass[1] ? 'password' : 'text'" required>
-                    <button type="button" mat-icon-button matSuffix (click)="hidePass[1] = !hidePass[1]">
-                        <mat-icon>{{hidePass[1] ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
-
-                <!-- TODO add repeat password? -->
-
-                <mat-form-field appearance="fill">
-                    <mat-label>Nome</mat-label>
-                    <input matInput formControlName="firstName" required>
-                </mat-form-field>
-
-                <mat-form-field appearance="fill">
-                    <mat-label>Cognome</mat-label>
-                    <input matInput formControlName="lastName" required>
-                </mat-form-field>
-
-                <button type="submit" mat-raised-button color="primary">Registrati</button>
+                <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Registrati</button>
             </form>
         </mat-card-content>
     </mat-card>

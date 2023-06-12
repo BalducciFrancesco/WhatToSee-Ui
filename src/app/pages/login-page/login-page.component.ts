@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserRole } from 'src/app/dtos/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,22 +10,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginPageComponent {
 
-  hidePass = [true, true, true];
+  hidePass = true;
 
-  touristLogin = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
+  selectedRole: UserRole = UserRole.TOURIST
+
+  nonWhitespaceRegex = /[\S]/
+  form = this.fb.nonNullable.group({
+    username: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
+    password: ['', [Validators.required, Validators.pattern(this.nonWhitespaceRegex)]],
   });
 
-  guideLogin = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-  });
-
-  adminLogin = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-  });
+  UserRole = UserRole
 
   constructor(
     private fb: FormBuilder, 
@@ -32,27 +28,24 @@ export class LoginPageComponent {
     private router: Router
   ) { }
   
-  submitTourist() {
-    if(this.touristLogin.valid) {
-      this.userService.loginTourist(this.touristLogin.getRawValue()).subscribe(loggedTourist => {
-        this.router.navigate(['/']);
-      })
-    }
-  }
+  submit() {
+    if (!this.form.valid) return;
 
-  submitGuide() {
-    if(this.guideLogin.valid) {
-      this.userService.loginGuide(this.guideLogin.getRawValue()).subscribe(loggedGuide => {
-        this.router.navigate(['/']);
-      })
+    let req;
+    switch (this.selectedRole) {
+      case UserRole.TOURIST:
+        req = this.userService.loginTourist(this.form.getRawValue())
+        break
+      case UserRole.GUIDE:
+        req = this.userService.loginGuide(this.form.getRawValue())
+        break
+      case UserRole.ADMINISTRATOR:
+        req = this.userService.loginAdministrator(this.form.getRawValue())
+        break
     }
-  }
 
-  submitAdministrator() {
-    if(this.adminLogin.valid) {
-      this.userService.loginAdministrator(this.adminLogin.getRawValue()).subscribe(loggedAdmin => {
-        this.router.navigate(['/']);
-      })
-    }
+    req?.subscribe(logged => {
+      this.router.navigate(['/']);
+    })
   }
 }
