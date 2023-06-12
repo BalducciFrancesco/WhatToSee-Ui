@@ -1,44 +1,30 @@
 <ng-container *ngIf="tour">
     <!-- floating bottom right FABs -->
-    <div class="fixed bottom-4 right-6 z-10 flex flex-col gap-y-2" [ngSwitch]="role">
-        <!-- tourist actions -->
-        <ng-container *ngSwitchCase="UserRole.TOURIST">
-            <!-- report -->
-            <!-- TODO don't allow multiple -->
-            <button mat-fab color="warn" (click)="openReportModal()">
+    <ng-container *ngIf="actions">
+        <div class="fixed bottom-4 right-6 z-10 flex flex-col gap-y-2">
+            <!-- tourist -->
+            <button mat-fab color="warn" *ngIf="actions.createReport" (click)="openReportModal()"> <!-- create report -->
                 <mat-icon>flag</mat-icon>
             </button>
-            <!-- chat with guide -->
-            <button mat-fab color="accent" (click)="goConversation()">
+            <button mat-fab color="accent" *ngIf="actions.sendMessage" (click)="goConversation()"> <!-- chat with guide -->
                 <mat-icon>chat</mat-icon>
             </button>
-            <!-- mark as completed -->
-            <!-- TODO don't allow multiple -->
-            <button mat-fab color="primary" (click)="markCompleted()">
+            <button mat-fab color="primary" *ngIf="actions.markAsCompleted" (click)="markCompleted()"> <!-- mark as completed -->
                 <mat-icon>done</mat-icon>
             </button>
-        </ng-container>
-        <!-- guide actions -->
-        <ng-container *ngSwitchCase="UserRole.GUIDE">
-            <ng-container *ngIf="isOwner">
-                <!-- delete -->
-                <button mat-fab color="warn" (click)="delete()">
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <!-- edit -->
-                <button mat-fab color="primary" routerLink="edit">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </ng-container>
-        </ng-container>
-        <!-- guide actions -->
-        <ng-container *ngSwitchCase="UserRole.ADMINISTRATOR">
-            <!-- problems check -->
-            <button mat-fab color="warn" (click)="openProblemsModal()">
+            <!-- guide -->
+            <button mat-fab color="warn" *ngIf="actions.delete" (click)="delete()"> <!-- delete -->
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-fab color="primary" *ngIf="actions.edit" routerLink="edit"> <!-- edit -->
+                <mat-icon>edit</mat-icon>
+            </button>
+            <!-- administrator -->
+            <button mat-fab color="warn" *ngIf="actions.viewReports" (click)="openProblemsModal()"> <!-- problems check -->
                 <mat-icon>feedback</mat-icon>
             </button>
-        </ng-container>
-    </div>
+        </div>
+    </ng-container>
 
     <hgroup>
         <h1 class="!mb-0">{{ tour.title }}</h1>
@@ -54,6 +40,7 @@
     <ul class="list-disc list-inside ml-2">
         <li>Durata approssimativa: {{ tour.approxDuration }}</li>
         <li>Costo approssimativo: {{ tour.approxCost | currency }}</li>
+        <li>Segnato come completato da {{ tour.markedAsCompletedCount }} turisti</li>
         <li>Tema: {{ tour.theme.name }}</li>
         <!-- segnato come percorso da 2 utenti -->
         <li>
@@ -70,8 +57,7 @@
     <div class="flex flex-col gap-2 lg:grid lg:grid-cols-2">
         <app-review-card *ngFor="let review of tour.reviews" [data]="review"></app-review-card>
         <!-- new review -->
-        <!-- TODO don't allow more than one -->
-        <mat-card *ngIf="role === UserRole.TOURIST" matRipple class="new-review-card" (click)="openReviewModal()">
+        <mat-card *ngIf="actions?.review" matRipple class="new-review-card" (click)="openReviewModal()">
             <mat-icon>add</mat-icon>
         </mat-card>
     </div>

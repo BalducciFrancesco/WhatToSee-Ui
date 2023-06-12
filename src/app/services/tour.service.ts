@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Utils } from '../classes/utils';
-import { City, Report, ReportDTO, Review, ReviewDTO, Tag, Theme, Tour, TourDTO, TourSearchDTO } from '../dtos/tour';
+import { City, Report, ReportDTO, Review, ReviewDTO, Tag, Theme, Tour, TourActions, TourDTO, TourSearchDTO } from '../dtos/tour';
 import { Tourist } from '../dtos/user';
 
 @Injectable({
@@ -15,6 +15,10 @@ export class TourService {
 
   public getById(tourId: string): Observable<Tour> {
     return this.http.get<Tour>(environment.apiUrl + '/tour/' + tourId)
+  }
+
+  public getAvailableActions(tourId: string): Observable<TourActions> {
+    return this.http.get<TourActions>(environment.apiUrl + '/tour/' + tourId + '/availableActions')
   }
 
   public getCompletedTours(): Observable<Tour[]> {

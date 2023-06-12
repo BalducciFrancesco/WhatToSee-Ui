@@ -1,17 +1,18 @@
-import { Conversation } from 'src/app/dtos/conversation';
-import { ConversationService } from 'src/app/services/conversation.service';
-import { ProblemsDialogComponent } from './../../components/problems-dialog/problems-dialog.component';
-import { UserService } from 'src/app/services/user.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { map, mergeMap } from 'rxjs';
+import { forkJoin, map, switchMap } from 'rxjs';
 import { ReportDialogComponent } from 'src/app/components/report-dialog/report-dialog.component';
-import { Tour } from 'src/app/dtos/tour';
-import { TourService } from 'src/app/services/tour.service';
 import { ReviewDialogComponent } from 'src/app/components/review-dialog/review-dialog.component';
+import { Conversation } from 'src/app/dtos/conversation';
+import { Tour } from 'src/app/dtos/tour';
 import { UserRole } from 'src/app/dtos/user';
+import { ConversationService } from 'src/app/services/conversation.service';
+import { TourService } from 'src/app/services/tour.service';
+import { UserService } from 'src/app/services/user.service';
+import { ProblemsDialogComponent } from './../../components/problems-dialog/problems-dialog.component';
+import { TourActions } from './../../dtos/tour';
 
 @Component({
   templateUrl: './tour-page.component.html',
@@ -20,10 +21,8 @@ import { UserRole } from 'src/app/dtos/user';
 export class TourPageComponent implements OnInit {
 
   tour?: Tour
-  role!: UserRole
-  UserRole = UserRole
-  isOwner: boolean = false
-  
+  actions?: TourActions
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -31,17 +30,15 @@ export class TourPageComponent implements OnInit {
     private conversationService: ConversationService,
     private dialogService: MatDialog,
     private notify: MatSnackBar,
-    private userService: UserService,
   ) {}
   
   ngOnInit(): void {
-    this.role = this.userService.getSession()!.role
     this.route.paramMap.pipe(
       map((param: ParamMap) => param.get('id')!),
-      mergeMap(tourId => this.tourService.getById(tourId))
-    ).subscribe(tour => {
+      switchMap(tourId => forkJoin([this.tourService.getById(tourId), this.tourService.getAvailableActions(tourId)]))
+    ).subscribe(([tour, actions]) => {
       this.tour = tour
-      this.isOwner = tour.author.id === this.userService.getSession()!.id
+      this.actions = actions
     })
   }
 
@@ -52,7 +49,7 @@ export class TourPageComponent implements OnInit {
   delete(): void {
     this.tourService.delete(this.tour!.id).subscribe(() => {
       this.notify.open('Tour eliminato con successo!', undefined, { panelClass: 'success-snackbar' });
-      this.router.navigate(['/guide', 'you'])
+      this.router.navigate(['/search'])
     })
   }
 

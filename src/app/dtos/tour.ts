@@ -20,6 +20,16 @@ export interface Tour {
     markedAsCompletedCount: number
 }
 
+export interface TourActions {
+    createReport: boolean
+    sendMessage: boolean
+    markAsCompleted: boolean
+    review: boolean
+    edit: boolean
+    delete: boolean
+    viewReports: boolean
+}
+
 export interface TourSearchDTO {
     city?: City
     approxDuration?: string  // will return tours with <= this value
