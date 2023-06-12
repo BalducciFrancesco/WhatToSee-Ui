@@ -126,12 +126,12 @@ export class TourEditorPageComponent implements OnInit {
     if(this.form.valid) {
       if(this.savedTour) {  // edit
         this.tourService.editTour(this.savedTour.id, Utils.nonEmptyFieldsOf(this.form.value)).subscribe((t: Tour) => {
-          this.notify.open('Tour modificato con successo!')
+          this.notify.open('Tour modificato con successo!', undefined, { panelClass: 'success-snackbar' })
           this.router.navigate(['/tour', t.id])
         })
       } else {  // create
         this.tourService.createTour(Utils.nonEmptyFieldsOf(this.form.value)).subscribe((t: Tour) => {
-          this.notify.open('Tour creato con successo!')
+          this.notify.open('Tour creato con successo!', undefined, { panelClass: 'success-snackbar' })
           this.router.navigate(['/tour', t.id])
         })
       }

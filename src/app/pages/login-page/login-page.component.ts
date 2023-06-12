@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserRole } from 'src/app/dtos/user';
 import { UserService } from 'src/app/services/user.service';
@@ -25,6 +26,7 @@ export class LoginPageComponent {
   constructor(
     private fb: FormBuilder, 
     private userService: UserService,
+    private notify: MatSnackBar,
     private router: Router
   ) { }
   
@@ -45,6 +47,7 @@ export class LoginPageComponent {
     }
 
     req?.subscribe(logged => {
+      this.notify.open('Benvenuto, ' + logged.firstName + '!', undefined, { panelClass: 'success-snackbar' })
       this.router.navigate(['/']);
     })
   }

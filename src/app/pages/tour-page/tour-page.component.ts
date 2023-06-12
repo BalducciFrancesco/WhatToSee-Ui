@@ -51,7 +51,7 @@ export class TourPageComponent implements OnInit {
   
   delete(): void {
     this.tourService.delete(this.tour!.id).subscribe(() => {
-      this.notify.open('Tour eliminato!');
+      this.notify.open('Tour eliminato con successo!', undefined, { panelClass: 'success-snackbar' });
       this.router.navigate(['/guide', 'you'])
     })
   }
@@ -68,7 +68,7 @@ export class TourPageComponent implements OnInit {
     const dialogRef = this.dialogService.open(ReportDialogComponent);
     dialogRef.afterClosed().subscribe(description => {
       if(description)
-        this.tourService.createReport(this.tour!.id, { description }).subscribe(() => this.notify.open('Segnalazione inviata!'))
+        this.tourService.createReport(this.tour!.id, { description }).subscribe(() => this.notify.open('Segnalazione inviata con successo!', undefined, { panelClass: 'success-snackbar' }))
     });
   }
 
@@ -78,7 +78,7 @@ export class TourPageComponent implements OnInit {
       if(review) {
         this.tourService.createReview(this.tour!.id, review).subscribe((createdReview) => {
           this.tour!.reviews.push(createdReview);
-          this.notify.open('Recensione inviata!')
+          this.notify.open('Recensione inviata con successo!', undefined, { panelClass: 'success-snackbar' })
         })
       }
     });
@@ -97,7 +97,7 @@ export class TourPageComponent implements OnInit {
   }
 
   markCompleted(): void {
-    this.tourService.markAsCompleted(this.tour!.id).subscribe(() => this.notify.open('Segnato come completato!'));
+    this.tourService.markAsCompleted(this.tour!.id).subscribe(() => this.notify.open('Segnato come completato con successo!', undefined, { panelClass: 'success-snackbar' }));
   }
 
   // -----------------
@@ -114,7 +114,7 @@ export class TourPageComponent implements OnInit {
 
   private administratorDelete(): void {
     this.tourService.delete(this.tour!.id).subscribe(() => {
-      this.notify.open('Tour eliminato!');
+      this.notify.open('Tour eliminato con successo!', undefined, { panelClass: 'success-snackbar' });
       this.router.navigate(['/administrator', 'you'])
     })
   }

@@ -105,7 +105,7 @@ registerLocaleData(localeIt);
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { width: '80vw' } },
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 4000 } },
     { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
