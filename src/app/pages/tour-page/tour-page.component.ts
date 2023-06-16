@@ -7,10 +7,8 @@ import { ReportDialogComponent } from 'src/app/components/report-dialog/report-d
 import { ReviewDialogComponent } from 'src/app/components/review-dialog/review-dialog.component';
 import { Conversation } from 'src/app/dtos/conversation';
 import { Tour } from 'src/app/dtos/tour';
-import { UserRole } from 'src/app/dtos/user';
 import { ConversationService } from 'src/app/services/conversation.service';
 import { TourService } from 'src/app/services/tour.service';
-import { UserService } from 'src/app/services/user.service';
 import { ProblemsDialogComponent } from './../../components/problems-dialog/problems-dialog.component';
 import { TourActions } from './../../dtos/tour';
 
