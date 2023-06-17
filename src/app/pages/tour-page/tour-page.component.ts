@@ -33,11 +33,17 @@ export class TourPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map((param: ParamMap) => param.get('id')!),
+      map(tourId => Number.parseInt(tourId)),
       switchMap(tourId => forkJoin([this.tourService.getById(tourId), this.tourService.getAvailableActions(tourId)]))
     ).subscribe(([tour, actions]) => {
       this.tour = tour
       this.actions = actions
     })
+  }
+
+  afterAction(): void {
+    // refresh available actions
+    this.tourService.getAvailableActions(this.tour!.id).subscribe(actions => this.actions = actions)
   }
 
   // -----------------
@@ -62,8 +68,12 @@ export class TourPageComponent implements OnInit {
   openReportModal(): void {
     const dialogRef = this.dialogService.open(ReportDialogComponent);
     dialogRef.afterClosed().subscribe(description => {
-      if(description)
-        this.tourService.createReport(this.tour!.id, { description }).subscribe(() => this.notify.open('Segnalazione inviata con successo!', undefined, { panelClass: 'success-snackbar' }))
+      if(description) {
+        this.tourService.createReport(this.tour!.id, { description }).subscribe(() => { 
+          this.notify.open('Segnalazione inviata con successo!', undefined, { panelClass: 'success-snackbar' })
+          this.afterAction()
+        })
+      }
     });
   }
 
@@ -74,6 +84,7 @@ export class TourPageComponent implements OnInit {
         this.tourService.createReview(this.tour!.id, review).subscribe((createdReview) => {
           this.tour!.reviews.push(createdReview);
           this.notify.open('Recensione inviata con successo!', undefined, { panelClass: 'success-snackbar' })
+          this.afterAction()
         })
       }
     });
@@ -92,7 +103,10 @@ export class TourPageComponent implements OnInit {
   }
 
   markCompleted(): void {
-    this.tourService.markAsCompleted(this.tour!.id).subscribe(() => this.notify.open('Segnato come completato con successo!', undefined, { panelClass: 'success-snackbar' }));
+    this.tourService.markAsCompleted(this.tour!.id).subscribe(() => {
+      this.notify.open('Segnato come completato con successo!', undefined, { panelClass: 'success-snackbar' });
+      this.afterAction()
+    })
   }
 
   // -----------------
