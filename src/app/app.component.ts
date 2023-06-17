@@ -61,8 +61,10 @@ export class AppComponent implements OnInit {
 
   // clear focus and close drawer
   onRouteClick() {
-    this.drawer.close();
-    (document.activeElement! as HTMLElement).blur();
+    if(this.drawer.mode === 'over') {
+      this.drawer.close();
+      (document.activeElement! as HTMLElement).blur();
+    }
   }
 
   logout() {
