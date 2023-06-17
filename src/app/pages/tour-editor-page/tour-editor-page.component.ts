@@ -29,11 +29,11 @@ export class TourEditorPageComponent implements OnInit {
     title: new FormControl<string | null>(null, { validators: Validators.required }),
     description: new FormControl<string | null>(null, { validators: Validators.required }),
     city: new FormControl<City | null>(null, { validators: Validators.required }),
-    tagNames: new FormControl<string[]>([]),
+    tagNames: new FormControl<string[]>([], { nonNullable: true }),
     theme: new FormControl<Theme | null>(null, { validators: Validators.required }),
     approxCost: new FormControl<number | null>(null, { validators: Validators.required }),
     approxDuration: new FormControl<string | null>(null, { validators: Validators.required }),
-    sharedTourists: new FormControl<User[]>([]),  // disabled if not public (usernames only)
+    sharedTourists: new FormControl<User[]>([], { nonNullable: true }),  // disabled if not public (usernames only)
     isPublic: new FormControl<boolean>(true, { nonNullable: true, validators: Validators.required }),
     stops: new FormControl<StopDTO[]>([], { validators: Validators.required }),
   });
@@ -88,10 +88,12 @@ export class TourEditorPageComponent implements OnInit {
     this.form.controls.isPublic.valueChanges.subscribe(isPublic => {
       isPublic ? this.form.controls.sharedTourists.disable() : this.form.controls.sharedTourists.enable()
     })
+
     this.tagOptionsFilter$ = this.tagInputControl.valueChanges.pipe(
       startWith(null),
       map((value: Tag | string | null) => this.filterTags(value)),
     );
+
     this.touristOptionsFilter$ = this.touristInputControl.valueChanges.pipe(
       startWith(null),
       map((value: User | string | null) => this.filterTourists(value)),
