@@ -1,8 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Utils } from '../classes/utils';
 import { City, Report, ReportDTO, Review, ReviewDTO, Tag, Theme, Tour, TourActions, TourDTO, TourSearchDTO } from '../dtos/tour';
 import { Tourist } from '../dtos/user';
 
@@ -13,11 +12,11 @@ export class TourService {
 
   constructor(private http: HttpClient) { }
 
-  public getById(tourId: string): Observable<Tour> {
+  public getById(tourId: number): Observable<Tour> {
     return this.http.get<Tour>(environment.apiUrl + '/tour/' + tourId)
   }
 
-  public getAvailableActions(tourId: string): Observable<TourActions> {
+  public getAvailableActions(tourId: number): Observable<TourActions> {
     return this.http.get<TourActions>(environment.apiUrl + '/tour/' + tourId + '/availableActions')
   }
 

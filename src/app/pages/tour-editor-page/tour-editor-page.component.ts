@@ -1,19 +1,19 @@
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, forkJoin, map, mergeMap, Observable, startWith, switchMap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Observable, filter, forkJoin, map, startWith, switchMap } from 'rxjs';
 import { Utils } from 'src/app/classes/utils';
 import { StopEditorDialogComponent } from 'src/app/components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
-import { City, Tag, Theme, Tour, StopDTO } from 'src/app/dtos/tour';
+import { City, StopDTO, Tag, Theme, Tour } from 'src/app/dtos/tour';
 import { Tourist } from 'src/app/dtos/user';
 import { TourService } from 'src/app/services/tour.service';
 import { UserService } from 'src/app/services/user.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -67,6 +67,7 @@ export class TourEditorPageComponent implements OnInit {
     this.route.paramMap.pipe(
       map((param: ParamMap) => param.get('id')!),
       filter(tourId => tourId !== null),
+      map(tourId => Number.parseInt(tourId)),
       switchMap(tourId => forkJoin(this.tourService.getById(tourId), this.tourService.getSharedTourists(Number(tourId))))
     ).subscribe(([tour, sharedTourists]) => {
       this.savedTour = tour
