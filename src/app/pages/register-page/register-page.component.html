@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-content>
         <form class="flex flex-col" [formGroup]="form" (submit)="submit()">
+
             <div class="flex items-center mb-3">
                 <span class="mr-3">Ruolo:</span>
                 <mat-button-toggle-group [(ngModel)]="selectedRole" [ngModelOptions]="{standalone: true}" class="self-start">
@@ -34,6 +35,7 @@
             </mat-form-field>
 
             <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Registrati</button>
+            
         </form>
     </mat-card-content>
 </mat-card>

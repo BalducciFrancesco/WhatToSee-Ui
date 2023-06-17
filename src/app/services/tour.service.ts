@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { City, Report, ReportDTO, Review, ReviewDTO, Tag, Theme, Tour, TourActions, TourDTO, TourSearchDTO } from '../dtos/tour';
-import { Tourist } from '../dtos/user';
+import { User } from '../dtos/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,8 @@ export class TourService {
     return this.http.get<Tour[]>(environment.apiUrl + '/tour/shared')
   }
 
-  public getSharedTourists(id: number): Observable<Tourist[]> {
-    return this.http.get<Tourist[]>(environment.apiUrl + '/tour/' + id + '/shared')
+  public getSharedTourists(id: number): Observable<User[]> {
+    return this.http.get<User[]>(environment.apiUrl + '/tour/' + id + '/shared')
   }
 
   public getCreatedTours(): Observable<Tour[]> {

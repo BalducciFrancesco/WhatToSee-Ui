@@ -1,12 +1,12 @@
-import { Guide, Tourist } from "./user";
+import { User } from "./user";
 
 // DTO = as sent to BE, removed sub-entities and id, lazy, POST request
 // NON-DTO = as recieved form BE, entity, eager, GET response
 
 export interface Conversation {
     id: number
-    guide: Guide
-    tourist: Tourist
+    guide: User
+    tourist: User
     messages: Message[] | null  // null in messages center response
 }
 

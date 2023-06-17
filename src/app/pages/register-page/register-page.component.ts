@@ -33,18 +33,7 @@ export class RegisterPageComponent {
 
   submit() {
     if(!this.form.valid) return;
-
-    let req;
-    switch(this.selectedRole) {
-      case UserRole.TOURIST: 
-        req = this.userService.registerTourist(this.form.getRawValue())
-        break
-      case UserRole.GUIDE:
-        req = this.userService.registerGuide(this.form.getRawValue())
-        break
-    }
-
-    req?.subscribe(registered => {
+    this.userService.register(this.form.getRawValue(), this.selectedRole).subscribe(registered => {
       this.notify.open('Ben arrivato, ' + registered.firstName + '!', undefined, { panelClass: 'success-snackbar' })
       this.router.navigate(['/']);
     })

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { UserRole } from 'src/app/dtos/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,9 +11,6 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginPageComponent {
 
   hidePass = true;
-
-  selectedRole: UserRole = UserRole.TOURIST
-  UserRole = UserRole
 
   nonWhitespaceRegex = /[\S]/
   form = this.fb.nonNullable.group({
@@ -31,22 +27,8 @@ export class LoginPageComponent {
   
   submit() {
     if (!this.form.valid) return;
-
-    let req;
-    switch (this.selectedRole) {
-      case UserRole.TOURIST:
-        req = this.userService.loginTourist(this.form.getRawValue())
-        break
-      case UserRole.GUIDE:
-        req = this.userService.loginGuide(this.form.getRawValue())
-        break
-      case UserRole.ADMINISTRATOR:
-        req = this.userService.loginAdministrator(this.form.getRawValue())
-        break
-    }
-
-    req?.subscribe(logged => {
-      this.notify.open('Benvenuto, ' + logged.firstName + '!', undefined, { panelClass: 'success-snackbar' })
+    this.userService.login(this.form.getRawValue()).subscribe(logged => {
+      this.notify.open('Ben tornato, ' + logged.firstName + '!', undefined, { panelClass: 'success-snackbar' })
       this.router.navigate(['/']);
     })
   }

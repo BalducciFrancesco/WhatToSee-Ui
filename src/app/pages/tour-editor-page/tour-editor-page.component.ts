@@ -11,7 +11,7 @@ import { Observable, filter, forkJoin, map, startWith, switchMap } from 'rxjs';
 import { Utils } from 'src/app/classes/utils';
 import { StopEditorDialogComponent } from 'src/app/components/tour-stop-editor-dialog/tour-stop-editor-dialog.component';
 import { City, StopDTO, Tag, Theme, Tour } from 'src/app/dtos/tour';
-import { Tourist } from 'src/app/dtos/user';
+import { User, UserRole } from 'src/app/dtos/user';
 import { TourService } from 'src/app/services/tour.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -23,7 +23,7 @@ import { UserService } from 'src/app/services/user.service';
 export class TourEditorPageComponent implements OnInit {
 
   savedTour?: Tour  // defined if edit mode
-  savedSharedTourists?: Tourist[] // defined if edit mode
+  savedSharedTourists?: User[] // defined if edit mode
 
   form = new FormGroup({
     title: new FormControl<string | null>(null, { validators: Validators.required }),
@@ -33,7 +33,7 @@ export class TourEditorPageComponent implements OnInit {
     theme: new FormControl<Theme | null>(null, { validators: Validators.required }),
     approxCost: new FormControl<number | null>(null, { validators: Validators.required }),
     approxDuration: new FormControl<string | null>(null, { validators: Validators.required }),
-    sharedTourists: new FormControl<Tourist[]>([]),  // disabled if not public (usernames only)
+    sharedTourists: new FormControl<User[]>([]),  // disabled if not public (usernames only)
     isPublic: new FormControl<boolean>(true, { nonNullable: true, validators: Validators.required }),
     stops: new FormControl<StopDTO[]>([], { validators: Validators.required }),
   });
@@ -41,13 +41,13 @@ export class TourEditorPageComponent implements OnInit {
   cityOptions$!: Observable<City[]>
   themeOptions$!: Observable<Theme[]>
   tagOptionsFilter$!: Observable<Tag[]>;
-  touristOptionsFilter$!: Observable<Tourist[]>;
+  touristOptionsFilter$!: Observable<User[]>;
   
   tagOptions: Tag[] = []
   tagInputControl = new FormControl()
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
-  touristOptions: Tourist[] = []
+  touristOptions: User[] = []
   touristInputControl = new FormControl()
   @ViewChild('touristInput') touristInput!: ElementRef<HTMLInputElement>;
 
@@ -79,7 +79,7 @@ export class TourEditorPageComponent implements OnInit {
     this.cityOptions$ = this.tourService.getAllCities()
     this.themeOptions$ = this.tourService.getAllThemes()
     this.tourService.getAllTags().subscribe(tags => this.tagOptions = tags)
-    this.userService.getAllTourists().subscribe(tourists => this.touristOptions = tourists)
+    this.userService.getAllByRole(UserRole.TOURIST).subscribe(tourists => this.touristOptions = tourists)
 
     // default disable shared tourist field
     this.form.controls.sharedTourists.disable()
@@ -94,7 +94,7 @@ export class TourEditorPageComponent implements OnInit {
     );
     this.touristOptionsFilter$ = this.touristInputControl.valueChanges.pipe(
       startWith(null),
-      map((value: Tourist | string | null) => this.filterTourists(value)),
+      map((value: User | string | null) => this.filterTourists(value)),
     );
   }
 
@@ -205,7 +205,7 @@ export class TourEditorPageComponent implements OnInit {
   // shared tourist autocomplete
   // ---------------
 
-  private filterTourists(v: Tourist | string | null): Tourist[] {
+  private filterTourists(v: User | string | null): User[] {
     if (v && typeof v === 'string') {
       return this.touristOptions.filter(t => t.username.toLowerCase().includes(v.toLowerCase()))
     } else {
@@ -229,14 +229,14 @@ export class TourEditorPageComponent implements OnInit {
     this.touristInputControl.setValue(null)
   }
 
-  removeSharedTourist(sharedTourist: Tourist): void {
+  removeSharedTourist(sharedTourist: User): void {
     const sharedTourists = this.form.controls.sharedTourists.value!
     sharedTourists.splice(sharedTourists.indexOf(sharedTourist), 1)
     this.form.controls.sharedTourists.setValue(sharedTourists)
   }
 
   selectedSharedTourist(e: MatAutocompleteSelectedEvent): void {
-    const newSharedTourist: Tourist = e.option.value
+    const newSharedTourist: User = e.option.value
     if (!newSharedTourist) return;
 
     const sharedTourists = this.form.controls.sharedTourists.value!
