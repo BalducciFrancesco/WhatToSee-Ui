@@ -1,8 +1,9 @@
-import { UserRole } from './../../dtos/user';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { UserRole } from './../../dtos/user';
 
 @Component({
   templateUrl: './register-page.component.html',
@@ -26,6 +27,7 @@ export class RegisterPageComponent {
   constructor(
     private fb: FormBuilder, 
     private userService: UserService, 
+    private notify: MatSnackBar,
     private router: Router
   ) { }
 
@@ -43,6 +45,7 @@ export class RegisterPageComponent {
     }
 
     req?.subscribe(registered => {
+      this.notify.open('Ben arrivato, ' + registered.firstName + '!', undefined, { panelClass: 'success-snackbar' })
       this.router.navigate(['/']);
     })
   }
