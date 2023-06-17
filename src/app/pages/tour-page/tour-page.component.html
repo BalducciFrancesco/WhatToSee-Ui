@@ -38,11 +38,11 @@
     
     <h3 class="!my-2">Dettagli complessivi:</h3>
     <ul class="list-disc list-inside ml-2">
+        <li>Città: {{ tour.city.name }}</li>
         <li>Durata approssimativa: {{ tour.approxDuration }}</li>
         <li>Costo approssimativo: {{ tour.approxCost | currency }}</li>
         <li>Segnato come completato da {{ tour.markedAsCompletedCount }} turisti</li>
         <li>Tema: {{ tour.theme.name }}</li>
-        <!-- segnato come percorso da 2 utenti -->
         <li>
             <div class="inline-flex items-center">
                 <span>Tags:</span>
