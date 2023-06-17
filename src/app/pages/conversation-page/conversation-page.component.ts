@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { filter, map, mergeMap, Observable, shareReplay } from 'rxjs';
+import { Observable, Subscription, filter, interval, map, mergeMap, shareReplay, switchMap } from 'rxjs';
 import { Conversation } from 'src/app/dtos/conversation';
 import { ConversationService } from 'src/app/services/conversation.service';
 import { UserRole } from './../../dtos/user';
@@ -20,16 +20,17 @@ export class ConversationPageComponent implements OnInit {
 
   newMessage: string = ''
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+
+  unsub$!: Subscription
 
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
-    private messagesService: ConversationService,
+    private conversationService: ConversationService,
     private userService: UserService,
     private breakpointObserver: BreakpointObserver
   ) {
@@ -50,27 +51,42 @@ export class ConversationPageComponent implements OnInit {
         map((param: ParamMap) => param.get('id')),
         filter(id => id != null),
         map(conversationId => Number(conversationId)),
-        mergeMap(conversationId => this.messagesService.getById(conversationId))  // retrieve conversation
-      ).subscribe(conversation => this.conversation = conversation)
+        mergeMap(conversationId => this.conversationService.getById(conversationId))  // retrieve conversation
+      ).subscribe(conversation => { 
+        this.conversation = conversation
+        this.startPolling()
+      })
+    } else {
+      this.startPolling()
     }
   }
 
   sendMessage() {
     if(this.newMessage && this.newMessage.trim()) {
       if(this.conversation !== undefined) { // sending in an already existing conversation
-        this.messagesService.sendMessage({ content: this.newMessage, conversationId: this.conversation.id }).subscribe(m => {
+        this.conversationService.sendMessage({ content: this.newMessage, conversationId: this.conversation.id }).subscribe(m => {
           // reload conversation
           this.conversation!.messages!.push(m)
           this.newMessage = ''
         })
       } else if(this.creationGuideId !== undefined) { // sending in a new conversation
-        this.messagesService.createConversation({ message: this.newMessage, guideId: this.creationGuideId }).subscribe(c => {
+        this.conversationService.createConversation({ message: this.newMessage, guideId: this.creationGuideId }).subscribe(c => {
           this.conversation = c
           this.newMessage = ''
           // TODO navigate to current page with conversation id
         })
       }
     }
+  }
+
+  private startPolling() {
+    this.unsub$ = interval(5000).pipe(
+      switchMap(() => this.conversationService.getById(this.conversation!.id))
+    ).subscribe(conversation => this.conversation = conversation)
+  }
+
+  ngOnDestroy(): void {
+    this.unsub$.unsubscribe()
   }
 
 }
