@@ -7,6 +7,9 @@ import { filter, map, mergeMap, shareReplay } from 'rxjs/operators';
 import { UserRole } from './dtos/user';
 import { UserService } from './services/user.service';
 
+/**
+ * Main component of the application. It contains the toolbar and the drawer.
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,16 +17,40 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
 
+  /**
+   * True if the user is logged in, false otherwise.
+   */
   isLogged: boolean = false;
   
+  /**
+   * The name of the logged user, null if not logged in.
+   */
   name: string | null = null;
+
+  /**
+   * The role of the logged user, null if not logged in.
+   */
   role: UserRole | null = null;
+
+  /**
+   * The user roles enum.
+   */
   UserRole = UserRole;
 
-  routeTitle: string = "WhatToSeeApp";
+  /**
+   * The title of the toolbar. It changes on each routing event.
+   */
+  routeTitle: string = "WhatToSee";
 
+  /**
+   * Reference to the drawer.
+   */
   @ViewChild('drawer') drawer!: MatDrawer;
 
+  /**
+   * Observable for screen size changes.
+   * Allows page to be responsive.
+   */
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -38,7 +65,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // update toolbar title on each routing event
+    // update toolbar, login status and user name on each routing event
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(() => this.rootRoute(this.activatedRoute)),
@@ -52,6 +79,11 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /**
+   * Utility function to get the root route of the current route.
+   * @param route the current route
+   * @returns the root route
+   */
   private rootRoute(route: ActivatedRoute): ActivatedRoute {
     while (route.firstChild) {
       route = route.firstChild;
@@ -59,7 +91,9 @@ export class AppComponent implements OnInit {
     return route;
   }
 
-  // clear focus and close drawer
+  /**
+   * When a route is clicked, close the drawer if it is in over mode and remove the focus from the hamburger button.
+   */
   onRouteClick() {
     (document.activeElement! as HTMLElement).blur();
     if(this.drawer.mode === 'over') {
@@ -67,6 +101,9 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * User requested to logout.
+   */
   logout() {
     this.userService.logout();
     this.router.navigate(['login']);

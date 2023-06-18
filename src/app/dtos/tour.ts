@@ -3,6 +3,9 @@ import { User } from "./user"
 // DTO = as sent to BE service, removed sub-entities and id (or extracted from service), lazy, POST request
 // NON-DTO = as received form BE, entity, eager, GET response
 
+/**
+ * A tour.
+ */
 export interface Tour {
     id: number
     author: User
@@ -20,16 +23,23 @@ export interface Tour {
     markedAsCompletedCount: number
 }
 
+/**
+ * Actions that the user is allowed to perform on a given tour.
+ */
 export interface TourActions {
-    createReport: boolean
-    sendMessage: boolean
-    markAsCompleted: boolean
-    review: boolean
-    edit: boolean
-    delete: boolean
-    viewReports: boolean
+    createReport: boolean  // true if user can create a report for this tour
+    sendMessage: boolean // true if user can send a message to the author of this tour
+    markAsCompleted: boolean // true if user can mark this tour as completed
+    review: boolean // true if user can review this tour
+    edit: boolean   // true if user can edit this tour
+    delete: boolean // true if user can delete this tour
+    viewReports: boolean    // true if user can view reports for this tour
 }
 
+/**
+ * DTO for searching for tours.
+ * All fields are optional.
+ */
 export interface TourSearchDTO {
     city?: City
     approxDuration?: string  // will return tours with <= this value
@@ -37,19 +47,25 @@ export interface TourSearchDTO {
     theme?: Theme
 }
 
+/**
+ * DTO for creating or editing a tour.
+ */
 export interface TourDTO {
     title: string
     description: string
     isPublic: boolean
     city: City
-    tagNames: string[]               // can be empty
+    tagNames: string[]  // can be empty
     theme: Theme
     approxCost: number
     approxDuration: string
-    sharedTourists?: User[]   // can be empty
+    sharedTourists?: User[] // can be empty or undefined if public
     stops: StopDTO[]
 }
 
+/**
+ * A tour stop.
+ */
 export interface Stop {
     id: number
     title: string
@@ -63,6 +79,9 @@ export interface Stop {
     transferOtherOptions: string | null
 }
 
+/**
+ * DTO for creating or editing a tour stop.
+ */
 export interface StopDTO {
     title: string
     description: string
@@ -75,6 +94,9 @@ export interface StopDTO {
     transferOtherOptions: string | null
 }
 
+/**
+ * A tour review.
+ */
 export interface Review {
     id: number
     author: User
@@ -83,35 +105,56 @@ export interface Review {
     description: string
 }
 
+/**
+ * DTO for creating a tour review.
+ */
 export interface ReviewDTO {
     stars: number
     description: string
 }
 
+/**
+ * A tour report.
+ */
 export interface Report {
     id: number
     author: User
     description: string
 }
 
+/**
+ * DTO for creating a tour report.
+ */
 export interface ReportDTO {
     description: string
 }
 
+/**
+ * A tour city.
+ */
 export interface City {
     id: number
     name: string
 }
 
+/**
+ * A tour tag.
+ */
 export interface Tag {
     id: number
     name: string
 }
 
+/**
+ * DTO for creating or re-using a tour tag.
+ */
 export interface TagDTO {
     name: string
 }
 
+/**
+ * A tour theme.
+ */
 export interface Theme {
     id: number
     name: string

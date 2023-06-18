@@ -1,15 +1,20 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Tour } from 'src/app/dtos/tour';
-import { StopEditorDialogComponent } from '../tour-stop-editor-dialog/tour-stop-editor-dialog.component';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { TourPageComponent } from './../../pages/tour-page/tour-page.component';
 
+/**
+ * Dialog for reporting a tour.
+ * @see TourPageComponent
+ */
 @Component({
   templateUrl: './report-dialog.component.html',
   styleUrls: ['./report-dialog.component.scss']
 })
 export class ReportDialogComponent {
 
+  /**
+   * User input for the report description.
+   */
   description: string | null = null;
 
   constructor(private dialogRef: MatDialogRef<ReportDialogComponent>) { }
@@ -20,9 +25,13 @@ export class ReportDialogComponent {
 
   onSubmit(): void {
     if(this.description !== null && this.description.trim())
-      this.dialogRef.close(this.description);
+      this.dialogRef.close(this.description); // return user input for report description
   }
 
+  /**
+   * When user presses enter, submit the form.
+   * @param key the key pressed
+   */
   keypress(key: KeyboardEvent) {
     if(key.code == 'Enter') {
       key.preventDefault()

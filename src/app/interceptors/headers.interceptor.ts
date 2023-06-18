@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 
-// appends user id to request header, if exists
 
+/**
+ * Interceptor for HTTP requests.
+ * Appends user id to request header, if logged. 
+ */
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
 

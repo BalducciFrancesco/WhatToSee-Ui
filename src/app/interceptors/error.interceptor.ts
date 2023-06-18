@@ -1,21 +1,25 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
+  HttpRequest,
   HttpStatusCode
 } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable, catchError, of } from 'rxjs';
 
+/**
+ * Interceptor for HTTP error responses.
+ * If the error status code is 401, redirects to the not-authorized page.
+ * Otherwise, displays the error message with a snackbar.
+ */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(private router: Router, private notify: MatSnackBar) { }
 
-  /** intercept any error status code and display its error.message with notify */
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError(err => {

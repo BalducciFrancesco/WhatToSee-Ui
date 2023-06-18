@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserRole } from './dtos/user';
+import { AuthGuard } from './guards/auth.guard';
 import { AdministratorPageComponent } from './pages/administrator-page/administrator-page.component';
 import { ConversationPageComponent } from './pages/conversation-page/conversation-page.component';
 import { GuidePageComponent } from './pages/guide-page/guide-page.component';
@@ -13,8 +14,11 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { TourEditorPageComponent } from './pages/tour-editor-page/tour-editor-page.component';
 import { TourPageComponent } from './pages/tour-page/tour-page.component';
 import { TouristPageComponent } from './pages/tourist-page/tourist-page.component';
-import { AuthGuard } from './guards/auth.guard';
 
+/**
+ * All the routes of the application.
+ * Each route can have a title and a role required to access it.
+ */
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent, data: { title: 'Login' }},
   { path: 'register', component: RegisterPageComponent, data: { title: 'Registrati' }},
@@ -40,7 +44,9 @@ const routes: Routes = [
   { path: '**', component: NotFoundPageComponent }, // route not found 
 ];
 
-
+/**
+ * Module that contains all the routes of the application.
+ */
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

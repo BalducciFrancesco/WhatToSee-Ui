@@ -1,15 +1,23 @@
-import { Stop } from 'src/app/dtos/tour';
-import { Utils } from 'src/app/classes/utils';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Utils } from 'src/app/classes/utils';
+import { Stop } from 'src/app/dtos/tour';
+import { TourEditorPageComponent } from './../../pages/tour-editor-page/tour-editor-page.component';
 
+/**
+ * Dialog for creating or editing a tour stop.
+ * @see TourEditorPageComponent
+ */
 @Component({
   templateUrl: './tour-stop-editor-dialog.component.html',
   styleUrls: ['./tour-stop-editor-dialog.component.scss']
 })
 export class StopEditorDialogComponent implements OnInit {
   
+  /**
+   * User input for the tour stop.
+   */
   form = this.fb.nonNullable.group({
     title: new FormControl<string | null>(null, { validators: Validators.required}),
     description: new FormControl<string | null>(null, { validators: Validators.required}),
@@ -25,12 +33,12 @@ export class StopEditorDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<StopEditorDialogComponent>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public savedStop?: Stop,
+    @Inject(MAT_DIALOG_DATA) public savedStop?: Stop, // defined if editing, with the starting state
   ) { }
 
   ngOnInit(): void {
     if(this.savedStop)
-      this.form.patchValue(this.savedStop);
+      this.form.patchValue(this.savedStop); // populate form with saved stop
   }
 
   onCancel(): void {
@@ -38,7 +46,7 @@ export class StopEditorDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.dialogRef.close(Utils.nonEmptyFieldsOf(this.form.value));
+    this.dialogRef.close(Utils.nonEmptyFieldsOf(this.form.value));  // return user input for the stop
   }
 
 }

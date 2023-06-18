@@ -1,11 +1,21 @@
 import { FormGroup } from "@angular/forms";
 
+/**
+ * Type for excluding null and undefined properties from object.
+ */
 export type NonEmptyFields<T> = {
     [P in keyof T]: NonNullable<T[P]>;
 };
 
-
+/**
+ * Utility class for common functions.
+ */
 export abstract class Utils  {
+    /**
+     * Finds invalid controls in a form and returns their names.
+     * @param form form to be checked
+     * @returns names of invalid controls
+     */
     public static findInvalidControls(form: FormGroup): string[] {
         const invalid = [];
         const controls = form.controls;
