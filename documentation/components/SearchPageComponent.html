@@ -1,0 +1,747 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>whattosee-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">whattosee-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SearchPageComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/search-page/search-page.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Page for searching tours.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-search-page</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./search-page.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./search-page.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cityOptions$" >cityOptions$</a>
+                            </li>
+                            <li>
+                                <a href="#searchForm" >searchForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#searchResults$" >searchResults$</a>
+                            </li>
+                            <li>
+                                <a href="#tagsOptions$" >tagsOptions$</a>
+                            </li>
+                            <li>
+                                <a href="#themeOptions$" >themeOptions$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#submitSearch" >submitSearch</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(tourService: <a href="../injectables/TourService.html" target="_self">TourService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/search-page/search-page.component.ts:47</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>tourService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TourService.html" target="_self" >TourService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/app/pages/search-page/search-page.component.ts:51</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitSearch"></a>
+                    <span class="name">
+                        <span ><b>submitSearch</b></span>
+                        <a href="#submitSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>submitSearch()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/app/pages/search-page/search-page.component.ts:61</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>User pressed the search button or enter.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cityOptions$"></a>
+                    <span class="name">
+                        <span ><b>cityOptions$</b></span>
+                        <a href="#cityOptions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/City.html" target="_self" >Observable&lt;City[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/search-page/search-page.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Available option for the city field. Retrieved from backend.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchForm"></a>
+                    <span class="name">
+                        <span ><b>searchForm</b></span>
+                        <a href="#searchForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    city: new FormControl&lt;City | null&gt;(null),
+    approxDuration: new FormControl&lt;string | null&gt;(null),
+    tags: new FormControl&lt;Tag[] | null&gt;(null),  // multiple selection
+    theme: new FormControl&lt;Theme | null&gt;(null),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/search-page/search-page.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>User input for search tour criteria.
+All fields are optional.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchResults$"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>searchResults$</b></span>
+                        <a href="#searchResults$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Tour.html" target="_self" >Observable&lt;Tour[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/search-page/search-page.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Search results retrieved from backend after the user submitted the search form.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tagsOptions$"></a>
+                    <span class="name">
+                        <span ><b>tagsOptions$</b></span>
+                        <a href="#tagsOptions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Tag.html" target="_self" >Observable&lt;Tag[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/search-page/search-page.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Available option for the tags field. Retrieved from backend.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="themeOptions$"></a>
+                    <span class="name">
+                        <span ><b>themeOptions$</b></span>
+                        <a href="#themeOptions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Theme.html" target="_self" >Observable&lt;Theme[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/search-page/search-page.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Available option for the theme field. Retrieved from backend.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup } from &#x27;@angular/forms&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { Utils } from &#x27;src/app/classes/utils&#x27;;
+import { City, Tag, Theme, Tour } from &#x27;src/app/dtos/tour&#x27;;
+import { TourService } from &#x27;src/app/services/tour.service&#x27;;
+
+/**
+ * Page for searching tours.
+ */
+@Component({
+  selector: &#x27;app-search-page&#x27;,
+  templateUrl: &#x27;./search-page.component.html&#x27;,
+  styleUrls: [&#x27;./search-page.component.scss&#x27;]
+})
+export class SearchPageComponent implements OnInit {
+
+  /**
+   * User input for search tour criteria.
+   * All fields are optional.
+   */
+  searchForm &#x3D; new FormGroup({
+    city: new FormControl&lt;City | null&gt;(null),
+    approxDuration: new FormControl&lt;string | null&gt;(null),
+    tags: new FormControl&lt;Tag[] | null&gt;(null),  // multiple selection
+    theme: new FormControl&lt;Theme | null&gt;(null),
+  })
+
+  /**
+   * Available option for the city field. Retrieved from backend.
+   */
+  cityOptions$!: Observable&lt;City[]&gt;
+
+  /**
+   * Available option for the theme field. Retrieved from backend.
+   */
+  themeOptions$!: Observable&lt;Theme[]&gt;
+
+  /**
+   * Available option for the tags field. Retrieved from backend.
+   */
+  tagsOptions$!: Observable&lt;Tag[]&gt;
+
+  /**
+   * Search results retrieved from backend after the user submitted the search form.
+   */
+  searchResults$?: Observable&lt;Tour[]&gt;
+
+  constructor(private tourService: TourService,) {}
+
+  ngOnInit(): void {
+    // retrieve options for the form fields
+    this.cityOptions$ &#x3D; this.tourService.getAllCities()
+    this.themeOptions$ &#x3D; this.tourService.getAllThemes()
+    this.tagsOptions$ &#x3D; this.tourService.getAllTags()
+  }
+
+  /**
+    * User pressed the search button or enter.
+   */
+  submitSearch(): void {
+    if(this.searchForm.valid) {
+      // retrieve and display search results
+      this.searchResults$ &#x3D; this.tourService.search(Utils.nonEmptyFieldsOf(this.searchForm.value))
+    }
+  }
+  
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- search bar --&gt;
+&lt;form class&#x3D;&quot;flex flex-col&quot; [formGroup]&#x3D;&quot;searchForm&quot; (submit)&#x3D;&quot;submitSearch()&quot;&gt;
+    &lt;div class&#x3D;&quot;flex flex-col gap-x-5 lg:grid lg:grid-cols-3&quot;&gt;
+        &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+            &lt;mat-label&gt;Città&lt;/mat-label&gt;
+            &lt;mat-select formControlName&#x3D;&quot;city&quot;&gt;
+                &lt;mat-option *ngFor&#x3D;&quot;let city of cityOptions$ | async&quot; [value]&#x3D;&quot;city&quot;&gt;
+                    {{ city.name }}
+                &lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+        &lt;/mat-form-field&gt;
+    
+        &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+            &lt;mat-label&gt;Durata approssimativa massima&lt;/mat-label&gt;
+            &lt;input type&#x3D;&quot;time&quot; matInput formControlName&#x3D;&quot;approxDuration&quot;&gt;
+        &lt;/mat-form-field&gt;
+    
+        &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+            &lt;mat-label&gt;Tema&lt;/mat-label&gt;
+            &lt;mat-select formControlName&#x3D;&quot;theme&quot;&gt;
+                &lt;mat-option *ngFor&#x3D;&quot;let theme of themeOptions$ | async&quot; [value]&#x3D;&quot;theme&quot;&gt;
+                    {{ theme.name }}
+                &lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+        &lt;/mat-form-field&gt;
+    
+        &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+            &lt;mat-label&gt;Tags&lt;/mat-label&gt;
+            &lt;mat-select formControlName&#x3D;&quot;tags&quot; multiple&gt;
+                &lt;mat-option *ngFor&#x3D;&quot;let tag of tagsOptions$ | async&quot; [value]&#x3D;&quot;tag&quot;&gt;
+                    {{ tag.name }}
+                &lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+        &lt;/mat-form-field&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;flex flex-col&quot;&gt;
+        &lt;button type&#x3D;&quot;reset&quot; mat-flat-button&gt;Rimuovi tutti i filtri&lt;/button&gt;
+        &lt;button class&#x3D;&quot;mb-2&quot; type&#x3D;&quot;submit&quot; mat-raised-button color&#x3D;&quot;primary&quot;&gt;Cerca&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+
+&lt;!-- results --&gt;
+&lt;ng-container *ngIf&#x3D;&quot;(searchResults$ | async) as tours&quot;&gt;
+    &lt;mat-divider class&#x3D;&quot;!my-3&quot;&gt;&lt;/mat-divider&gt;
+    
+    &lt;h3&gt;Risultati ({{ tours.length }}):&lt;/h3&gt;
+    &lt;div class&#x3D;&quot;flex flex-col gap-3 lg:grid lg:grid-cols-2 my-2&quot;&gt;
+        &lt;app-tour-card matRipple *ngFor&#x3D;&quot;let t of tours&quot; [data]&#x3D;&quot;t&quot; class&#x3D;&quot;cursor-pointer&quot; [routerLink]&#x3D;&quot;[&#x27;/tour&#x27;,t.id]&quot;&gt;&lt;/app-tour-card&gt;
+    &lt;/div&gt;
+&lt;/ng-container&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./search-page.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- search bar --><form class="flex flex-col" [formGroup]="searchForm" (submit)="submitSearch()">    <div class="flex flex-col gap-x-5 lg:grid lg:grid-cols-3">        <mat-form-field appearance="fill">            <mat-label>Città</mat-label>            <mat-select formControlName="city">                <mat-option *ngFor="let city of cityOptions$ | async" [value]="city">                    {{ city.name }}                </mat-option>            </mat-select>        </mat-form-field>            <mat-form-field appearance="fill">            <mat-label>Durata approssimativa massima</mat-label>            <input type="time" matInput formControlName="approxDuration">        </mat-form-field>            <mat-form-field appearance="fill">            <mat-label>Tema</mat-label>            <mat-select formControlName="theme">                <mat-option *ngFor="let theme of themeOptions$ | async" [value]="theme">                    {{ theme.name }}                </mat-option>            </mat-select>        </mat-form-field>            <mat-form-field appearance="fill">            <mat-label>Tags</mat-label>            <mat-select formControlName="tags" multiple>                <mat-option *ngFor="let tag of tagsOptions$ | async" [value]="tag">                    {{ tag.name }}                </mat-option>            </mat-select>        </mat-form-field>    </div>    <div class="flex flex-col">        <button type="reset" mat-flat-button>Rimuovi tutti i filtri</button>        <button class="mb-2" type="submit" mat-raised-button color="primary">Cerca</button>    </div></form><!-- results --><ng-container *ngIf="(searchResults$ | async) as tours">    <mat-divider class="!my-3"></mat-divider>        <h3>Risultati ({{ tours.length }}):</h3>    <div class="flex flex-col gap-3 lg:grid lg:grid-cols-2 my-2">        <app-tour-card matRipple *ngFor="let t of tours" [data]="t" class="cursor-pointer" [routerLink]="[\'/tour\',t.id]"></app-tour-card>    </div></ng-container></div>'
+    var COMPONENTS = [{'name': 'AdministratorPageComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ConversationPageComponent', 'selector': ''},{'name': 'GuidePageComponent', 'selector': ''},{'name': 'LoginPageComponent', 'selector': ''},{'name': 'MessagesCenterPageComponent', 'selector': ''},{'name': 'NotAuthorizedPageComponent', 'selector': ''},{'name': 'NotFoundPageComponent', 'selector': ''},{'name': 'ProblemsDialogComponent', 'selector': ''},{'name': 'RegisterPageComponent', 'selector': ''},{'name': 'ReportDialogComponent', 'selector': ''},{'name': 'ReviewCardComponent', 'selector': 'app-review-card'},{'name': 'ReviewDialogComponent', 'selector': ''},{'name': 'SearchPageComponent', 'selector': 'app-search-page'},{'name': 'StarRatingComponent', 'selector': 'app-star-rating'},{'name': 'StopCardComponent', 'selector': 'app-tour-stop-card'},{'name': 'StopEditorDialogComponent', 'selector': ''},{'name': 'TourCardComponent', 'selector': 'app-tour-card'},{'name': 'TourEditorPageComponent', 'selector': ''},{'name': 'TouristPageComponent', 'selector': ''},{'name': 'TourPageComponent', 'selector': ''}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SearchPageComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SearchPageComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
